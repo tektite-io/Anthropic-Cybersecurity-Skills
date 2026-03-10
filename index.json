@@ -1,51 +1,51 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-03-10T23:40:24Z",
+  "generated_at": "2026-03-10T23:42:14Z",
   "repository": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
-  "total_skills": 659,
+  "total_skills": 673,
   "total_domains": 1,
   "total_subdomains": 28,
   "domain_stats": {
-    "cybersecurity": 659
+    "cybersecurity": 673
   },
   "subdomain_stats": {
     "digital-forensics": 35,
-    "security-operations": 32,
-    "threat-intelligence": 46,
-    "malware-analysis": 35,
+    "security-operations": 33,
+    "threat-intelligence": 48,
+    "malware-analysis": 36,
     "cloud-security": 51,
     "soc-operations": 33,
     "mobile-security": 12,
     "container-security": 29,
     "phishing-defense": 16,
-    "network-security": 35,
-    "incident-response": 24,
+    "network-security": 36,
+    "incident-response": 25,
     "red-teaming": 24,
     "devsecops": 16,
     "identity-access-management": 34,
-    "vulnerability-management": 24,
-    "threat-hunting": 37,
-    "web-application-security": 41,
+    "vulnerability-management": 25,
+    "threat-hunting": 40,
+    "web-application-security": 42,
     "penetration-testing": 23,
     "zero-trust-architecture": 13,
     "cryptography": 13,
     "endpoint-security": 16,
     "ot-ics-security": 28,
     "api-security": 28,
-    "threat-detection": 2,
+    "threat-detection": 4,
     "ransomware-defense": 5,
-    "application-security": 1,
+    "application-security": 2,
     "compliance-governance": 5,
     "red-team": 1
   },
   "top_tags": [
     {
       "tag": "mitre-attack",
-      "count": 57
+      "count": 59
     },
     {
       "tag": "threat-hunting",
-      "count": 45
+      "count": 49
     },
     {
       "tag": "penetration-testing",
@@ -53,7 +53,7 @@
     },
     {
       "tag": "threat-intelligence",
-      "count": 39
+      "count": 41
     },
     {
       "tag": "cloud-security",
@@ -61,7 +61,7 @@
     },
     {
       "tag": "owasp",
-      "count": 36
+      "count": 37
     },
     {
       "tag": "network-security",
@@ -80,11 +80,11 @@
       "count": 31
     },
     {
-      "tag": "api-security",
-      "count": 29
+      "tag": "web-security",
+      "count": 30
     },
     {
-      "tag": "web-security",
+      "tag": "api-security",
       "count": 29
     },
     {
@@ -319,6 +319,25 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/analyzing-cobalt-strike-malleable-profiles"
+    },
+    {
+      "name": "analyzing-cobaltstrike-malleable-c2-profiles",
+      "description": "Parse and analyze Cobalt Strike Malleable C2 profiles using dissect.cobaltstrike and pyMalleableC2 to extract C2 indicators, detect evasion techniques, and generate network detection signatures.",
+      "domain": "cybersecurity",
+      "subdomain": "malware-analysis",
+      "tags": [
+        "cobalt-strike",
+        "malleable-c2",
+        "c2-detection",
+        "beacon-analysis",
+        "network-signatures",
+        "threat-hunting",
+        "red-team-tools"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/analyzing-cobaltstrike-malleable-c2-profiles"
     },
     {
       "name": "analyzing-command-and-control-communication",
@@ -761,6 +780,17 @@
       "path": "skills/analyzing-network-flow-data-with-netflow"
     },
     {
+      "name": "analyzing-network-packets-with-scapy",
+      "description": "Craft, send, sniff, and dissect network packets using Scapy for protocol analysis, network reconnaissance, and traffic anomaly detection in authorized security testing",
+      "domain": "cybersecurity",
+      "subdomain": "network-security",
+      "tags": [],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/analyzing-network-packets-with-scapy"
+    },
+    {
       "name": "analyzing-network-traffic-for-incidents",
       "description": ">",
       "domain": "cybersecurity",
@@ -1030,6 +1060,25 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/analyzing-threat-actor-ttps-with-mitre-attack"
+    },
+    {
+      "name": "analyzing-threat-actor-ttps-with-mitre-navigator",
+      "description": ">",
+      "domain": "cybersecurity",
+      "subdomain": "threat-intelligence",
+      "tags": [
+        "mitre-attack",
+        "navigator",
+        "threat-intelligence",
+        "apt",
+        "ttp-mapping",
+        "stix",
+        "attackcti"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/analyzing-threat-actor-ttps-with-mitre-navigator"
     },
     {
       "name": "analyzing-threat-intelligence-feeds",
@@ -3417,6 +3466,17 @@
       "path": "skills/detecting-container-escape-with-falco-rules"
     },
     {
+      "name": "detecting-credential-dumping-techniques",
+      "description": "Detect LSASS credential dumping, SAM database extraction, and NTDS.dit theft using Sysmon Event ID 10, Windows Security logs, and SIEM correlation rules",
+      "domain": "cybersecurity",
+      "subdomain": "threat-detection",
+      "tags": [],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/detecting-credential-dumping-techniques"
+    },
+    {
       "name": "detecting-credential-dumping-with-edr",
       "description": "Detect OS credential dumping techniques including LSASS access, SAM extraction, and DCSync using EDR telemetry and Sysmon logs.",
       "domain": "cybersecurity",
@@ -3530,6 +3590,25 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/detecting-dns-exfiltration-with-dns-query-analysis"
+    },
+    {
+      "name": "detecting-email-account-compromise",
+      "description": "Detect compromised O365 and Google Workspace email accounts by analyzing inbox rule creation, suspicious sign-in locations, mail forwarding rules, and unusual API access patterns via Microsoft Graph and audit logs.",
+      "domain": "cybersecurity",
+      "subdomain": "incident-response",
+      "tags": [
+        "email-compromise",
+        "office365",
+        "microsoft-graph",
+        "bec",
+        "inbox-rules",
+        "sign-in-analysis",
+        "account-takeover"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/detecting-email-account-compromise"
     },
     {
       "name": "detecting-email-forwarding-rules-attack",
@@ -3742,6 +3821,24 @@
       "path": "skills/detecting-living-off-the-land-attacks"
     },
     {
+      "name": "detecting-malicious-scheduled-tasks-with-sysmon",
+      "description": ">",
+      "domain": "cybersecurity",
+      "subdomain": "threat-hunting",
+      "tags": [
+        "sysmon",
+        "scheduled-tasks",
+        "persistence",
+        "detection",
+        "threat-hunting",
+        "windows-security"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/detecting-malicious-scheduled-tasks-with-sysmon"
+    },
+    {
       "name": "detecting-mimikatz-execution-patterns",
       "description": "Detect Mimikatz execution through command-line patterns, LSASS access signatures, binary indicators, and in-memory detection of known modules.",
       "domain": "cybersecurity",
@@ -3890,6 +3987,17 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/detecting-pass-the-hash-attacks"
+    },
+    {
+      "name": "detecting-pass-the-ticket-attacks",
+      "description": "Detect Kerberos Pass-the-Ticket (PtT) attacks by analyzing Windows Event IDs 4768, 4769, and 4771 for anomalous ticket usage patterns in Splunk and Elastic SIEM",
+      "domain": "cybersecurity",
+      "subdomain": "threat-detection",
+      "tags": [],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/detecting-pass-the-ticket-attacks"
     },
     {
       "name": "detecting-port-scanning-with-fail2ban",
@@ -5204,6 +5312,25 @@
       "path": "skills/hunting-credential-stuffing-attacks"
     },
     {
+      "name": "hunting-for-anomalous-powershell-execution",
+      "description": ">",
+      "domain": "cybersecurity",
+      "subdomain": "threat-hunting",
+      "tags": [
+        "powershell",
+        "script-block-logging",
+        "event-4104",
+        "amsi",
+        "threat-hunting",
+        "evtx",
+        "obfuscation"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/hunting-for-anomalous-powershell-execution"
+    },
+    {
       "name": "hunting-for-beaconing-with-frequency-analysis",
       "description": "Identify command-and-control beaconing patterns in network traffic by applying statistical frequency analysis, jitter calculation, and coefficient of variation scoring to detect periodic callbacks from compromised endpoints.",
       "domain": "cybersecurity",
@@ -5390,6 +5517,25 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/hunting-for-registry-persistence-mechanisms"
+    },
+    {
+      "name": "hunting-for-registry-run-key-persistence",
+      "description": "Detect MITRE ATT&CK T1547.001 registry Run key persistence by analyzing Sysmon Event ID 13 logs and registry queries to identify malicious auto-start entries.",
+      "domain": "cybersecurity",
+      "subdomain": "threat-hunting",
+      "tags": [
+        "persistence",
+        "registry-run-keys",
+        "t1547-001",
+        "sysmon",
+        "threat-hunting",
+        "windows-forensics",
+        "mitre-attack"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/hunting-for-registry-run-key-persistence"
     },
     {
       "name": "hunting-for-scheduled-task-persistence",
@@ -7788,6 +7934,17 @@
       "path": "skills/implementing-siem-correlation-rules-for-apt"
     },
     {
+      "name": "implementing-siem-use-case-tuning",
+      "description": "Tune SIEM detection rules to reduce false positives by analyzing alert volumes, creating whitelists, adjusting thresholds, and measuring detection efficacy metrics in Splunk and Elastic",
+      "domain": "cybersecurity",
+      "subdomain": "security-operations",
+      "tags": [],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/implementing-siem-use-case-tuning"
+    },
+    {
       "name": "implementing-siem-use-cases-for-detection",
       "description": ">",
       "domain": "cybersecurity",
@@ -8037,6 +8194,25 @@
       "path": "skills/implementing-velociraptor-for-ir-collection"
     },
     {
+      "name": "implementing-vulnerability-management-with-greenbone",
+      "description": "Deploy and operate Greenbone/OpenVAS vulnerability management using the python-gvm library to create scan targets, execute vulnerability scans, and parse scan reports via GMP protocol.",
+      "domain": "cybersecurity",
+      "subdomain": "vulnerability-management",
+      "tags": [
+        "openvas",
+        "greenbone",
+        "vulnerability-scanning",
+        "gmp",
+        "python-gvm",
+        "vulnerability-management",
+        "compliance"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/implementing-vulnerability-management-with-greenbone"
+    },
+    {
       "name": "implementing-vulnerability-remediation-sla",
       "description": "Vulnerability remediation SLAs define mandatory timeframes for patching or mitigating identified vulnerabilities based on severity, asset criticality, and exploit availability. Effective SLA programs",
       "domain": "cybersecurity",
@@ -8072,6 +8248,25 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/implementing-vulnerability-sla-breach-alerting"
+    },
+    {
+      "name": "implementing-web-application-logging-with-modsecurity",
+      "description": ">",
+      "domain": "cybersecurity",
+      "subdomain": "web-application-security",
+      "tags": [
+        "modsecurity",
+        "waf",
+        "crs",
+        "owasp",
+        "web-security",
+        "audit-logging",
+        "rule-tuning"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/implementing-web-application-logging-with-modsecurity"
     },
     {
       "name": "implementing-zero-knowledge-proof-for-authentication",
@@ -9433,6 +9628,24 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/performing-firmware-malware-analysis"
+    },
+    {
+      "name": "performing-fuzzing-with-aflplusplus",
+      "description": ">",
+      "domain": "cybersecurity",
+      "subdomain": "application-security",
+      "tags": [
+        "fuzzing",
+        "aflplusplus",
+        "coverage-guided",
+        "crash-triage",
+        "binary-analysis",
+        "security-testing"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/performing-fuzzing-with-aflplusplus"
     },
     {
       "name": "performing-gcp-security-assessment-with-forseti",
@@ -10926,6 +11139,26 @@
       "author": "mukul975",
       "license": "Apache-2.0",
       "path": "skills/performing-threat-hunting-with-yara-rules"
+    },
+    {
+      "name": "performing-threat-intelligence-sharing-with-misp",
+      "description": "Use PyMISP to create, enrich, and share threat intelligence events on a MISP platform, including IOC management, feed integration, STIX export, and community sharing workflows.",
+      "domain": "cybersecurity",
+      "subdomain": "threat-intelligence",
+      "tags": [
+        "misp",
+        "pymisp",
+        "threat-intelligence",
+        "ioc-sharing",
+        "stix",
+        "taxii",
+        "threat-feeds",
+        "information-sharing"
+      ],
+      "version": "1.0",
+      "author": "mukul975",
+      "license": "Apache-2.0",
+      "path": "skills/performing-threat-intelligence-sharing-with-misp"
     },
     {
       "name": "performing-threat-landscape-assessment-for-sector",
