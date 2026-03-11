@@ -1,87 +1,88 @@
-# Security Framework Mappings
+# MITRE ATT&CK Navigator Layer - Anthropic Cybersecurity Skills
 
-This directory maps the 607+ cybersecurity skills in this repository to industry-standard security frameworks, enabling practitioners and AI agents to discover relevant skills through the lens of established security models.
+This directory contains a MITRE ATT&CK Navigator layer file that maps the coverage of the Anthropic Cybersecurity Skills repository against the ATT&CK Enterprise matrix.
 
-## Supported Frameworks
+## Files
 
-### MITRE ATT&CK v15
+| File | Description |
+|------|-------------|
+| `attack-navigator-layer.json` | ATT&CK Navigator layer (v4.5 format, Enterprise ATT&CK v14) |
 
-The [MITRE ATT&CK](https://attack.mitre.org/) framework is a globally accessible knowledge base of adversary tactics and techniques based on real-world observations. Skills are mapped to:
+## How to View
 
-- **Tactics** (TA00xx) -- the adversary's tactical goals during an operation
-- **Techniques** (T1xxx) -- the specific methods used to achieve those goals
-- **Sub-techniques** (T1xxx.xxx) -- more granular variations of techniques
+1. Open the [MITRE ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/)
+2. Click **Open Existing Layer**
+3. Select **Upload from local** and choose `attack-navigator-layer.json`
+4. The matrix will display with blue-shaded techniques indicating coverage
 
-See [`mitre-attack/`](mitre-attack/) for the full mapping and coverage analysis.
+Alternatively, paste the raw JSON URL into the Navigator's "Load from URL" option if this file is hosted publicly.
 
-### NIST Cybersecurity Framework 2.0
+## Coverage Statistics
 
-The [NIST CSF 2.0](https://www.nist.gov/cyberframework) provides a taxonomy of high-level cybersecurity outcomes organized into 6 core functions:
+| Metric | Value |
+|--------|-------|
+| Total skills scanned | 742 |
+| Unique ATT&CK techniques referenced | 218 |
+| Parent techniques | 94 |
+| Sub-techniques | 124 |
+| Tactics with coverage | 14/14 |
 
-| Function | Code | Description |
-|----------|------|-------------|
-| Govern | GV | Establishing and monitoring cybersecurity risk management strategy |
-| Identify | ID | Understanding organizational cybersecurity risk |
-| Protect | PR | Safeguarding assets through security controls |
-| Detect | DE | Finding and analyzing cybersecurity events |
-| Respond | RS | Taking action regarding detected incidents |
-| Recover | RC | Restoring capabilities after an incident |
+## Coverage by Tactic
 
-See [`nist-csf/`](nist-csf/) for the full alignment and category mapping.
+| Tactic | Techniques Covered |
+|--------|-------------------|
+| Defense Evasion | 36 |
+| Credential Access | 33 |
+| Persistence | 29 |
+| Initial Access | 17 |
+| Command and Control | 17 |
+| Privilege Escalation | 13 |
+| Discovery | 12 |
+| Exfiltration | 12 |
+| Reconnaissance | 11 |
+| Collection | 10 |
+| Lateral Movement | 9 |
+| Execution | 8 |
+| Resource Development | 6 |
+| Impact | 5 |
 
-### OWASP Top 10 (2025)
+## Color Scale
 
-The [OWASP Top 10](https://owasp.org/www-project-top-ten/) represents the most critical security risks to web applications. Skills are mapped to each risk category to provide hands-on remediation and testing capabilities.
+The layer uses a blue gradient to indicate coverage depth:
 
-See [`owasp/`](owasp/) for the full mapping.
+- **Light blue** (`#cfe2f3`): 1-2 skills reference this technique
+- **Medium blue** (`#6fa8dc`): 3-5 skills reference this technique
+- **Dark blue** (`#3d85c6`): 6-10 skills reference this technique
+- **Deep blue** (`#1155cc`): 11+ skills reference this technique
 
-## How Mappings Work
+## Top 10 Most Covered Techniques
 
-Each skill in this repository has YAML frontmatter with `domain`, `subdomain`, and `tags` fields. Framework mappings aggregate skills by subdomain relevance and tag correlation:
+| Technique | Name | Skills |
+|-----------|------|--------|
+| T1059.001 | PowerShell | 26 |
+| T1055 | Process Injection | 17 |
+| T1053.005 | Scheduled Task | 16 |
+| T1566.001 | Spearphishing Attachment | 15 |
+| T1558.003 | Kerberoasting | 14 |
+| T1547.001 | Registry Run Keys / Startup Folder | 13 |
+| T1078 | Valid Accounts | 13 |
+| T1003.006 | DCSync | 13 |
+| T1071.001 | Web Protocols | 12 |
+| T1021.002 | SMB/Windows Admin Shares | 12 |
 
-```
-Skill YAML frontmatter
-  -> subdomain (e.g., "penetration-testing")
-  -> tags (e.g., ["mitre-attack", "privilege-escalation"])
-  -> Framework mapping (e.g., ATT&CK TA0004 Privilege Escalation)
-```
+## Methodology
 
-Mappings are maintained at the subdomain level for scalability. Individual skills may also carry framework-specific tags in their frontmatter for precise lookups.
+Techniques were extracted by scanning all `SKILL.md` files in the repository for ATT&CK technique ID patterns (`T1XXX` and `T1XXX.XXX`). Each technique's score is proportional to the number of distinct skills that reference it, normalized to a 1-100 scale.
 
-## Subdomain Distribution (607 skills)
+## Layer Format
 
-| Subdomain | Skills | Primary Frameworks |
-|-----------|--------|--------------------|
-| cloud-security | 48 | ATT&CK, NIST CSF |
-| threat-intelligence | 43 | ATT&CK, NIST CSF |
-| web-application-security | 41 | ATT&CK, OWASP |
-| threat-hunting | 35 | ATT&CK, NIST CSF |
-| digital-forensics | 34 | ATT&CK, NIST CSF |
-| malware-analysis | 34 | ATT&CK, NIST CSF |
-| identity-access-management | 33 | ATT&CK, NIST CSF |
-| network-security | 33 | ATT&CK, NIST CSF |
-| soc-operations | 33 | ATT&CK, NIST CSF |
-| api-security | 28 | OWASP, ATT&CK |
-| ot-ics-security | 28 | ATT&CK (ICS), NIST CSF |
-| container-security | 26 | ATT&CK, NIST CSF |
-| incident-response | 24 | ATT&CK, NIST CSF |
-| vulnerability-management | 24 | ATT&CK, NIST CSF, OWASP |
-| penetration-testing | 23 | ATT&CK |
-| red-teaming | 24 | ATT&CK |
-| devsecops | 16 | NIST CSF, OWASP |
-| endpoint-security | 16 | ATT&CK, NIST CSF |
-| phishing-defense | 16 | ATT&CK, NIST CSF |
-| cryptography | 13 | NIST CSF |
-| zero-trust-architecture | 13 | NIST CSF |
-| mobile-security | 12 | ATT&CK (Mobile), OWASP |
-| compliance-governance | 5 | NIST CSF |
-| ransomware-defense | 5 | ATT&CK, NIST CSF |
+- **Format version**: 4.5
+- **ATT&CK version**: 14 (Enterprise)
+- **Navigator version**: 4.9.1
+- **Domain**: enterprise-attack
 
-## Contributing
+## Related Links
 
-To add or update a framework mapping:
-
-1. Identify the skill subdomain and relevant framework category
-2. Update the corresponding mapping file in the framework directory
-3. Ensure the skill's YAML frontmatter tags reflect the mapping
-4. Submit a pull request with the mapping justification
+- [MITRE ATT&CK Framework](https://attack.mitre.org/)
+- [ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/)
+- [ATT&CK Navigator GitHub](https://github.com/mitre-attack/attack-navigator)
