@@ -8,7 +8,6 @@ import argparse
 import subprocess
 from datetime import datetime
 
-import requests
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -17,7 +16,7 @@ logger = logging.getLogger(__name__)
 def enumerate_iam_users():
     """Enumerate all IAM users in the AWS account."""
     cmd = ["aws", "iam", "list-users", "--output", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         users = json.loads(result.stdout).get("Users", [])
         logger.info("Enumerated %d IAM users", len(users))
@@ -28,7 +27,7 @@ def enumerate_iam_users():
 def enumerate_iam_roles():
     """Enumerate IAM roles and identify cross-account trust relationships."""
     cmd = ["aws", "iam", "list-roles", "--output", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         roles = json.loads(result.stdout).get("Roles", [])
         cross_account = []
@@ -55,7 +54,7 @@ def check_imds_v1_instances():
         "--query", "Reservations[*].Instances[*].[InstanceId,MetadataOptions.HttpTokens,State.Name]",
         "--output", "json",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         instances = json.loads(result.stdout)
         vulnerable = []
@@ -71,14 +70,14 @@ def check_imds_v1_instances():
 def check_public_s3_buckets():
     """Enumerate S3 buckets and check for public access."""
     cmd = ["aws", "s3api", "list-buckets", "--query", "Buckets[*].Name", "--output", "text"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         return []
     buckets = result.stdout.strip().split()
     public_buckets = []
     for bucket in buckets:
         status_cmd = ["aws", "s3api", "get-bucket-policy-status", "--bucket", bucket, "--output", "json"]
-        r = subprocess.run(status_cmd, capture_output=True, text=True)
+        r = subprocess.run(status_cmd, capture_output=True, text=True, timeout=120)
         if r.returncode == 0:
             policy_status = json.loads(r.stdout)
             if policy_status.get("PolicyStatus", {}).get("IsPublic", False):
@@ -90,7 +89,7 @@ def check_public_s3_buckets():
 def check_lambda_env_secrets():
     """Check Lambda functions for secrets in environment variables."""
     cmd = ["aws", "lambda", "list-functions", "--query", "Functions[*].FunctionName", "--output", "text"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         return []
     functions = result.stdout.strip().split()
@@ -103,7 +102,7 @@ def check_lambda_env_secrets():
             "--query", "Environment.Variables",
             "--output", "json",
         ]
-        r = subprocess.run(env_cmd, capture_output=True, text=True)
+        r = subprocess.run(env_cmd, capture_output=True, text=True, timeout=120)
         if r.returncode == 0 and r.stdout.strip() != "null":
             env_vars = json.loads(r.stdout)
             exposed = [k for k in env_vars if any(s in k.lower() for s in sensitive_keys)]
@@ -121,7 +120,7 @@ def test_privesc_create_policy_version(policy_arn):
         "--action-names", "iam:CreatePolicyVersion",
         "--output", "json",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         eval_results = json.loads(result.stdout).get("EvaluationResults", [])
         for er in eval_results:

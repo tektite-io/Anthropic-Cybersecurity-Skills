@@ -3,13 +3,12 @@
 
 import argparse
 import json
-import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
 try:
-    from pymisp import PyMISP, MISPEvent, MISPAttribute, MISPTag
+    from pymisp import PyMISP, MISPEvent
     HAS_PYMISP = True
 except ImportError:
     HAS_PYMISP = False

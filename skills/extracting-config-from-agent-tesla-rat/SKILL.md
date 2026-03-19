@@ -22,7 +22,7 @@ Agent Tesla is a .NET-based Remote Access Trojan (RAT) and keylogger that ranked
 - Understanding of .NET IL code and Reflection
 - Sandbox for dynamic analysis (ANY.RUN, CAPE)
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deobfuscate and Extract Configuration
 

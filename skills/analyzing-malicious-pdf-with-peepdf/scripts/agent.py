@@ -37,9 +37,9 @@ def run_pdfid(filepath):
     """Run pdfid.py to triage PDF for suspicious keywords."""
     cmd = ["python3", "-m", "pdfid", filepath]
     alt_cmd = ["pdfid.py", filepath]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
-        result = subprocess.run(alt_cmd, capture_output=True, text=True)
+        result = subprocess.run(alt_cmd, capture_output=True, text=True, timeout=120)
     keywords = {}
     for line in result.stdout.strip().split("\n"):
         line = line.strip()
@@ -59,9 +59,9 @@ def run_peepdf_analysis(filepath):
     """Run peepdf for detailed PDF object analysis."""
     cmd = ["peepdf", "-f", "-l", filepath]
     alt_cmd = ["python3", "-m", "peepdf", "-f", "-l", filepath]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
-        result = subprocess.run(alt_cmd, capture_output=True, text=True)
+        result = subprocess.run(alt_cmd, capture_output=True, text=True, timeout=120)
     analysis = {
         "versions": 0,
         "objects": 0,
@@ -98,7 +98,7 @@ def run_pdf_parser(filepath, object_id=None):
         cmd = ["pdf-parser.py", "-o", str(object_id), "-f", "-d", filepath]
     else:
         cmd = ["pdf-parser.py", "--stats", filepath]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return result.stdout[:3000]
 
 
@@ -107,7 +107,7 @@ def extract_javascript(filepath, peepdf_analysis):
     js_content = []
     for obj_id in peepdf_analysis.get("js_objects", []):
         cmd = ["pdf-parser.py", "-o", str(obj_id), "-f", "-w", filepath]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         if result.stdout:
             js_content.append({
                 "object_id": obj_id,

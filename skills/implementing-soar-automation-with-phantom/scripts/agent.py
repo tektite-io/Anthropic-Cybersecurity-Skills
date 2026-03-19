@@ -28,12 +28,12 @@ class SplunkSOARClient:
         self.session.verify = verify_ssl
 
     def _get(self, endpoint, params=None):
-        resp = self.session.get(f"{self.base_url}/rest{endpoint}", params=params)
+        resp = self.session.get(f"{self.base_url}/rest{endpoint}", params=params, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def _post(self, endpoint, data=None):
-        resp = self.session.post(f"{self.base_url}/rest{endpoint}", json=data)
+        resp = self.session.post(f"{self.base_url}/rest{endpoint}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

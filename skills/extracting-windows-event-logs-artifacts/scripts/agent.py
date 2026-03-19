@@ -9,7 +9,7 @@ import os
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)

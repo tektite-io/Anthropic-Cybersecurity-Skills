@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for detecting C2 beaconing patterns in Zeek conn.log data."""
 
-import os
 import json
 import argparse
 from datetime import datetime
@@ -9,7 +8,6 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 from zat.log_to_dataframe import LogToDataFrame
-from zat import zeek_log_reader
 
 
 def load_conn_log(log_path):

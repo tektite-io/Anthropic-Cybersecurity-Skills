@@ -56,7 +56,7 @@ PCI DSS 4.0.1 establishes 12 requirements across 6 control objectives for organi
 - **Anti-phishing mechanisms**: Technical controls to detect and protect against phishing (Req 5.4.1)
 - **Automated log review**: Automated mechanisms for review of audit logs (Req 10.4.1.1)
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Scoping and Assessment (Weeks 1-4)
 1. Identify all cardholder data flows (card present, card not present, storage)

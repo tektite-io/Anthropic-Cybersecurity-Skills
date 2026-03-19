@@ -6,7 +6,6 @@ import json
 import argparse
 import sys
 import os
-from datetime import datetime
 
 
 def run_semgrep_scan(target_dir, config="auto", output_format="json"):

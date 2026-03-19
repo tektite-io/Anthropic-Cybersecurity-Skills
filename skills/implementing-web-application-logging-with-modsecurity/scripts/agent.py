@@ -2,7 +2,6 @@
 """ModSecurity WAF audit log analysis and rule tuning agent."""
 
 import json
-import sys
 import argparse
 import re
 from datetime import datetime

@@ -5,7 +5,6 @@ import argparse
 import email
 import json
 import re
-import sys
 import time
 
 import requests
@@ -37,7 +36,7 @@ class SOARClient:
             "status": "new",
             "sensitivity": "amber",
         }
-        resp = self.session.post(f"{self.base_url}/rest/container", json=payload)
+        resp = self.session.post(f"{self.base_url}/rest/container", json=payload, timeout=30)
         resp.raise_for_status()
         data = resp.json()
         return {"container_id": data.get("id"), "success": data.get("success", False)}
@@ -54,7 +53,7 @@ class SOARClient:
             "cef": cef,
             "run_automation": run_automation,
         }
-        resp = self.session.post(f"{self.base_url}/rest/artifact", json=payload)
+        resp = self.session.post(f"{self.base_url}/rest/artifact", json=payload, timeout=30)
         resp.raise_for_status()
         data = resp.json()
         return {"artifact_id": data.get("id"), "success": data.get("success", False)}
@@ -67,14 +66,15 @@ class SOARClient:
             "scope": scope,
             "run": True,
         }
-        resp = self.session.post(f"{self.base_url}/rest/playbook_run", json=payload)
+        resp = self.session.post(f"{self.base_url}/rest/playbook_run", json=payload, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_action_runs(self, container_id: int) -> list:
         resp = self.session.get(
             f"{self.base_url}/rest/action_run",
-            params={"_filter_container": container_id, "page_size": 100}
+            params={"_filter_container": container_id, "page_size": 100},
+            timeout=30,
         )
         resp.raise_for_status()
         return resp.json().get("data", [])

@@ -7,11 +7,9 @@ and assesses decryption feasibility for ransomware samples and encrypted files.
 
 import os
 import sys
-import struct
 import hashlib
 import math
 import json
-import re
 from collections import Counter
 
 

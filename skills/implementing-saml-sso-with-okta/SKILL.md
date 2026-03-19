@@ -41,7 +41,7 @@ Implement SAML 2.0 Single Sign-On (SSO) using Okta as the Identity Provider (IdP
 - **Attribute Statements**: Map Okta user profile attributes to SAML assertion attributes
 - **Group Attribute Statements**: Include group membership for RBAC
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Create SAML Application in Okta
 1. Navigate to Applications > Create App Integration

@@ -41,7 +41,7 @@ Indicator confidence decreases over time as adversaries rotate infrastructure. A
 - **Coverage**: Percentage of known threat techniques with IOC coverage
 - **Freshness**: Average age of active indicators in the database
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Implement IOC Lifecycle State Machine
 

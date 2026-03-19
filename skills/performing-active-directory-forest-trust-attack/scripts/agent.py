@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """Agent for AD forest trust enumeration and security assessment using impacket."""
 
 import json
@@ -9,7 +12,6 @@ try:
     from impacket.dcerpc.v5 import transport, lsat, lsad
     from impacket.dcerpc.v5.dtypes import MAXIMUM_ALLOWED
     from impacket.dcerpc.v5.samr import SID_NAME_USE
-    from impacket.smbconnection import SMBConnection
 except ImportError:
     transport = None
 

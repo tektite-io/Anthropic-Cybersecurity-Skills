@@ -7,7 +7,6 @@ including pass-the-hash, RDP pivoting, WMI/PSExec execution, and SMB abuse.
 
 import argparse
 import json
-import sys
 from datetime import datetime
 
 LATERAL_MOVEMENT_QUERIES = {

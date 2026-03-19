@@ -3,6 +3,7 @@
 
 import json
 import logging
+import os
 import argparse
 from datetime import datetime
 from collections import defaultdict
@@ -18,7 +19,7 @@ def arkime_request(base_url, endpoint, auth, params=None):
     """Make an authenticated request to Arkime API v3."""
     url = f"{base_url}{endpoint}"
     try:
-        resp = requests.get(url, auth=HTTPDigestAuth(*auth), params=params, verify=False, timeout=30)
+        resp = requests.get(url, auth=HTTPDigestAuth(*auth), params=params, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()
     except requests.RequestException as e:

@@ -1,6 +1,6 @@
 ---
 name: implementing-identity-verification-for-zero-trust
-description: Implementing Identity Verification For Zero Trust
+description: Implement continuous identity verification for zero trust using phishing-resistant MFA (FIDO2/WebAuthn), risk-based conditional access, and identity governance aligned with the CISA Zero Trust Maturity Model.
 domain: cybersecurity
 subdomain: security-operations
 tags: [cybersecurity]
@@ -95,7 +95,7 @@ Conditional access policies evaluate multiple signals (user risk level, sign-in 
 ### Identity Threat Detection
 AI-driven analytics detect compromised identities through impossible travel detection, anomalous sign-in patterns, credential stuffing detection, and token replay attacks.
 
-## Procedure
+## Workflow
 
 ### Phase 1: Identity Infrastructure
 

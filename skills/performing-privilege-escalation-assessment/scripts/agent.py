@@ -7,10 +7,9 @@ capabilities, and kernel version checks.
 """
 
 import subprocess
+import shlex
 import json
 import sys
-import re
-import platform
 from pathlib import Path
 from datetime import datetime
 
@@ -24,13 +23,17 @@ class PrivescAssessmentAgent:
         self.findings = []
 
     def _run(self, cmd, timeout=30):
-        """Execute a shell command and return output."""
+        """Execute a command and return output."""
         try:
+            # Strip shell stderr redirects and detect shell operators
+            clean_cmd = cmd.replace("2>/dev/null", "").strip()
+            needs_shell = any(op in clean_cmd for op in ("|", ";", "&&", "||"))
             result = subprocess.run(
-                cmd, shell=True, capture_output=True, text=True, timeout=timeout
+                clean_cmd if needs_shell else shlex.split(clean_cmd),
+                shell=needs_shell, capture_output=True, text=True, timeout=timeout
             )
             return result.stdout.strip()
-        except (subprocess.TimeoutExpired, FileNotFoundError):
+        except (subprocess.TimeoutExpired, FileNotFoundError, ValueError):
             return ""
 
     def get_system_info(self):

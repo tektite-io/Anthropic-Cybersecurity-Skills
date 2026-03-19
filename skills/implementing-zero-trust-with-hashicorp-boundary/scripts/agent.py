@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Agent for auditing HashiCorp Boundary zero trust access configuration."""
 
+import os
 import subprocess
 import json
 import argparse
-import sys
 from datetime import datetime, timezone
 
 
@@ -12,7 +12,7 @@ def run_boundary_cmd(args_list, addr, token):
     """Execute a boundary CLI command and return parsed JSON."""
     env_vars = {"BOUNDARY_ADDR": addr, "BOUNDARY_TOKEN": token}
     cmd = ["boundary"] + args_list + ["-format=json"]
-    result = subprocess.run(cmd, capture_output=True, text=True, env={**dict(__import__('os').environ), **env_vars}, timeout=30)
+    result = subprocess.run(cmd, capture_output=True, text=True, env={**dict(os.environ), **env_vars}, timeout=30)
     if result.returncode != 0:
         print(f"  [-] Error: {result.stderr.strip()[:200]}")
         return {}

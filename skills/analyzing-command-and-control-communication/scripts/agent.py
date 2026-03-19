@@ -3,13 +3,12 @@
 
 import statistics
 import base64
-import json
 import os
 import sys
 from collections import defaultdict
 
 try:
-    from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR, Raw
+    from scapy.all import rdpcap, IP, TCP, DNS, DNSQR
     HAS_SCAPY = True
 except ImportError:
     HAS_SCAPY = False

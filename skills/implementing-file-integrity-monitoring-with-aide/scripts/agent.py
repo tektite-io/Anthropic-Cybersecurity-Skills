@@ -7,7 +7,6 @@ import re
 import subprocess
 import argparse
 from datetime import datetime
-from collections import defaultdict
 
 AIDE_RULE_SETS = {
     "critical_binaries": {
@@ -102,7 +101,8 @@ def initialize_baseline():
     if result.returncode == 0:
         subprocess.run(
             ["cp", "/var/lib/aide/aide.db.new", "/var/lib/aide/aide.db"],
-            capture_output=True, text=True
+            capture_output=True, text=True,
+            timeout=120,
         )
         return {"status": "success", "output": result.stdout[:500]}
     return {"status": "error", "stderr": result.stderr[:500]}

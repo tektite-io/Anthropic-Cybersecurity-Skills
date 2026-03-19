@@ -36,7 +36,7 @@ Raw IOCs from different sources come in inconsistent formats. Normalization invo
 
 STIX patterns express IOCs in a standardized format: `[ipv4-addr:value = '203.0.113.1']`, `[domain-name:value = 'malicious.example.com']`, `[url:value = 'http://evil.com/payload']`, `[file:hashes.'SHA-256' = 'abc123...']`. Each indicator includes valid_from, indicator_types, confidence, and optional TLP markings.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Build IOC Extraction and Normalization
 
@@ -301,7 +301,7 @@ class IOCDistributor:
             f"{misp_url}/events",
             headers=headers,
             json=event,
-            verify=False,
+            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         )
         if resp.status_code == 200:
             event_id = resp.json().get("Event", {}).get("id", "")

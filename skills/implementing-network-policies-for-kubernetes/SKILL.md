@@ -20,7 +20,7 @@ Kubernetes NetworkPolicies provide pod-level network segmentation by defining in
 - kubectl configured with admin access
 - Understanding of pod labels and selectors
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Default Deny All Traffic
 

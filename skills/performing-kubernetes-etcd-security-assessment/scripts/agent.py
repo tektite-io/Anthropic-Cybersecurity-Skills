@@ -3,6 +3,7 @@
 
 import json
 import argparse
+import os
 import subprocess
 import re
 from datetime import datetime
@@ -42,7 +43,8 @@ def check_etcd_encryption(kubeconfig=None):
         return {"error": str(e)}
 
 
-def check_etcd_access(etcd_endpoint="https://127.0.0.1:2379", cert=None, key=None, cacert=None):
+def check_etcd_access(etcd_endpoint=None, cert=None, key=None, cacert=None):
+    etcd_endpoint = etcd_endpoint or os.environ.get("ETCD_ENDPOINT", "https://127.0.0.1:2379")
     """Test etcd access and check for unauthenticated access."""
     cmd = ["etcdctl", "endpoint", "health", "--endpoints", etcd_endpoint]
     if cert:
@@ -154,7 +156,7 @@ def main():
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("encrypt", help="Check encryption at rest")
     a = sub.add_parser("access", help="Test etcd access")
-    a.add_argument("--endpoint", default="https://127.0.0.1:2379")
+    a.add_argument("--endpoint", default=os.environ.get("ETCD_ENDPOINT", "https://127.0.0.1:2379"))
     a.add_argument("--cert", help="Client certificate")
     a.add_argument("--key", help="Client key")
     a.add_argument("--cacert", help="CA certificate")

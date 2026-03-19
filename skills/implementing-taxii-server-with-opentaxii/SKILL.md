@@ -36,7 +36,7 @@ TAXII supports hub-and-spoke (central server distributes to consumers), peer-to-
 
 TAXII transports STIX 2.1 bundles containing Structured Threat Information objects: Indicators (detection patterns), Observed Data, Malware, Attack Patterns, Threat Actors, Intrusion Sets, Campaigns, Relationships, and Sightings. Each object has a unique STIX ID, creation/modification timestamps, and optional TLP marking definitions.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deploy TAXII 2.1 Server with Medallion
 
@@ -310,7 +310,7 @@ def push_to_splunk(iocs, splunk_url, hec_token):
             f"{splunk_url}/services/collector/event",
             headers=headers,
             json=event,
-            verify=False,
+            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         )
         if resp.status_code != 200:
             print(f"[-] Splunk HEC error: {resp.text}")

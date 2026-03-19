@@ -7,7 +7,6 @@ import csv
 from datetime import datetime, timedelta
 from math import radians, sin, cos, sqrt, atan2
 from collections import Counter
-from pathlib import Path
 
 
 def haversine_km(lat1, lon1, lat2, lon2):

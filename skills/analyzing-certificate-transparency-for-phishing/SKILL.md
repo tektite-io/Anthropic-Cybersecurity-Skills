@@ -36,7 +36,7 @@ Attackers register lookalike domains and obtain free certificates (often from Le
 
 crt.sh is a free web interface and PostgreSQL database operated by Sectigo that indexes CT logs. It supports wildcard searches (`%.example.com`), direct SQL queries, and JSON API responses. It tracks certificate issuance, expiration, and revocation across all major CT logs.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Query crt.sh for Certificate History
 

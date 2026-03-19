@@ -40,7 +40,7 @@ QR code phishing (quishing) is a rapidly growing attack vector where malicious U
 - Average similarity score of 0.209 between quishing and legitimate QR emails
 - QR codes in image attachments require OCR and deep image processing
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Enable Image-Based Threat Detection
 - Configure email gateway to scan embedded images for QR codes

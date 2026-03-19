@@ -37,7 +37,7 @@ Effective rules target patterns that are unique to the malware family and surviv
 
 YARA evaluates conditions short-circuit style. Place the most discriminating and cheapest-to-evaluate conditions first. Use `filesize` limits to skip irrelevant files quickly. Minimize regex usage in favor of hex patterns. Use `private` rules as building blocks for complex detection logic without generating standalone matches.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Analyze Sample for Unique Patterns
 

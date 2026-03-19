@@ -73,7 +73,7 @@ def detect_weak_encryption(access_points):
 def capture_handshake(interface, target_bssid, channel, output_file, duration=60):
     """Capture WPA2 4-way handshake using airodump-ng."""
     set_channel_cmd = ["iwconfig", interface, "channel", str(channel)]
-    subprocess.run(set_channel_cmd, capture_output=True)
+    subprocess.run(set_channel_cmd, capture_output=True, timeout=120)
 
     cmd = [
         "airodump-ng", "--bssid", target_bssid, "--channel", str(channel),

@@ -10,6 +10,9 @@ license: Apache-2.0
 ---
 # Conducting Pass-the-Ticket Attack
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Overview
 
 Pass-the-Ticket (PtT) is a lateral movement technique that uses stolen Kerberos tickets (TGT or TGS) to authenticate to services without knowing the user's password. By extracting Kerberos tickets from memory (LSASS) on a compromised host, an attacker can inject those tickets into their own session to impersonate the ticket owner and access resources as that user.
@@ -21,7 +24,7 @@ Pass-the-Ticket (PtT) is a lateral movement technique that uses stolen Kerberos 
 - **T1558** - Steal or Forge Kerberos Tickets
 - **T1021.002** - Remote Services: SMB/Windows Admin Shares
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Ticket Extraction
 1. Gain local admin access on target workstation

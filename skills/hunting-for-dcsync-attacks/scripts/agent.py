@@ -26,7 +26,7 @@ def get_domain_controllers():
     """Get list of legitimate domain controller machine accounts."""
     cmd = ["powershell", "-Command",
            "Get-ADDomainController -Filter * | Select-Object Name, IPv4Address | ConvertTo-Json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     dcs = []
     try:
         data = json.loads(result.stdout) if result.stdout else []
@@ -52,7 +52,7 @@ def query_event_4662(evtx_path=None, max_events=5000):
     else:
         cmd = ["wevtutil", "qe", "Security",
                "/q:*[System[EventID=4662]]", "/f:xml", f"/c:{max_events}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     for event_xml in re.findall(r"<Event.*?</Event>", result.stdout, re.DOTALL):
         try:
             root = ET.fromstring(event_xml)
@@ -154,7 +154,7 @@ def check_replication_acls():
            "Where-Object {$_.ObjectType -eq '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2' -or "
            "$_.ObjectType -eq '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'} | "
            "Select-Object IdentityReference, ActiveDirectoryRights | ConvertTo-Json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     try:
         acls = json.loads(result.stdout) if result.stdout else []
         if isinstance(acls, dict):

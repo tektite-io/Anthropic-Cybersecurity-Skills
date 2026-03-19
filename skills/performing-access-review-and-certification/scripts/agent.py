@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for conducting access review and certification using identity governance APIs."""
 
-import requests
 import json
 import argparse
 import csv

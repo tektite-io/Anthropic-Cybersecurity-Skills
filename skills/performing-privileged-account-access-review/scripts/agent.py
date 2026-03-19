@@ -5,7 +5,6 @@ compliance with least-privilege and periodic recertification requirements."""
 import argparse
 import csv
 import json
-import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 

@@ -36,7 +36,7 @@ Effective brand monitoring combines proactive scanning (domain permutation with 
 
 Not all impersonation is malicious. Risk factors include: active web content (especially login pages), SSL certificate present, MX records configured (email receiving capability), visual similarity to legitimate site, recent registration date, and hosting in regions associated with cybercrime.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Multi-Channel Brand Monitoring System
 

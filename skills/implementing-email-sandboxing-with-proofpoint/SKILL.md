@@ -37,7 +37,7 @@ Email sandboxing detonates suspicious attachments and URLs in isolated environme
 - Encrypted/password-protected attachments
 - Multi-stage payloads with delayed C2 retrieval
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure TAP in Proofpoint
 - Enable TAP for inbound email policy

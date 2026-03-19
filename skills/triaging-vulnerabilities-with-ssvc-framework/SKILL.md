@@ -67,7 +67,7 @@ Potential consequences for physical safety and public welfare:
 | **Attend** | Escalate to senior management, accelerate remediation | 14 days |
 | **Act** | Apply mitigations immediately, executive-level awareness | 48 hours |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Ingest Vulnerability Data
 ```python

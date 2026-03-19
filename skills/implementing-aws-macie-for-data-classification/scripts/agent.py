@@ -7,7 +7,7 @@ import logging
 import os
 import sys
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import List
 
 try:
     import boto3

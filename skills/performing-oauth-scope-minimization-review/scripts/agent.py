@@ -9,7 +9,7 @@ import requests
 import json
 import sys
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 SCOPE_RISK = {
@@ -51,14 +51,14 @@ class OAuthScopeAuditor:
             "client_id": client_id,
             "client_secret": client_secret,
             "scope": "https://graph.microsoft.com/.default",
-        })
+        }, timeout=30)
         resp.raise_for_status()
         return resp.json()["access_token"]
 
     def _paginated_get(self, url):
         results = []
         while url:
-            resp = requests.get(url, headers=self.headers)
+            resp = requests.get(url, headers=self.headers, timeout=30)
             resp.raise_for_status()
             data = resp.json()
             results.extend(data.get("value", []))

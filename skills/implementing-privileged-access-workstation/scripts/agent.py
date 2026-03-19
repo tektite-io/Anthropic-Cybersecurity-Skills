@@ -4,7 +4,6 @@
 import json
 import argparse
 import subprocess
-import re
 from datetime import datetime
 
 

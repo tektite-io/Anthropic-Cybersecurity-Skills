@@ -11,7 +11,7 @@ import argparse
 import json
 import os
 import xml.etree.ElementTree as ET
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 

@@ -8,7 +8,6 @@ with anomalous encryption types, impossible lifetimes, and non-existent accounts
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
 
 try:

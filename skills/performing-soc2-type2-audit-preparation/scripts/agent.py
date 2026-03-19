@@ -8,7 +8,7 @@ readiness reports with gap analysis.
 
 import json
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict
 
 

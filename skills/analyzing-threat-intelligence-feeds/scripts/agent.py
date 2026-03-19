@@ -4,11 +4,10 @@
 import os
 import json
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from taxii2client.v21 import Server, Collection, as_pages
-from stix2 import Filter, MemoryStore, Indicator, Relationship, Bundle
-from stix2 import ThreatActor, Malware
+from stix2 import Indicator, Bundle
 
 
 def discover_taxii_server(url, user=None, password=None):
@@ -95,7 +94,7 @@ def score_feed_quality(indicators, known_good_iocs=None):
         1 for i in indicators
         if i.get("valid_from") and
         datetime.fromisoformat(i["valid_from"].replace("Z", "+00:00"))
-        > datetime.now(tz=__import__("datetime").timezone.utc) - timedelta(days=90)
+        > datetime.now(tz=timezone.utc) - timedelta(days=90)
     )
     score = int(
         (with_confidence / total * 25) +

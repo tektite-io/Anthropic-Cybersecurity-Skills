@@ -2,6 +2,7 @@
 """Agent for performing phishing simulation campaigns with GoPhish API."""
 
 import json
+import os
 import argparse
 from datetime import datetime
 
@@ -21,12 +22,12 @@ class GoPhishClient:
         self.headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
     def _get(self, path):
-        resp = requests.get(f"{self.base_url}{path}", headers=self.headers, verify=False, timeout=30)
+        resp = requests.get(f"{self.base_url}{path}", headers=self.headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()
 
     def _post(self, path, data):
-        resp = requests.post(f"{self.base_url}{path}", headers=self.headers, json=data, verify=False, timeout=30)
+        resp = requests.post(f"{self.base_url}{path}", headers=self.headers, json=data, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()
 

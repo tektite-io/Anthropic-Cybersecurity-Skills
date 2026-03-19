@@ -20,7 +20,7 @@ Docker Bench for Security is an open-source script that checks dozens of common 
 - Root or sudo access on Docker host
 - Docker Bench Security script or container image
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Run Docker Bench Security
 

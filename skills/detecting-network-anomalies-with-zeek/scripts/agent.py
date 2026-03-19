@@ -10,8 +10,8 @@ from datetime import datetime
 from pathlib import Path
 
 
-ZEEK_BIN = "/opt/zeek/bin/zeek"
-ZEEK_LOG_DIR = "/opt/zeek/logs/current"
+ZEEK_BIN = os.environ.get("ZEEK_BIN", "/opt/zeek/bin/zeek")
+ZEEK_LOG_DIR = os.environ.get("ZEEK_LOG_DIR", "/opt/zeek/logs/current")
 
 
 def check_zeek_status():
@@ -240,7 +240,11 @@ def analyze_pcap(pcap_path):
     if not os.path.exists(pcap_path):
         return {"error": f"PCAP not found: {pcap_path}"}
 
-    output_dir = f"/tmp/zeek_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    import tempfile
+    output_dir = os.path.join(
+        os.environ.get("ZEEK_OUTPUT_DIR", tempfile.gettempdir()),
+        f"zeek_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    )
     os.makedirs(output_dir, exist_ok=True)
     try:
         result = subprocess.run(

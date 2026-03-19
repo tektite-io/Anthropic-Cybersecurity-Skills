@@ -52,7 +52,7 @@ Role mining is the process of analyzing existing user-permission assignments to 
 | Weighted Structural Complexity (WSC) | Sum of role-user + role-permission assignments | Minimize |
 | Deviation | Extra permissions not covered by assigned roles | < 5% |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Extract User-Permission Data
 

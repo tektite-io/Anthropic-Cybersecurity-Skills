@@ -20,7 +20,7 @@ def get_sf_session(base_url):
 
 def list_modules(session):
     """List available SpiderFoot modules."""
-    resp = session.get(f"{session.base_url}/api/modules")
+    resp = session.get(f"{session.base_url}/api/modules", timeout=30)
     resp.raise_for_status()
     modules = resp.json()
     return [{"name": m.get("name", ""), "descr": m.get("descr", ""),
@@ -30,7 +30,7 @@ def list_modules(session):
 
 def list_scan_types(session):
     """List available scan types (use cases)."""
-    resp = session.get(f"{session.base_url}/api/scantypes")
+    resp = session.get(f"{session.base_url}/api/scantypes", timeout=30)
     resp.raise_for_status()
     return resp.json()
 
@@ -42,7 +42,7 @@ def start_scan(session, target, scan_name, use_case="all"):
         "scantarget": target,
         "usecase": use_case,
     }
-    resp = session.post(f"{session.base_url}/api/startscan", data=data)
+    resp = session.post(f"{session.base_url}/api/startscan", data=data, timeout=30)
     resp.raise_for_status()
     result = resp.json()
     scan_id = result.get("scanid", result.get("id", ""))
@@ -52,7 +52,7 @@ def start_scan(session, target, scan_name, use_case="all"):
 
 def get_scan_status(session, scan_id):
     """Check scan status."""
-    resp = session.get(f"{session.base_url}/api/scanstatus/{scan_id}")
+    resp = session.get(f"{session.base_url}/api/scanstatus/{scan_id}", timeout=30)
     resp.raise_for_status()
     return resp.json()
 
@@ -75,7 +75,7 @@ def wait_for_scan(session, scan_id, poll_interval=10, timeout=600):
 
 def get_scan_results(session, scan_id):
     """Retrieve all results from a completed scan."""
-    resp = session.get(f"{session.base_url}/api/scanresults/{scan_id}")
+    resp = session.get(f"{session.base_url}/api/scanresults/{scan_id}", timeout=30)
     resp.raise_for_status()
     return resp.json()
 

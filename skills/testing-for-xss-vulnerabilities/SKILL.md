@@ -34,6 +34,9 @@ license: Apache-2.0
 - XSS Hunter or Burp Collaborator for out-of-band payload verification
 - SecLists XSS payload lists and custom payloads for WAF bypass scenarios
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: Input and Output Mapping

@@ -22,6 +22,9 @@ Active Directory forest trusts enable authentication across organizational bound
 - Network access to Domain Controllers (ports 389, 445, 88)
 - Authorized penetration testing engagement or lab environment
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Steps
 
 1. Enumerate forest trust relationships via LDAP trusted domain objects

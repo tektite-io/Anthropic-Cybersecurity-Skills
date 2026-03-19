@@ -6,7 +6,6 @@ import argparse
 import logging
 import subprocess
 import os
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -24,7 +23,7 @@ def query_db_users(db_type, host, admin_user, admin_password):
     else:
         cmd = ["sqlcmd", "-S", host, "-U", admin_user, "-P", admin_password, "-Q",
                "SELECT name, type_desc, is_disabled FROM sys.server_principals WHERE type IN ('S','U');"]
-    result = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    result = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=120)
     return [{"raw": line.strip()} for line in result.stdout.strip().split("\n") if line.strip()]
 
 
@@ -44,7 +43,7 @@ def audit_session_logging(db_type, host, admin_user, admin_password):
     env = {**os.environ, "PGPASSWORD": admin_password}
     if db_type == "postgresql":
         cmd = ["psql", "-h", host, "-U", admin_user, "-c", "SHOW log_connections;", "--no-align", "-t"]
-        result = subprocess.run(cmd, capture_output=True, text=True, env=env)
+        result = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=120)
         if "off" in result.stdout.lower():
             findings.append({"issue": "log_connections disabled", "severity": "high"})
     return findings

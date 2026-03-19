@@ -19,7 +19,7 @@ def parse_firewall_config(config_file):
 
 def get_iptables_zones():
     cmd = ["iptables", "-L", "-n", "-v", "--line-numbers"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     chains = defaultdict(list)
     current_chain = ""
     for line in result.stdout.split("\n"):

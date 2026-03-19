@@ -36,7 +36,7 @@ Active monitoring queries paste site APIs or scraping endpoints at regular inter
 
 Effective monitoring uses regex patterns for email:password combinations, API keys (AWS, Azure, GCP, Stripe, Twilio), database connection strings, private keys (SSH, PGP), JWT tokens, and internal hostnames/URLs. Organization-specific keywords (domain names, product names, employee names) reduce false positives.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Pastebin Scraping API Monitor
 

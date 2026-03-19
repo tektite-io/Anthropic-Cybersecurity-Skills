@@ -5,7 +5,6 @@ import json
 import argparse
 import re
 from datetime import datetime
-from pathlib import Path
 
 try:
     from elasticsearch import Elasticsearch
@@ -124,7 +123,6 @@ def scan_sysmon_log(evtx_file):
     """Parse Sysmon EVTX for LOLBin process creation (Event ID 1)."""
     try:
         import Evtx.Evtx as evtx_lib
-        import Evtx.Views as evtx_views
     except ImportError:
         return {"error": "python-evtx not installed"}
     findings = []

@@ -37,7 +37,7 @@ Profiling uses the Diamond Model (adversary, infrastructure, capability, victim)
 
 A complete threat actor profile includes: aliases and naming conventions across vendors, suspected origin and sponsorship, motivation (espionage, financial, hacktivism, disruption), targeted sectors and geographies, known campaigns and operations, TTPs mapped to ATT&CK, toolset and malware families, infrastructure patterns, and historical timeline.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Collect Intelligence from Multiple Sources
 

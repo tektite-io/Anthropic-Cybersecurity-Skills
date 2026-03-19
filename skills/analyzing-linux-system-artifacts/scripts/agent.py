@@ -4,15 +4,15 @@
 import os
 import sys
 import glob
-import json
-import re
-import datetime
+import shlex
 import subprocess
 
 
 def run_cmd(cmd):
-    """Execute a shell command and return output."""
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+    """Execute a command and return output."""
+    if isinstance(cmd, str):
+        cmd = shlex.split(cmd)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 
@@ -196,10 +196,12 @@ def check_ld_preload(evidence_root):
 
 def find_suid_binaries(evidence_root):
     """Find SUID/SGID binaries (potential privilege escalation)."""
-    stdout, _, rc = run_cmd(
-        f"find {evidence_root} -perm -4000 -type f 2>/dev/null"
+    result = subprocess.run(
+        ["find", evidence_root, "-perm", "-4000", "-type", "f"],
+        capture_output=True, text=True, timeout=30
     )
-    return stdout.splitlines() if rc == 0 and stdout else []
+    stdout = result.stdout.strip()
+    return stdout.splitlines() if result.returncode == 0 and stdout else []
 
 
 def find_suspicious_tmp_files(evidence_root):

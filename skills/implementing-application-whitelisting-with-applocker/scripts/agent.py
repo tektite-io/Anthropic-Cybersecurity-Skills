@@ -4,7 +4,6 @@
 import json
 import argparse
 import re
-import subprocess
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path

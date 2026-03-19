@@ -5,10 +5,8 @@ Core TIP components: STIX/TAXII ingestion, indicator lifecycle management,
 confidence scoring, sharing groups, and intelligence dissemination.
 """
 
-import sys
 import json
 import datetime
-import hashlib
 import re
 import uuid
 

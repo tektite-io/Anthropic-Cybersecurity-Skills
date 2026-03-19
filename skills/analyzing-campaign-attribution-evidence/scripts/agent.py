@@ -6,9 +6,6 @@ malware code similarity, timing patterns, and language artifacts.
 """
 
 import json
-import os
-import sys
-import hashlib
 import re
 from collections import defaultdict
 from datetime import datetime

@@ -8,7 +8,6 @@ import sys
 import time
 
 from bleak import BleakClient, BleakScanner
-from bleak.backends.characteristic import BleakGATTCharacteristic
 
 
 SENSITIVE_SERVICE_UUIDS = {

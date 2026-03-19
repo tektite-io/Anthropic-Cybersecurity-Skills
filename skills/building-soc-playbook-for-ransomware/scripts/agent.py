@@ -3,6 +3,7 @@
 
 import json
 import logging
+import os
 import argparse
 import hashlib
 from datetime import datetime
@@ -76,7 +77,8 @@ def search_iocs_splunk(splunk_url, session_key, ioc_list):
         f"{splunk_url}/services/search/jobs",
         headers={"Authorization": f"Splunk {session_key}"},
         data={"search": f"search {query}", "output_mode": "json"},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     return resp.json()
 

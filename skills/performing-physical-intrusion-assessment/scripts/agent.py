@@ -5,7 +5,6 @@ import json
 import argparse
 import csv
 from datetime import datetime
-from pathlib import Path
 
 
 ASSESSMENT_CATEGORIES = {

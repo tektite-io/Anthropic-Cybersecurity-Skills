@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 def graph_api(token, endpoint):
     cmd = ["curl", "-s", "-H", f"Authorization: Bearer {token}",
            f"https://graph.microsoft.com/v1.0{endpoint}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 
@@ -50,7 +50,7 @@ def analyze_adoption(registrations):
 
 def check_rp_config(rp_url):
     cmd = ["curl", "-s", f"{rp_url}/.well-known/webauthn"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     findings = []
     try:
         config = json.loads(result.stdout)

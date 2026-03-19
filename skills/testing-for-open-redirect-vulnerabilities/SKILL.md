@@ -26,6 +26,9 @@ license: Apache-2.0
 - Browser with developer tools for observing redirect chains
 - Knowledge of HTTP 301/302/303/307/308 redirect status codes
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1 — Identify Redirect Parameters

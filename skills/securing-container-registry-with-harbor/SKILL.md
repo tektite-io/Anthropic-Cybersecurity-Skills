@@ -22,7 +22,7 @@ Harbor is an open-source container registry that provides security features incl
 - OIDC/LDAP for authentication
 - Kubernetes cluster (for deployment target)
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Install Harbor with Security Configuration
 

@@ -3,9 +3,7 @@
 
 import requests
 import json
-import sys
 import argparse
-import hashlib
 from datetime import datetime, timezone
 
 

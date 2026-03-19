@@ -4,7 +4,6 @@
 import json
 import sys
 import argparse
-import urllib.parse
 from datetime import datetime
 
 try:

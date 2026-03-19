@@ -14,7 +14,8 @@ from datetime import datetime
 def verify_photorec():
     """Check that PhotoRec is installed and available."""
     result = subprocess.run(
-        ["photorec", "--version"], capture_output=True, text=True
+        ["photorec", "--version"], capture_output=True, text=True,
+        timeout=120,
     )
     if result.returncode == 0:
         return {"installed": True, "version": result.stdout.strip()}
@@ -24,7 +25,8 @@ def verify_photorec():
 def get_image_info(image_path):
     """Get forensic image information."""
     file_result = subprocess.run(
-        ["file", image_path], capture_output=True, text=True
+        ["file", image_path], capture_output=True, text=True,
+        timeout=120,
     )
     size = os.path.getsize(image_path) if os.path.exists(image_path) else 0
     return {

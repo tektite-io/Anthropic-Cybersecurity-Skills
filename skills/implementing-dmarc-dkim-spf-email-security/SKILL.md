@@ -30,7 +30,7 @@ Adds a cryptographic signature to outgoing emails using a private key. The corre
 ### DMARC (Domain-based Message Authentication, Reporting and Conformance)
 Builds on SPF and DKIM by specifying a policy (none/quarantine/reject) for messages that fail authentication, and provides a reporting mechanism to monitor spoofing attempts.
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Audit Current State
 ```bash

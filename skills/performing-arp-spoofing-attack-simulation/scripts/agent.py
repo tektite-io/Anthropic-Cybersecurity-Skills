@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """
 ARP Spoofing Attack Simulation Agent — AUTHORIZED TESTING ONLY
 Simulates ARP spoofing attacks using Scapy in controlled lab environments
@@ -7,12 +10,11 @@ to test network detection capabilities and validate DAI countermeasures.
 WARNING: Only use with explicit written authorization on isolated test networks.
 """
 
-import json
 import sys
 import time
 from datetime import datetime, timezone
 
-from scapy.all import ARP, Ether, sendp, srp, conf, get_if_list, get_if_hwaddr
+from scapy.all import ARP, Ether, sendp, srp, get_if_hwaddr
 
 
 def get_mac(ip: str, iface: str) -> str:

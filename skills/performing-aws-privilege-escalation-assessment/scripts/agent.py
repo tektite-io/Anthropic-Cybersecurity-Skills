@@ -8,7 +8,6 @@ WARNING: Only use with explicit written authorization on approved AWS accounts.
 """
 
 import json
-import sys
 from datetime import datetime, timezone
 
 import boto3

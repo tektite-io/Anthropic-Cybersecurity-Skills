@@ -6,10 +6,7 @@ certificates, and identifies potential phishing infrastructure.
 """
 
 import json
-import os
 import sys
-import re
-from datetime import datetime
 from collections import defaultdict
 
 try:

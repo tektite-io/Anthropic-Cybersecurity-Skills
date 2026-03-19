@@ -6,7 +6,6 @@ import json
 import csv
 import argparse
 from datetime import datetime
-from pathlib import Path
 
 import LnkParse3
 

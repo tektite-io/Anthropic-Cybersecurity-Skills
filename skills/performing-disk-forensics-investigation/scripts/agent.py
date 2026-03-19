@@ -6,14 +6,12 @@ parsing, deleted file recovery, and timeline generation using pytsk3 and
 hashlib for evidence integrity.
 """
 
-import csv
 import hashlib
 import json
 import os
 import struct
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
 
 try:
     import pytsk3

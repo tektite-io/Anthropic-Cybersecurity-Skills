@@ -1,6 +1,6 @@
 ---
 name: configuring-microsegmentation-for-zero-trust
-description: Configuring Microsegmentation For Zero Trust
+description: Configure microsegmentation policies to enforce least-privilege workload-to-workload access using tools like VMware NSX, Illumio, and Calico, preventing lateral movement in zero trust architectures.
 domain: cybersecurity
 subdomain: security-operations
 tags: [cybersecurity]
@@ -68,7 +68,7 @@ Modern microsegmentation uses labels (role, application, environment, location) 
 ### Ring-Fencing
 Isolate critical applications (PCI cardholder data environment, SWIFT financial systems, healthcare PHI) with strict allow-list policies that deny all traffic not explicitly permitted.
 
-## Procedure
+## Workflow
 
 ### Phase 1: Discovery and Mapping
 

@@ -4,7 +4,6 @@
 import json
 import sys
 import urllib.request
-import urllib.parse
 import ssl
 from datetime import datetime
 

@@ -8,7 +8,6 @@ import argparse
 import re
 import subprocess
 from datetime import datetime
-from collections import defaultdict
 
 try:
     import requests

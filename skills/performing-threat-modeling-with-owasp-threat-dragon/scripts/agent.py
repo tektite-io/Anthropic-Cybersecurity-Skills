@@ -10,7 +10,6 @@ import json
 import sys
 import uuid
 from datetime import datetime
-from pathlib import Path
 
 
 STRIDE_BY_ELEMENT = {

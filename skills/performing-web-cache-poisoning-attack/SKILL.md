@@ -28,6 +28,9 @@ license: Apache-2.0
 - **Cache buster**: Unique query parameter to isolate test requests from other users
 - **Caution**: Cache poisoning affects all users; test with cache-busting parameters first
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: Identify the Caching Layer and Behavior

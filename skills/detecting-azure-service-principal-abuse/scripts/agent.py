@@ -8,8 +8,6 @@ from datetime import datetime, timedelta
 
 try:
     from azure.identity import ClientSecretCredential
-    from azure.mgmt.authorization import AuthorizationManagementClient
-    from azure.graphrbac import GraphRbacManagementClient
 except ImportError:
     ClientSecretCredential = None
 

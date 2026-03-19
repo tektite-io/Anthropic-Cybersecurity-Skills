@@ -21,7 +21,7 @@ class CloudflareAccessClient:
         self.headers = {"Authorization": f"Bearer {api_token}", "Content-Type": "application/json"}
 
     def _get(self, endpoint):
-        resp = requests.get(f"{self.base}/{endpoint}", headers=self.headers)
+        resp = requests.get(f"{self.base}/{endpoint}", headers=self.headers, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

@@ -5,7 +5,6 @@ import os
 import json
 import argparse
 import csv
-from datetime import datetime
 
 from regipy.registry import RegistryHive
 
@@ -45,7 +44,6 @@ def parse_usbstor(system_hive_path):
 
 def parse_mounted_devices(system_hive_path):
     """Parse MountedDevices to map drive letters to USB devices."""
-    import struct
     reg = RegistryHive(system_hive_path)
     mounted_key = reg.get_key("MountedDevices")
     mappings = []

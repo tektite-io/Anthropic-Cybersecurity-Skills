@@ -34,7 +34,7 @@ Sliver is an open-source, cross-platform adversary emulation framework developed
 - **T1132.001** - Data Encoding: Standard Encoding
 - **T1572** - Protocol Tunneling
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Team Server Deployment
 1. Provision a VPS (e.g., DigitalOcean, Linode, AWS EC2) for the team server

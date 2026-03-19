@@ -7,7 +7,7 @@ import argparse
 from collections import defaultdict, Counter
 from datetime import datetime
 
-from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR, ICMP, Raw
+from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR, ICMP
 
 
 def load_pcap(filepath):

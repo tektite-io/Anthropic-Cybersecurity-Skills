@@ -23,6 +23,9 @@ An internal network penetration test simulates an attacker who has already gaine
 - Testing laptop with Kali Linux, Impacket, Responder, BloodHound
 - Coordination with IT/SOC for monitoring and emergency contacts
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Phase 1 — Network Discovery and Enumeration
 
 ### Initial Network Reconnaissance

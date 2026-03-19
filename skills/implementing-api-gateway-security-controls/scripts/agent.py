@@ -3,6 +3,7 @@
 
 import json
 import argparse
+import os
 from datetime import datetime
 
 try:
@@ -61,14 +62,15 @@ def audit_aws_api_gateway(region="us-east-1"):
     return findings
 
 
-def audit_kong_gateway(admin_url="http://localhost:8001"):
+def audit_kong_gateway(admin_url=None):
+    admin_url = admin_url or os.environ.get("KONG_ADMIN_URL", "http://localhost:8001")
     """Audit Kong API Gateway plugin configurations."""
     findings = []
-    services = requests.get(f"{admin_url}/services").json().get("data", [])
+    services = requests.get(f"{admin_url}/services").json().get("data", [], timeout=30)
     for svc in services:
         svc_id = svc["id"]
         svc_name = svc.get("name", svc_id)
-        plugins = requests.get(f"{admin_url}/services/{svc_id}/plugins").json().get("data", [])
+        plugins = requests.get(f"{admin_url}/services/{svc_id}/plugins").json().get("data", [], timeout=30)
         plugin_names = {p["name"] for p in plugins}
         if "key-auth" not in plugin_names and "jwt" not in plugin_names and "oauth2" not in plugin_names:
             findings.append({
@@ -127,7 +129,7 @@ def analyze_gateway_logs(log_path):
 def main():
     parser = argparse.ArgumentParser(description="API Gateway Security Audit Agent")
     parser.add_argument("--action", choices=["aws", "kong", "logs", "full"], default="full")
-    parser.add_argument("--kong-url", default="http://localhost:8001")
+    parser.add_argument("--kong-url", default=os.environ.get("KONG_ADMIN_URL", "http://localhost:8001"))
     parser.add_argument("--region", default="us-east-1")
     parser.add_argument("--log", help="Gateway access log (JSON lines)")
     parser.add_argument("--output", default="api_gateway_audit_report.json")

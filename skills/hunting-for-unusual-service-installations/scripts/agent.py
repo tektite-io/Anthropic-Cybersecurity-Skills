@@ -14,7 +14,6 @@ except ImportError:
 
 try:
     import Evtx.Evtx as evtx
-    import Evtx.Views as evtx_views
 except ImportError:
     evtx = None
 

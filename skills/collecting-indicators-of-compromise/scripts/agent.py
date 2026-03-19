@@ -3,7 +3,6 @@
 
 import json
 import re
-import hashlib
 import logging
 import argparse
 from datetime import datetime

@@ -75,7 +75,7 @@ CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N
 ```
 This example represents a network-exploitable vulnerability requiring no privileges, no user interaction, no attack requirements, with high impact on confidentiality, integrity, and availability of the vulnerable system.
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Assess Base Metrics
 For each vulnerability, evaluate:

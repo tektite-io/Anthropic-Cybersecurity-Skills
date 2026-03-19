@@ -37,7 +37,7 @@ Security awareness training is the human layer of phishing defense. An effective
 - **Level 4**: Long-term Sustainment - Continuous program with culture change
 - **Level 5**: Metrics Framework - Risk-based measurement and optimization
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Establish Baseline
 - Run initial phishing simulation across all departments

@@ -3,10 +3,8 @@
 
 import json
 import argparse
-import re
 from datetime import datetime
 from collections import defaultdict, Counter
-from pathlib import Path
 
 
 def load_access_logs(log_path):

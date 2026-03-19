@@ -48,7 +48,7 @@ TLS 1.3 (RFC 8446) is the latest version of the Transport Layer Security protoco
 - **secp384r1**: NIST P-384 ECDH (higher security margin)
 - **x448**: Curve448 ECDH (highest security)
 
-## Implementation Steps
+## Workflow
 
 1. Verify OpenSSL version supports TLS 1.3 (1.1.1+)
 2. Generate or obtain TLS certificate and private key

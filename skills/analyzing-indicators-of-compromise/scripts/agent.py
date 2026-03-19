@@ -3,9 +3,7 @@
 
 import re
 import os
-import sys
 import json
-import hashlib
 import datetime
 
 try:
@@ -69,7 +67,7 @@ def is_private_ip(ip):
 def query_virustotal_hash(sha256, api_key):
     """Query VirusTotal for a file hash."""
     url = f"https://www.virustotal.com/api/v3/files/{sha256}"
-    resp = requests.get(url, headers={"x-apikey": api_key})
+    resp = requests.get(url, headers={"x-apikey": api_key}, timeout=30)
     if resp.status_code == 200:
         data = resp.json().get("data", {}).get("attributes", {})
         stats = data.get("last_analysis_stats", {})
@@ -88,7 +86,7 @@ def query_virustotal_hash(sha256, api_key):
 def query_virustotal_domain(domain, api_key):
     """Query VirusTotal for domain reputation."""
     url = f"https://www.virustotal.com/api/v3/domains/{domain}"
-    resp = requests.get(url, headers={"x-apikey": api_key})
+    resp = requests.get(url, headers={"x-apikey": api_key}, timeout=30)
     if resp.status_code == 200:
         data = resp.json().get("data", {}).get("attributes", {})
         stats = data.get("last_analysis_stats", {})
@@ -107,7 +105,7 @@ def query_abuseipdb(ip, api_key, max_age_days=90):
     """Query AbuseIPDB for IP reputation."""
     url = "https://api.abuseipdb.com/api/v2/check"
     resp = requests.get(url, headers={"Key": api_key, "Accept": "application/json"},
-                        params={"ipAddress": ip, "maxAgeInDays": max_age_days})
+                        params={"ipAddress": ip, "maxAgeInDays": max_age_days}, timeout=30)
     if resp.status_code == 200:
         data = resp.json().get("data", {})
         return {
@@ -125,7 +123,7 @@ def query_abuseipdb(ip, api_key, max_age_days=90):
 def query_malwarebazaar(sha256):
     """Query MalwareBazaar for file hash information."""
     url = "https://mb-api.abuse.ch/api/v1/"
-    resp = requests.post(url, data={"query": "get_info", "hash": sha256})
+    resp = requests.post(url, data={"query": "get_info", "hash": sha256}, timeout=30)
     if resp.status_code == 200:
         result = resp.json()
         if result.get("query_status") == "ok" and result.get("data"):

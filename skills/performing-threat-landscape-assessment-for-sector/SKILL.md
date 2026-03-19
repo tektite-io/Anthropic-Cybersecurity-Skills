@@ -36,7 +36,7 @@ A comprehensive assessment includes: threat actor profiling (groups targeting th
 
 Sector-specific intelligence comes from ISACs (Information Sharing and Analysis Centers), government advisories (CISA, FBI, NSA), vendor threat reports (CrowdStrike Annual Threat Report, Mandiant M-Trends, Verizon DBIR), and academic research on sector-specific attacks.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Identify Threat Actors Targeting the Sector
 
@@ -198,7 +198,7 @@ def analyze_attack_vectors(assessment):
 def generate_sector_report(assessment):
     data = assessment.assessment
     report = f"""# {data['sector'].title()} Sector Threat Landscape Assessment
-Generated: {__import__('datetime').datetime.now().isoformat()}
+Generated: {datetime.datetime.now().isoformat()}
 
 ## Executive Summary
 This assessment analyzes the cyber threat landscape for the {data['sector']} sector,

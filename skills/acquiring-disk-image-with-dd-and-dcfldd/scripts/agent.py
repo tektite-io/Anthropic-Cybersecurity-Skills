@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Forensic disk image acquisition agent using dd and dcfldd with hash verification."""
 
+import shlex
 import subprocess
 import hashlib
 import os
-import sys
 import datetime
 import json
 
 
 def run_cmd(cmd, capture=True):
-    """Execute a shell command and return output."""
-    result = subprocess.run(cmd, shell=True, capture_output=capture, text=True)
+    """Execute a command and return output."""
+    if isinstance(cmd, str):
+        cmd = shlex.split(cmd)
+    result = subprocess.run(cmd, capture_output=capture, text=True, timeout=120)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 
@@ -65,16 +67,22 @@ def compute_hash(path, algorithm="sha256", block_size=65536):
 
 def acquire_with_dd(source, destination, block_size=4096, log_file=None):
     """Acquire a forensic image using dd with error handling."""
-    cmd = (
-        f"dd if={source} of={destination} bs={block_size} "
-        f"conv=noerror,sync status=progress"
-    )
-    if log_file:
-        cmd += f" 2>&1 | tee {log_file}"
+    dd_cmd = [
+        "dd", f"if={source}", f"of={destination}",
+        f"bs={block_size}", "conv=noerror,sync", "status=progress"
+    ]
     print(f"[*] Starting dd acquisition: {source} -> {destination}")
     print(f"[*] Block size: {block_size}")
     start = datetime.datetime.utcnow()
-    _, stderr, rc = run_cmd(cmd, capture=False)
+    if log_file:
+        dd_proc = subprocess.run(dd_cmd, capture_output=True, text=True, timeout=120)
+        combined = (dd_proc.stdout or "") + (dd_proc.stderr or "")
+        with open(log_file, "w") as lf:
+            lf.write(combined)
+        rc = dd_proc.returncode
+    else:
+        result = subprocess.run(dd_cmd, text=True, timeout=120)
+        rc = result.returncode
     elapsed = (datetime.datetime.utcnow() - start).total_seconds()
     print(f"[*] Acquisition completed in {elapsed:.1f} seconds (rc={rc})")
     return rc == 0
@@ -83,18 +91,21 @@ def acquire_with_dd(source, destination, block_size=4096, log_file=None):
 def acquire_with_dcfldd(source, destination, hash_alg="sha256", hash_log=None,
                         error_log=None, block_size=4096, split_size=None):
     """Acquire a forensic image using dcfldd with built-in hashing."""
-    cmd = f"dcfldd if={source} of={destination} bs={block_size} conv=noerror,sync"
-    cmd += f" hash={hash_alg}"
+    cmd = [
+        "dcfldd", f"if={source}", f"of={destination}",
+        f"bs={block_size}", "conv=noerror,sync",
+        f"hash={hash_alg}", "hashwindow=1G",
+    ]
     if hash_log:
-        cmd += f" hashlog={hash_log}"
-    cmd += " hashwindow=1G"
+        cmd.append(f"hashlog={hash_log}")
     if error_log:
-        cmd += f" errlog={error_log}"
+        cmd.append(f"errlog={error_log}")
     if split_size:
-        cmd += f" split={split_size} splitformat=aa"
+        cmd.extend([f"split={split_size}", "splitformat=aa"])
     print(f"[*] Starting dcfldd acquisition: {source} -> {destination}")
     start = datetime.datetime.utcnow()
-    _, stderr, rc = run_cmd(cmd, capture=False)
+    result = subprocess.run(cmd, text=True, timeout=120)
+    rc = result.returncode
     elapsed = (datetime.datetime.utcnow() - start).total_seconds()
     print(f"[*] dcfldd completed in {elapsed:.1f} seconds (rc={rc})")
     return rc == 0

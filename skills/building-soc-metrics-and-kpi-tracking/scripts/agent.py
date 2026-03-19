@@ -2,17 +2,18 @@
 """SOC Metrics and KPI Tracking Agent - Collects and reports SOC performance metrics."""
 
 import json
+import os
 import time
 import logging
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import requests
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-SPLUNK_BASE = "https://localhost:8089"
+SPLUNK_BASE = os.environ.get("SPLUNK_URL", "https://localhost:8089")
 HEADERS = {"Content-Type": "application/json"}
 
 
@@ -21,7 +22,8 @@ def authenticate_splunk(base_url, username, password):
     resp = requests.post(
         f"{base_url}/services/auth/login",
         data={"username": username, "password": password},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     resp.raise_for_status()
     session_key = resp.json()["sessionKey"]
@@ -41,7 +43,8 @@ def run_splunk_search(base_url, headers, query, earliest="-30d", latest="now"):
         f"{base_url}/services/search/jobs",
         headers=headers,
         data=search_body,
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     resp.raise_for_status()
     sid = resp.json()["sid"]
@@ -51,7 +54,8 @@ def run_splunk_search(base_url, headers, query, earliest="-30d", latest="now"):
             f"{base_url}/services/search/jobs/{sid}",
             headers=headers,
             params={"output_mode": "json"},
-            verify=False,
+            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+            timeout=30,
         ).json()
         if status["entry"][0]["content"]["isDone"]:
             break
@@ -61,7 +65,8 @@ def run_splunk_search(base_url, headers, query, earliest="-30d", latest="now"):
         f"{base_url}/services/search/jobs/{sid}/results",
         headers=headers,
         params={"output_mode": "json", "count": 0},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     ).json()
     return results.get("results", [])
 

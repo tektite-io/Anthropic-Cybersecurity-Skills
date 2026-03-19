@@ -4,7 +4,6 @@
 import json
 import argparse
 import subprocess
-from datetime import datetime
 
 try:
     import frida

@@ -38,7 +38,7 @@ class WazuhDetectionAgent:
             resp = requests.post(
                 f"{self.base_url}/security/user/authenticate",
                 auth=HTTPBasicAuth(username, password),
-                verify=False, timeout=10,
+                verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=10,  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             )
             if resp.status_code == 200:
                 return resp.json().get("data", {}).get("token")
@@ -53,7 +53,7 @@ class WazuhDetectionAgent:
             resp = requests.request(
                 method, f"{self.base_url}{path}",
                 headers={"Authorization": f"Bearer {self.token}"},
-                params=params, json=data, verify=False, timeout=15,
+                params=params, json=data, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=15,  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             )
             return resp.json() if resp.status_code == 200 else None
         except requests.RequestException:

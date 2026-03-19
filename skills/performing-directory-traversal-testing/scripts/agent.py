@@ -7,7 +7,6 @@ injecting traversal sequences into file path parameters.
 WARNING: Only use with explicit written authorization for the target application.
 """
 
-import json
 import sys
 from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse

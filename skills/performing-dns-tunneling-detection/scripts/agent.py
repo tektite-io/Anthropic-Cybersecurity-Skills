@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """Agent for detecting DNS tunneling via entropy and statistical analysis."""
 
-import os
 import json
 import math
 import argparse
 from collections import Counter, defaultdict
 from datetime import datetime
 
-from scapy.all import rdpcap, DNS, DNSQR, DNSRR
+from scapy.all import rdpcap, DNS, DNSQR
 
 
 def shannon_entropy(data):

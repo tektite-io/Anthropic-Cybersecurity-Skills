@@ -5,7 +5,6 @@ import argparse
 import json
 import logging
 import os
-import sys
 from datetime import datetime
 from typing import Dict, List
 

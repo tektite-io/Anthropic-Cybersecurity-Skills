@@ -3,7 +3,7 @@
 
 import json
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import Counter
 
 

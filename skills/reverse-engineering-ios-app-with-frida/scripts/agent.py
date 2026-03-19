@@ -9,7 +9,6 @@ API calls for security assessment.
 import subprocess
 import json
 import sys
-import re
 from datetime import datetime
 from pathlib import Path
 

@@ -4,8 +4,6 @@
 import json
 import sys
 import argparse
-import socket
-import struct
 from datetime import datetime
 from collections import Counter
 
@@ -18,8 +16,7 @@ except ImportError:
     sys.exit(1)
 
 try:
-    from pysnmp.hlapi import (getCmd, nextCmd, SnmpEngine, CommunityData,
-                               UdpTransportTarget, ContextData, ObjectType, ObjectIdentity)
+    from pysnmp.hlapi import nextCmd, SnmpEngine, CommunityData, UdpTransportTarget, ContextData, ObjectType, ObjectIdentity
     HAS_SNMP = True
 except ImportError:
     HAS_SNMP = False

@@ -41,7 +41,7 @@ URLScan.io is a free service for scanning and analyzing suspicious URLs. It capt
 - Data URIs or base64-encoded content
 - JavaScript-heavy pages with minimal HTML
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Submit URL to URLScan
 ```

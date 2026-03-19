@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def kubectl_json(args_list):
     cmd = ["kubectl"] + args_list + ["-o", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.returncode == 0 else {}
 
 
@@ -61,7 +61,7 @@ def analyze_policy_coverage(constraints):
 
 def check_audit_status():
     cmd = ["kubectl", "get", "pods", "-n", "gatekeeper-system", "-o", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     pods = json.loads(result.stdout) if result.returncode == 0 else {}
     pod_status = []
     for pod in pods.get("items", []):

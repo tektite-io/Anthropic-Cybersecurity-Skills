@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """BloodHound Attack Path Analysis Agent - Queries Neo4j for AD attack paths to Domain Admin."""
 
 import json

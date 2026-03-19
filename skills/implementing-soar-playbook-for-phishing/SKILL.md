@@ -9,6 +9,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Implementing SOAR Playbook for Phishing
+
 ## Overview
 
 This skill implements a phishing incident response workflow using the Splunk SOAR (formerly Phantom) REST API. When a suspected phishing email is reported, the agent parses email headers and body, creates a SOAR container representing the incident, attaches artifacts containing indicators of compromise (sender address, URLs, IP addresses, file hashes), triggers an automated investigation playbook, and polls for action results.

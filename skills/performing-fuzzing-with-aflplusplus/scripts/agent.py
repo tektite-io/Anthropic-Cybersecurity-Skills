@@ -3,11 +3,9 @@
 """AFL++ fuzzing campaign management and crash triage agent."""
 
 import json
-import sys
 import argparse
 import os
 import subprocess
-import glob
 from datetime import datetime
 
 

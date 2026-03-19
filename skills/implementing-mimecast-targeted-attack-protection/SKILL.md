@@ -40,7 +40,7 @@ Mimecast Targeted Threat Protection (TTP) is a suite of advanced email security 
 - **Pre-Delivery Action (Hold)**: URLs checked before message delivery; held if suspicious
 - **Pre-Delivery Action (None)**: URLs checked pre-delivery but not held
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure URL Protect Policy
 - Navigate to Administration > Gateway > Policies > Targeted Threat Protection - URL Protect

@@ -46,7 +46,7 @@ Dark web monitoring involves systematically scanning Tor hidden services, underg
 - Disable JavaScript in Tor Browser for enhanced security
 - Never download or execute files from dark web sources on production systems
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Set Up Tor-Based HTTP Client
 

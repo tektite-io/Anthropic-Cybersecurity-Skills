@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """Agent for auditing Terraform infrastructure for security misconfigurations."""
 
-import os
 import json
 import argparse
 import subprocess
 from datetime import datetime
-from pathlib import Path
 
 
 def run_checkov(terraform_dir, output_format="json"):
     """Run Checkov static analysis on Terraform code."""
     cmd = ["checkov", "-d", terraform_dir, "--framework", "terraform", "--output", output_format, "--compact"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if output_format == "json":
         try:
             return json.loads(result.stdout)
@@ -24,7 +22,7 @@ def run_checkov(terraform_dir, output_format="json"):
 def run_checkov_on_plan(plan_json_path):
     """Run Checkov on a Terraform plan JSON file for accurate analysis."""
     cmd = ["checkov", "-f", plan_json_path, "--framework", "terraform_plan", "--output", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:
@@ -34,7 +32,7 @@ def run_checkov_on_plan(plan_json_path):
 def run_tfsec(terraform_dir, min_severity="HIGH"):
     """Run tfsec Terraform security scanner."""
     cmd = ["tfsec", terraform_dir, "--format", "json", "--minimum-severity", min_severity]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:

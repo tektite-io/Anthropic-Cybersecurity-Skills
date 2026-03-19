@@ -2,13 +2,10 @@
 """Network traffic baselining agent using pandas for NetFlow/IPFIX statistical analysis."""
 
 import json
-import math
 import argparse
 from datetime import datetime
-from collections import defaultdict
 
 import pandas as pd
-import numpy as np
 
 
 def load_netflow_csv(filepath):

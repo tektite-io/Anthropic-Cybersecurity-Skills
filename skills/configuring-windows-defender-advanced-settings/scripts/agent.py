@@ -2,7 +2,6 @@
 """Windows Defender advanced configuration audit agent."""
 
 import json
-import sys
 import argparse
 import subprocess
 from datetime import datetime

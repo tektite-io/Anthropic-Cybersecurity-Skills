@@ -8,7 +8,6 @@ to detect misconfigurations enabling container privilege escalation.
 import argparse
 import json
 import subprocess
-import sys
 from datetime import datetime
 
 DANGEROUS_CAPABILITIES = {

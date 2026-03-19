@@ -13,6 +13,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Implementing Syslog Centralization with Rsyslog
+
 ## Instructions
 
 1. Install dependencies: `pip install jinja2 paramiko`

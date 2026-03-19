@@ -20,7 +20,7 @@ AI-powered BEC detection uses machine learning, NLP, and behavioral analytics to
 - SIEM for alert correlation and investigation
 - Understanding of BEC attack types (FBI IC3 classification)
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy AI Email Security Platform
 - Select API-based solution (Abnormal Security, Tessian, Ironscales) or enhance existing SEG

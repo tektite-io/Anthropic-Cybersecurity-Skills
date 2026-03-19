@@ -11,6 +11,7 @@ import json
 import os
 import datetime
 import subprocess
+import shlex
 import platform
 import hashlib
 
@@ -35,8 +36,15 @@ VOLATILITY_ORDER = [
     {"priority": 9, "source": "logged_users", "description": "Currently logged-in users",
      "tool_linux": "w", "tool_windows": "query user"},
     {"priority": 10, "source": "scheduled_tasks", "description": "Scheduled tasks and cron jobs",
-     "tool_linux": "crontab -l; ls /etc/cron.d/", "tool_windows": "schtasks /query /FO CSV /V"},
+     "tool_linux": ["crontab -l", "ls /etc/cron.d/"], "tool_windows": "schtasks /query /FO CSV /V"},
 ]
+
+
+def _run_single_cmd(cmd_str, timeout=60):
+    """Run a single command string without shell, return stdout and stderr."""
+    return subprocess.run(
+        shlex.split(cmd_str), capture_output=True, text=True, timeout=timeout
+    )
 
 
 def collect_artifact(source_config, output_dir):
@@ -49,15 +57,29 @@ def collect_artifact(source_config, output_dir):
     result = {
         "source": source_name,
         "priority": source_config["priority"],
-        "command": cmd,
+        "command": cmd if isinstance(cmd, str) else "; ".join(cmd),
         "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
         "status": "pending",
     }
 
     try:
-        proc = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True, timeout=60
-        )
+        # Run multiple commands sequentially if cmd is a list, combining output
+        if isinstance(cmd, list):
+            combined_stdout = ""
+            combined_stderr = ""
+            last_rc = 0
+            for sub_cmd in cmd:
+                sub_proc = _run_single_cmd(sub_cmd, timeout=60)
+                combined_stdout += sub_proc.stdout
+                combined_stderr += sub_proc.stderr
+                last_rc = sub_proc.returncode
+            proc = type("CombinedResult", (), {
+                "stdout": combined_stdout,
+                "stderr": combined_stderr,
+                "returncode": last_rc,
+            })()
+        else:
+            proc = _run_single_cmd(cmd, timeout=60)
         result["status"] = "collected"
         result["output_lines"] = len(proc.stdout.splitlines())
         result["output_file"] = output_file

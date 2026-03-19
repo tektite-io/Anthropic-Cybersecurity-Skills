@@ -7,9 +7,7 @@ keychain dumping, filesystem inspection, and jailbreak detection bypass.
 
 import subprocess
 import json
-import os
 import sys
-import re
 
 
 def run_objection(command, app_id=None, timeout=30):

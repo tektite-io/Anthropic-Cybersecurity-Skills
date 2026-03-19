@@ -45,7 +45,7 @@ Deploy CyberArk Privileged Access Management to discover, vault, rotate, and mon
 5. **Reconciliation**: Re-sync credentials when vault and target are out of sync
 6. **Decommissioning**: Remove accounts no longer needed
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Vault Architecture Design
 1. Deploy primary vault server in secured network segment

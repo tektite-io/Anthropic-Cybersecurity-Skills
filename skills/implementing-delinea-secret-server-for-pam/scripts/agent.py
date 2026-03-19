@@ -28,7 +28,7 @@ class SecretServerClient:
         data = {"grant_type": "password", "username": username, "password": password}
         if domain:
             data["domain"] = domain
-        resp = self.session.post(url, data=data)
+        resp = self.session.post(url, data=data, timeout=30)
         resp.raise_for_status()
         return resp.json()["access_token"]
 
@@ -41,13 +41,13 @@ class SecretServerClient:
             params["filter.folderId"] = folder_id
         if secret_template_id:
             params["filter.secretTemplateId"] = secret_template_id
-        resp = self.session.get(f"{self.base_url}/api/v1/secrets", params=params)
+        resp = self.session.get(f"{self.base_url}/api/v1/secrets", params=params, timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 
     def get_secret(self, secret_id):
         """Retrieve a secret by ID."""
-        resp = self.session.get(f"{self.base_url}/api/v1/secrets/{secret_id}")
+        resp = self.session.get(f"{self.base_url}/api/v1/secrets/{secret_id}", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
@@ -56,13 +56,13 @@ class SecretServerClient:
         items = [{"fieldId": fid, "itemValue": val} for fid, val in fields.items()]
         data = {"name": name, "secretTemplateId": template_id,
                 "folderId": folder_id, "items": items}
-        resp = self.session.post(f"{self.base_url}/api/v1/secrets", json=data)
+        resp = self.session.post(f"{self.base_url}/api/v1/secrets", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_secret_templates(self):
         """List available secret templates."""
-        resp = self.session.get(f"{self.base_url}/api/v1/secret-templates")
+        resp = self.session.get(f"{self.base_url}/api/v1/secret-templates", timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 
@@ -71,46 +71,46 @@ class SecretServerClient:
         params = {}
         if parent_id:
             params["filter.parentFolderId"] = parent_id
-        resp = self.session.get(f"{self.base_url}/api/v1/folders", params=params)
+        resp = self.session.get(f"{self.base_url}/api/v1/folders", params=params, timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 
     def rotate_secret_password(self, secret_id):
         """Trigger password rotation for a secret (Remote Password Changing)."""
         resp = self.session.post(
-            f"{self.base_url}/api/v1/secrets/{secret_id}/change-password")
+            f"{self.base_url}/api/v1/secrets/{secret_id}/change-password", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_secret_audit(self, secret_id):
         """Get audit trail for a specific secret."""
-        resp = self.session.get(f"{self.base_url}/api/v1/secrets/{secret_id}/audits")
+        resp = self.session.get(f"{self.base_url}/api/v1/secrets/{secret_id}/audits", timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 
     def checkout_secret(self, secret_id):
         """Check out a secret for exclusive access."""
         resp = self.session.post(
-            f"{self.base_url}/api/v1/secrets/{secret_id}/check-out")
+            f"{self.base_url}/api/v1/secrets/{secret_id}/check-out", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def checkin_secret(self, secret_id):
         """Check in a previously checked-out secret."""
         resp = self.session.post(
-            f"{self.base_url}/api/v1/secrets/{secret_id}/check-in")
+            f"{self.base_url}/api/v1/secrets/{secret_id}/check-in", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_users(self):
         """List all users."""
-        resp = self.session.get(f"{self.base_url}/api/v1/users")
+        resp = self.session.get(f"{self.base_url}/api/v1/users", timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 
     def get_roles(self):
         """List all roles."""
-        resp = self.session.get(f"{self.base_url}/api/v1/roles")
+        resp = self.session.get(f"{self.base_url}/api/v1/roles", timeout=30)
         resp.raise_for_status()
         return resp.json().get("records", [])
 

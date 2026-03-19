@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """VLAN hopping assessment agent using scapy for DTP and double-tagging tests."""
 
 import subprocess
 import sys
-import os
-import json
 from datetime import datetime
 
 try:
@@ -21,7 +22,8 @@ def get_interface_info(iface="eth0"):
     """Get network interface details."""
     mac = get_if_hwaddr(iface)
     result = subprocess.run(
-        ["ip", "link", "show", iface], capture_output=True, text=True
+        ["ip", "link", "show", iface], capture_output=True, text=True,
+        timeout=120,
     )
     return {"interface": iface, "mac": mac, "status": result.stdout.strip()}
 
@@ -93,18 +95,20 @@ def send_dtp_desirable(iface="eth0", count=10):
 
 def create_vlan_interface(iface, vlan_id, ip_addr):
     """Create a VLAN subinterface."""
-    subprocess.run(["modprobe", "8021q"], capture_output=True)
+    subprocess.run(["modprobe", "8021q"], capture_output=True, timeout=120)
     vlan_iface = f"{iface}.{vlan_id}"
     subprocess.run(
         ["ip", "link", "add", "link", iface, "name", vlan_iface,
          "type", "vlan", "id", str(vlan_id)],
-        capture_output=True
+        capture_output=True,
+        timeout=120,
     )
     subprocess.run(
         ["ip", "addr", "add", f"{ip_addr}/24", "dev", vlan_iface],
-        capture_output=True
+        capture_output=True,
+        timeout=120,
     )
-    subprocess.run(["ip", "link", "set", vlan_iface, "up"], capture_output=True)
+    subprocess.run(["ip", "link", "set", vlan_iface, "up"], capture_output=True, timeout=120)
     return {"vlan_interface": vlan_iface, "vlan_id": vlan_id, "ip": ip_addr}
 
 
@@ -134,7 +138,8 @@ def cleanup_vlan_interfaces(iface, vlan_ids):
     for vid in vlan_ids:
         vlan_iface = f"{iface}.{vid}"
         result = subprocess.run(
-            ["ip", "link", "del", vlan_iface], capture_output=True
+            ["ip", "link", "del", vlan_iface], capture_output=True,
+            timeout=120,
         )
         removed.append({"interface": vlan_iface, "success": result.returncode == 0})
     return removed

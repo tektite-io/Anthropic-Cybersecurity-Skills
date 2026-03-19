@@ -38,7 +38,7 @@ CodeQL compiles source code into a queryable database, then executes security-fo
 
 For enterprises managing hundreds of repositories, GHAS supports configuring code scanning at scale using the organization-level security overview. Administrators can enable default setup across all eligible repositories, define custom security configurations, and monitor adoption through the security coverage dashboard.
 
-## Implementation Steps
+## Workflow
 
 ### Step 1 --- Enable GHAS on the Organization
 

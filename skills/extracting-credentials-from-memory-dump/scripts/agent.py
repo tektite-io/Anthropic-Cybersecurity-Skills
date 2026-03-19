@@ -8,9 +8,8 @@ import logging
 import os
 import re
 import subprocess
-import sys
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)

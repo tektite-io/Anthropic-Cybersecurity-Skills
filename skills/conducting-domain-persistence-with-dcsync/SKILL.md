@@ -10,6 +10,9 @@ license: Apache-2.0
 ---
 # Conducting Domain Persistence with DCSync
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Overview
 
 DCSync is an attack technique that abuses the Microsoft Directory Replication Service Remote Protocol (MS-DRSR) to impersonate a Domain Controller and request password data from the target DC. The attack was introduced by Benjamin Delpy (Mimikatz author) and Vincent Le Toux, leveraging the DS-Replication-Get-Changes and DS-Replication-Get-Changes-All extended rights. Any principal (user or computer) with these rights can replicate password hashes for any account in the domain, including the KRBTGT account. With the KRBTGT hash, attackers can forge Golden Tickets for indefinite domain persistence. DCSync is categorized as MITRE ATT&CK T1003.006 and is a critical post-exploitation technique used by APT groups including APT28 (Fancy Bear), APT29 (Cozy Bear), and FIN6.
@@ -32,7 +35,7 @@ DCSync is an attack technique that abuses the Microsoft Directory Replication Se
 - **T1098** - Account Manipulation
 - **T1078.002** - Valid Accounts: Domain Accounts
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Identify Accounts with DCSync Rights
 1. Enumerate principals with replication rights:

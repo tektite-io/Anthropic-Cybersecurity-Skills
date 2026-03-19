@@ -58,7 +58,7 @@ Zeek generates protocol-specific log files:
 | `pe.log` | Portable Executable file metadata |
 | `dpd.log` | Dynamic Protocol Detection failures |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Install and Configure Zeek
 

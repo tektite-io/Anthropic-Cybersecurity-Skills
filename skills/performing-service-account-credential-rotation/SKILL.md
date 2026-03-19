@@ -70,7 +70,7 @@ Secrets Manager / Vault
         └── Revoke old credential (after grace period)
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Discover and Inventory Service Accounts
 

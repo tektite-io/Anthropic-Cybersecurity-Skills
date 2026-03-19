@@ -3,19 +3,20 @@
 
 import json
 import argparse
-import logging
-import subprocess
+import base64
 import hashlib
 import hmac
-import base64
+import logging
+import os
+import subprocess
 import uuid
-from datetime import datetime
 from collections import defaultdict
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-MIMECAST_BASE = "https://us-api.mimecast.com"
+MIMECAST_BASE = os.environ.get("MIMECAST_BASE_URL", "https://us-api.mimecast.com")
 
 
 def mimecast_request(base_url, app_id, app_key, access_key, secret_key, endpoint, data=None):
@@ -37,7 +38,7 @@ def mimecast_request(base_url, app_id, app_key, access_key, secret_key, endpoint
         cmd.extend(["-H", f"{k}: {v}"])
     if data:
         cmd.extend(["-d", json.dumps({"data": [data]})])
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 

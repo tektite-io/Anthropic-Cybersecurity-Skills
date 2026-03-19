@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """Agent for hunting credential stuffing attacks in authentication logs."""
 
-import os
 import json
 import argparse
 from datetime import datetime
-from collections import defaultdict
 
 import pandas as pd
-import numpy as np
 
 
 def load_auth_logs(log_path):

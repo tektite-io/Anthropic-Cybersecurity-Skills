@@ -8,7 +8,6 @@ and OIDC authentication via Harbor REST API v2.0.
 
 import json
 import sys
-import base64
 from pathlib import Path
 from datetime import datetime
 

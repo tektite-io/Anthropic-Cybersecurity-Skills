@@ -33,7 +33,7 @@ LaZagne is an open-source post-exploitation tool designed to retrieve credential
 - **T1003.004** - OS Credential Dumping: LSA Secrets
 - **T1539** - Steal Web Session Cookie
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: LaZagne Deployment
 1. Transfer LaZagne to the compromised host:

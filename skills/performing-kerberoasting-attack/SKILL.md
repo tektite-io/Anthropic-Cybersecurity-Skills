@@ -10,6 +10,9 @@ license: Apache-2.0
 ---
 # Performing Kerberoasting Attack
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Overview
 
 Kerberoasting is a post-exploitation technique that targets service accounts in Active Directory by requesting Kerberos TGS (Ticket Granting Service) tickets for accounts with Service Principal Names (SPNs) set. These tickets are encrypted with the service account's NTLM hash, allowing offline brute-force cracking without generating failed login events. It is one of the most common privilege escalation paths in AD environments because any domain user can request TGS tickets.
@@ -20,7 +23,7 @@ Kerberoasting is a post-exploitation technique that targets service accounts in 
 - **T1087.002** - Account Discovery: Domain Account
 - **T1069.002** - Permission Groups Discovery: Domain Groups
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: SPN Enumeration
 1. Enumerate accounts with SPNs using LDAP queries

@@ -5,7 +5,6 @@
 import argparse
 import json
 import re
-import sys
 from collections import Counter
 from datetime import datetime
 from pathlib import Path

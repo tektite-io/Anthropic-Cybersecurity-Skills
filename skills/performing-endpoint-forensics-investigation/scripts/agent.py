@@ -7,7 +7,6 @@ import subprocess
 import os
 import hashlib
 from datetime import datetime
-from pathlib import Path
 
 
 def collect_system_info():

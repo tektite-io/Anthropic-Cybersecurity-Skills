@@ -2,6 +2,7 @@
 """Historian server attack detection agent for ICS/SCADA environments."""
 
 import json
+import os
 import sys
 import argparse
 import socket
@@ -51,7 +52,8 @@ def check_pi_web_api(host, username=None, password=None):
     results = {"host": host, "checks": []}
 
     try:
-        resp = requests.get(f"{base}/system", auth=auth, verify=False, timeout=10)
+        resp = requests.get(f"{base}/system", auth=auth,
+                            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=10)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         if resp.status_code == 200:
             data = resp.json()
             results["product_version"] = data.get("ProductTitle", "")
@@ -67,7 +69,8 @@ def check_pi_web_api(host, username=None, password=None):
         results["error"] = str(e)
 
     try:
-        resp = requests.get(f"{base}/points", auth=auth, verify=False,
+        resp = requests.get(f"{base}/points", auth=auth,
+                            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",
                             params={"maxCount": 10}, timeout=10)
         if resp.status_code == 200:
             points = resp.json().get("Items", [])

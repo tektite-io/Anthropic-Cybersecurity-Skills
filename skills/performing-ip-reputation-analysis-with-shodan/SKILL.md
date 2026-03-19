@@ -36,7 +36,7 @@ Shodan's free InternetDB API (internetdb.shodan.io) provides quick IP lookups wi
 
 IP reputation is assessed by combining: number and type of open ports (unusual ports indicate compromise), vulnerable services (unpatched software with known CVEs), hosting type (residential, cloud, VPN/proxy, bulletproof hosting), historical activity (past associations with malware, scanning, spam), and geographic context (countries known for specific threat activity).
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Basic IP Enrichment with Shodan API
 

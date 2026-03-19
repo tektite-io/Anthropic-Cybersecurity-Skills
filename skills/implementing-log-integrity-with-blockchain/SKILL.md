@@ -14,6 +14,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Implementing Log Integrity with Blockchain
+
 ## Instructions
 
 1. Install dependencies: `pip install requests`

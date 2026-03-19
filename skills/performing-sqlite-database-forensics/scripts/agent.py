@@ -11,8 +11,11 @@ import sqlite3
 import json
 import sys
 import os
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
+
+_SAFE_TABLE_RE = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
 
 
 class SQLiteForensicsAgent:
@@ -141,7 +144,9 @@ class SQLiteForensicsAgent:
         tables = []
         for (name,) in cursor.fetchall():
             try:
-                cursor.execute(f'SELECT COUNT(*) FROM "{name}"')
+                if not _SAFE_TABLE_RE.match(name):
+                    continue
+                cursor.execute(f"SELECT COUNT(*) FROM [{name}]")
                 count = cursor.fetchone()[0]
             except sqlite3.OperationalError:
                 count = -1

@@ -5,11 +5,8 @@ Monitors and analyzes ransomware group leak site data for threat intelligence,
 victim tracking, and TTI (time-to-intelligence) reporting.
 """
 
-import os
 import sys
 import json
-import re
-import hashlib
 from datetime import datetime, timedelta
 from collections import defaultdict, Counter
 

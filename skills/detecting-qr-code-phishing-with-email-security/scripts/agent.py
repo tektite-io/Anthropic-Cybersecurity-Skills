@@ -2,13 +2,10 @@
 """Agent for detecting QR code phishing (quishing) in email attachments and bodies."""
 
 import argparse
-import base64
 import email
-import hashlib
 import json
 import os
 import re
-import sys
 from datetime import datetime, timezone
 from email import policy
 from urllib.parse import urlparse
@@ -21,7 +18,6 @@ except ImportError:
     HAS_QR = False
 
 try:
-    import requests
     HAS_REQUESTS = True
 except ImportError:
     HAS_REQUESTS = False

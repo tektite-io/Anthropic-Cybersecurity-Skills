@@ -4,11 +4,8 @@
 import argparse
 import json
 import struct
-import sys
-from collections import defaultdict
 
 from ldap3 import Server, Connection, ALL, NTLM, SUBTREE
-from ldap3.protocol.formatters.formatters import format_sid
 
 
 DANGEROUS_MASKS = {

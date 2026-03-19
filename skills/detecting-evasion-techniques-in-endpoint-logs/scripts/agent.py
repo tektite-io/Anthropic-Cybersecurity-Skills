@@ -9,9 +9,7 @@ by analyzing Sysmon and Windows Security event logs.
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
-from pathlib import Path
 
 try:
     import Evtx.Evtx as evtx

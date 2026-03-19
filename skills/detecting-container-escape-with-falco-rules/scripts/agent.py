@@ -10,7 +10,6 @@ import json
 import subprocess
 import sys
 from datetime import datetime
-from pathlib import Path
 
 ESCAPE_RULE_TAGS = ["container", "escape", "T1611", "T1610", "namespace",
                     "docker_socket", "cgroup", "kernel_module", "privileged"]

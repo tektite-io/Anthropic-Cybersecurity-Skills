@@ -3,8 +3,9 @@
 
 import json
 import logging
+import os
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict
 
 import requests
@@ -19,9 +20,9 @@ def misp_request(url, key, endpoint, method="GET", data=None):
     full_url = f"{url}/{endpoint}"
     try:
         if method == "GET":
-            resp = requests.get(full_url, headers=headers, timeout=30, verify=False)
+            resp = requests.get(full_url, headers=headers, timeout=30, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         else:
-            resp = requests.post(full_url, headers=headers, json=data or {}, timeout=30, verify=False)
+            resp = requests.post(full_url, headers=headers, json=data or {}, timeout=30, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()
     except requests.RequestException as e:

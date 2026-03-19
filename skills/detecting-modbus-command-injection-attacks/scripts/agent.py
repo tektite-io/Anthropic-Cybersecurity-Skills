@@ -7,8 +7,6 @@ abuse, and anomalous register access patterns using Zeek logs or pcap analysis.
 
 import argparse
 import json
-import re
-import sys
 from collections import Counter, defaultdict
 from datetime import datetime
 

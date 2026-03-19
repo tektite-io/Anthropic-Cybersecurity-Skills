@@ -10,7 +10,7 @@ import requests
 import json
 import sys
 import re
-from urllib.parse import urlparse
+from datetime import datetime
 
 
 class SecurityHeadersAgent:
@@ -252,7 +252,7 @@ class SecurityHeadersAgent:
 
         report = {
             "target": self.target_url,
-            "audit_date": __import__("datetime").datetime.utcnow().isoformat(),
+            "audit_date": datetime.utcnow().isoformat(),
             "grade": self.calculate_grade(header_checks),
             "findings": all_findings,
         }

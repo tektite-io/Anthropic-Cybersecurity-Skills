@@ -6,7 +6,7 @@ import os
 import hashlib
 import argparse
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 try:

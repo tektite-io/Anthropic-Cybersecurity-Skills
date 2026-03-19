@@ -37,7 +37,7 @@ Windows ransomware typically uses CryptoAPI (`CryptAcquireContext`, `CryptGenKey
 
 Decryption opportunities arise from: hardcoded encryption keys, weak PRNG for key generation (using `GetTickCount` or `time()` as seed), reuse of IVs across files, ECB mode usage, keys remaining in memory post-encryption, and race conditions where keys can be captured during encryption.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Identify Cryptographic Functions
 

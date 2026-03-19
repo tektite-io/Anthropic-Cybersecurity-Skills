@@ -7,7 +7,7 @@ import argparse
 from datetime import datetime
 
 try:
-    from falconpy import Hosts, Detections, RealTimeResponse, SensorDownload
+    from falconpy import Hosts, Detections
 except ImportError:
     print("Install: pip install crowdstrike-falconpy")
     sys.exit(1)

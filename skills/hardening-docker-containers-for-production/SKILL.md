@@ -43,7 +43,7 @@ Hardening Docker containers for production involves applying security best pract
 - **Isolation**: Apply seccomp profiles, AppArmor/SELinux, namespace restrictions
 - **Auditability**: Enable content trust, log all container activity
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Harden the Dockerfile
 

@@ -35,7 +35,7 @@ Implement Just-In-Time (JIT) access provisioning to eliminate standing privilege
 - Access automatically expires after defined time window
 - All access events logged and auditable
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Identify Eligible Access Types
 - Privileged admin access (domain admin, root, DBA)

@@ -43,7 +43,7 @@ STIX objects are categorized as:
 
 A Bundle is a collection of STIX objects transmitted together. Bundles have a unique ID and contain an array of objects. TAXII collections serve bundles in response to GET requests.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: TAXII Server Discovery
 

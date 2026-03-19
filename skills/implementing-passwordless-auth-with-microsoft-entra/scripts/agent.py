@@ -34,7 +34,7 @@ def graph_get(token, endpoint, beta=False):
     """Make authenticated GET request to Microsoft Graph."""
     base = GRAPH_BETA if beta else GRAPH_URL
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-    resp = requests.get(f"{base}{endpoint}", headers=headers)
+    resp = requests.get(f"{base}{endpoint}", headers=headers, timeout=30)
     resp.raise_for_status()
     return resp.json()
 

@@ -47,7 +47,7 @@ Never use raw passwords as encryption keys. Always derive keys using:
 - Generate nonces using `os.urandom()` (CSPRNG)
 - Store nonce alongside ciphertext (it is not secret)
 
-## Implementation Steps
+## Workflow
 
 1. Install the `cryptography` library: `pip install cryptography`
 2. Generate or derive an encryption key

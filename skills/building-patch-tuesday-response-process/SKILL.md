@@ -61,7 +61,7 @@ Microsoft releases security updates on the second Tuesday of each month ("Patch 
 | Edge/Browser | Edge Chromium, IE mode | Medium |
 | Development Tools | Visual Studio, VS Code | Low |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Pre-Patch Tuesday Preparation (Monday before)
 ```

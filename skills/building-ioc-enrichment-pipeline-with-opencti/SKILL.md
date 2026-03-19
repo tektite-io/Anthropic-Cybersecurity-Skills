@@ -37,7 +37,7 @@ Internal enrichment connectors are triggered automatically when new observables 
 
 OpenCTI uses a 0-100 confidence scale for indicators. Enrichment connectors can update confidence scores based on external validation: VirusTotal detection ratios, Shodan exposure data, AbuseIPDB report counts, and GreyNoise classification results.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deploy OpenCTI with Docker Compose
 

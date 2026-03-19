@@ -2,7 +2,6 @@
 """Asset criticality scoring agent for vulnerability prioritization."""
 
 import json
-import sys
 import argparse
 import csv
 from datetime import datetime

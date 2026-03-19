@@ -7,7 +7,6 @@ import os
 import re
 import subprocess
 import sys
-from collections import Counter
 from datetime import datetime, timezone
 
 

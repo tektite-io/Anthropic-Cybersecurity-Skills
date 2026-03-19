@@ -54,7 +54,7 @@ ARP Poisoning Attack:
 | ARP from non-DHCP source | Static IP claims from unknown devices | Medium |
 | Gateway MAC change | Default gateway MAC address changed | Critical |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy ARPWatch for Continuous Monitoring
 

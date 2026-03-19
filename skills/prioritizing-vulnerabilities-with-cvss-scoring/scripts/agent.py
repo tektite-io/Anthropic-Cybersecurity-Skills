@@ -7,7 +7,6 @@ a risk-prioritized remediation report.
 """
 
 import json
-import sys
 import requests
 from datetime import datetime
 from collections import defaultdict

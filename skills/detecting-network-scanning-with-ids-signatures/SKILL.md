@@ -51,7 +51,7 @@ Network scanning is typically the first phase of an attack, where adversaries en
 | Aggressive | `-T4` | Parallel, 1.25s timeout | Very easy |
 | Insane | `-T5` | Maximum parallelism | Trivial |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy Suricata Scan Detection Rules
 

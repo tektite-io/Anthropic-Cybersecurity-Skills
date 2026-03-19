@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """
 Bandwidth Throttling Attack Simulation Agent — AUTHORIZED TESTING ONLY
 Simulates bandwidth degradation attacks using Scapy and tc (traffic control)
@@ -10,10 +13,9 @@ WARNING: Only use with explicit written authorization on isolated test networks.
 import json
 import subprocess
 import sys
-import time
 from datetime import datetime, timezone
 
-from scapy.all import IP, TCP, UDP, Raw, send, RandShort
+from scapy.all import IP, UDP, Raw, send, RandShort
 
 
 def run_cmd(cmd: list[str]) -> dict:

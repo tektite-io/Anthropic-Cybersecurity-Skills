@@ -5,13 +5,12 @@ Connects to MISP instances to collect, filter, and export threat intelligence
 including events, attributes, and feeds via the PyMISP REST API client.
 """
 
-import sys
 import json
 import os
 import datetime
 
 try:
-    from pymisp import PyMISP, MISPEvent, MISPAttribute
+    from pymisp import PyMISP
     HAS_PYMISP = True
 except ImportError:
     HAS_PYMISP = False

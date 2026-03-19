@@ -3,12 +3,13 @@
 
 import json
 import logging
+import os
 import argparse
 import hashlib
 from datetime import datetime, timedelta
 
 import requests
-from taxii2client.v21 import Server, Collection
+from taxii2client.v21 import Collection
 from stix2 import Indicator, Bundle, parse
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -125,7 +126,9 @@ def push_to_splunk_ti(splunk_url, session_key, indicators):
         data = {"ip": ioc["value"], "description": f"{ioc.get('source')}: {ioc['value']}"}
         resp = requests.post(
             f"{splunk_url}/services/data/threat_intel/item/ip_intel",
-            headers=headers, data=data, verify=False,
+            headers=headers, data=data,
+            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+            timeout=30,
         )
         if resp.status_code == 201:
             pushed += 1

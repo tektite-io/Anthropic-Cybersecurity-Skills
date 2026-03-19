@@ -6,14 +6,11 @@ verification, IOC extraction, and recovery tracking during
 ransomware incident response.
 """
 
-import requests
 import json
 import sys
 import hashlib
-import re
 from pathlib import Path
 from datetime import datetime
-from collections import defaultdict
 
 
 class RansomwareResponseAgent:

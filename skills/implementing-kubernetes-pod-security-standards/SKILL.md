@@ -38,7 +38,7 @@ Pod Security Standards (PSS) define three levels of security policies -- Privile
 | **audit** | Logs violations in audit log but allows pod |
 | **warn** | Returns warning to user but allows pod |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Label Namespaces for PSA
 

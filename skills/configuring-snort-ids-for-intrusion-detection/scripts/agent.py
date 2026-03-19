@@ -10,10 +10,11 @@ from datetime import datetime
 from pathlib import Path
 
 
-SNORT_BIN = "/usr/local/bin/snort"
-SNORT_CONF = "/usr/local/etc/snort/snort.lua"
-RULES_DIR = "/usr/local/etc/snort/rules"
-LOG_DIR = "/var/log/snort"
+SNORT_BIN = os.environ.get("SNORT_BIN", "/usr/local/bin/snort")
+SNORT_CONF = os.environ.get("SNORT_CONF", "/usr/local/etc/snort/snort.lua")
+RULES_DIR = os.environ.get("SNORT_RULES_DIR", "/usr/local/etc/snort/rules")
+LOG_DIR = os.environ.get("SNORT_LOG_DIR", "/var/log/snort")
+DAQ_DIR = os.environ.get("SNORT_DAQ_DIR", DAQ_DIR)
 
 
 def check_snort_installed():
@@ -36,7 +37,7 @@ def validate_configuration(config_path=SNORT_CONF):
     """Validate Snort configuration file syntax."""
     try:
         result = subprocess.run(
-            [SNORT_BIN, "-c", config_path, "--daq-dir", "/usr/local/lib/daq", "-T"],
+            [SNORT_BIN, "-c", config_path, "--daq-dir", DAQ_DIR, "-T"],
             capture_output=True, text=True, timeout=60
         )
         success = result.returncode == 0
@@ -134,7 +135,7 @@ def test_rule_against_pcap(pcap_path, rule_file=None):
 
     cmd = [
         SNORT_BIN, "-c", SNORT_CONF,
-        "--daq-dir", "/usr/local/lib/daq",
+        "--daq-dir", DAQ_DIR,
         "-r", pcap_path, "-l", output_dir, "-A", "fast",
     ]
     try:

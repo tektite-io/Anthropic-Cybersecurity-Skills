@@ -40,7 +40,7 @@ Campaign attribution analysis involves systematically evaluating evidence to det
 ### Analysis of Competing Hypotheses (ACH)
 Structured analytical method that evaluates evidence against multiple competing hypotheses. Each piece of evidence is scored as consistent, inconsistent, or neutral with respect to each hypothesis. The hypothesis with the least inconsistent evidence is favored.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Collect Attribution Evidence
 

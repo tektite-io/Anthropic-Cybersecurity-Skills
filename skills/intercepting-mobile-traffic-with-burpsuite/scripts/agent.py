@@ -3,8 +3,6 @@
 
 import json
 import argparse
-import sys
-import os
 import re
 from datetime import datetime
 from urllib.parse import urlparse

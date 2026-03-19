@@ -44,7 +44,7 @@ Deploy Cisco Duo multi-factor authentication across enterprise applications, VPN
 - **Device Health**: Block or require MFA based on OS patch level, encryption, firewall
 - **Risk-Based Authentication**: Step-up MFA for anomalous login patterns
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Duo Authentication Proxy Setup
 1. Deploy Duo Authentication Proxy on Windows/Linux server

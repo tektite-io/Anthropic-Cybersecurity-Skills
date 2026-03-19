@@ -37,7 +37,7 @@ The beacon configuration encodes the malleable C2 profile that dictates HTTP req
 
 Each Cobalt Strike license embeds a unique watermark (4-byte integer) into generated beacons. Extracting the watermark can link multiple beacons to the same operator or cracked license. Known watermark databases maintained by threat intelligence providers map watermarks to specific threat actors or leaked license keys.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Extract Configuration with CobaltStrikeParser
 

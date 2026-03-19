@@ -3,9 +3,8 @@
 
 import json
 import argparse
-import re
 from datetime import datetime
-from collections import Counter, defaultdict
+from collections import Counter
 
 
 OT_PROTOCOLS = {

@@ -56,7 +56,7 @@ The entity can only perform an action if ALL applicable policy types allow it.
 | Multi-Tenant Workloads | Ensure tenant-specific roles cannot access other tenants' resources |
 | CI/CD Pipeline Roles | Restrict automation roles to specific services |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Define the Permission Boundary Policy
 

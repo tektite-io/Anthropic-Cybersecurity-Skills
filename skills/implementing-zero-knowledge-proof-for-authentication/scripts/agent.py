@@ -5,7 +5,6 @@ import hashlib
 import secrets
 import json
 import argparse
-import sys
 from datetime import datetime
 
 

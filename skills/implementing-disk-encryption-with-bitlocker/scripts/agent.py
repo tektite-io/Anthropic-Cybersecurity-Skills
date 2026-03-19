@@ -4,9 +4,7 @@
 import json
 import argparse
 import subprocess
-import re
 from datetime import datetime
-from pathlib import Path
 
 
 def get_bitlocker_status():

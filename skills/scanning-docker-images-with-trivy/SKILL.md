@@ -51,7 +51,7 @@ Trivy uses multiple vulnerability databases:
 - Amazon Linux Security Center
 - GitHub Advisory Database
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Install Trivy
 

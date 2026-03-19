@@ -22,6 +22,9 @@ Thick client (fat client) penetration testing assesses the security of desktop a
 - Tools: dnSpy, Procmon, Process Hacker, Wireshark, Burp Suite, Echo Mirage, Fiddler, IDA Pro/Ghidra
 - Administrative access to test machine
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Phase 1 — Information Gathering
 
 ### Static Analysis

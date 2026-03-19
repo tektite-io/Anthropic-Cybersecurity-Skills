@@ -57,7 +57,7 @@ User navigates to Google Workspace app (Gmail, Drive, etc.)
 | NameID Value | User's primary Google Workspace email |
 | Binding | HTTP-POST (for ACS), HTTP-Redirect (for SSO URL) |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Prepare the Identity Provider
 

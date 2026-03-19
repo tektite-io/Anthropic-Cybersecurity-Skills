@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """Pass-the-Ticket attack detection agent using Windows event log analysis."""
 
 import json
-import sys
 import argparse
 from datetime import datetime
 

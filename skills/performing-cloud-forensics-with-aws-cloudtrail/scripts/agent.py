@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 try:
     import boto3
-    from botocore.exceptions import ClientError
     HAS_BOTO3 = True
 except ImportError:
     HAS_BOTO3 = False

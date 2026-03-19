@@ -7,7 +7,6 @@ import argparse
 from datetime import datetime, timedelta
 
 from azure.identity import DefaultAzureCredential, ClientSecretCredential
-from azure.mgmt.authorization import AuthorizationManagementClient
 import requests
 
 
@@ -21,7 +20,7 @@ def graph_get(token, endpoint, params=None):
     """Make an authenticated GET request to Microsoft Graph API."""
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     url = f"https://graph.microsoft.com/v1.0{endpoint}"
-    resp = requests.get(url, headers=headers, params=params)
+    resp = requests.get(url, headers=headers, params=params, timeout=30)
     resp.raise_for_status()
     return resp.json()
 

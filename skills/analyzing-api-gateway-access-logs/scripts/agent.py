@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 """Agent for analyzing API Gateway access logs for security threats."""
 
-import os
 import re
 import json
 import argparse
 from datetime import datetime
-from collections import defaultdict
 
 import pandas as pd
-import numpy as np
 
 
 def load_api_logs(log_path):

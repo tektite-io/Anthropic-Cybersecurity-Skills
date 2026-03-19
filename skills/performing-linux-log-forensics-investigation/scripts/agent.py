@@ -5,7 +5,6 @@ import json
 import argparse
 import re
 import gzip
-from datetime import datetime
 from pathlib import Path
 from collections import Counter
 

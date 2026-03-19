@@ -2,7 +2,6 @@
 """Cloud Security Posture Management (CSPM) agent across AWS, Azure, and GCP."""
 
 import json
-import sys
 import argparse
 import subprocess
 from datetime import datetime

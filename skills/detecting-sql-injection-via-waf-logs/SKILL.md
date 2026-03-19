@@ -14,6 +14,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Detecting SQL Injection via WAF Logs
+
 ## Instructions
 
 1. Install dependencies: `pip install requests`

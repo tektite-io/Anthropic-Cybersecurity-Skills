@@ -32,7 +32,7 @@ EvilGinx3 is a man-in-the-middle attack framework used for phishing login creden
 - **T1556** - Modify Authentication Process
 - **T1550.004** - Use Alternate Authentication Material: Web Session Cookie
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Infrastructure Setup
 1. Register a convincing lookalike domain (e.g., using homoglyphs or typosquatting)

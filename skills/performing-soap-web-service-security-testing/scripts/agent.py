@@ -5,10 +5,10 @@ Parses WSDL definitions using zeep/lxml, tests for XXE, SQL injection,
 SOAPAction spoofing, and WS-Security bypass vulnerabilities.
 """
 
-import requests
 import json
+import os
+import requests
 import sys
-import re
 from lxml import etree
 
 
@@ -167,7 +167,7 @@ class SOAPSecurityTester:
 
 
 def main():
-    wsdl = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080/ws?wsdl"
+    wsdl = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("SOAP_WSDL_URL", "http://localhost:8080/ws?wsdl")
     tester = SOAPSecurityTester(wsdl)
     tester.parse_wsdl()
     for op in tester.operations:

@@ -3,7 +3,6 @@
 
 import boto3
 import json
-import sys
 import argparse
 from datetime import datetime
 

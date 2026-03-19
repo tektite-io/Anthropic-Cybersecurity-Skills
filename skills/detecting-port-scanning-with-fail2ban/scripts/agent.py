@@ -10,9 +10,9 @@ from collections import Counter
 from datetime import datetime
 
 
-FAIL2BAN_CLIENT = "fail2ban-client"
-FAIL2BAN_LOG = "/var/log/fail2ban.log"
-AUTH_LOG = "/var/log/auth.log"
+FAIL2BAN_CLIENT = os.environ.get("FAIL2BAN_CLIENT", "fail2ban-client")
+FAIL2BAN_LOG = os.environ.get("FAIL2BAN_LOG", "/var/log/fail2ban.log")
+AUTH_LOG = os.environ.get("AUTH_LOG", "/var/log/auth.log")
 
 
 def check_fail2ban_status():
@@ -173,7 +173,7 @@ def parse_auth_log_ssh(log_path=None):
 
 def detect_port_scan_from_logs(log_path=None):
     """Detect port scanning patterns from system logs."""
-    log_path = log_path or "/var/log/syslog"
+    log_path = log_path or os.environ.get("SYSLOG_PATH", "/var/log/syslog")
     if not os.path.exists(log_path):
         return {"error": f"Syslog not found: {log_path}"}
 

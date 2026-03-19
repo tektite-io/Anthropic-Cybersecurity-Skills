@@ -36,7 +36,7 @@ Leak sites provide: victim identification (company name, sector, country), attac
 
 Never directly access DLS sites in a production environment. Use purpose-built monitoring services (Ransomwatch, DarkFeed, KELA, Flashpoint), Tor-isolated research VMs, commercial threat intelligence platforms, or community-maintained datasets. All analysis should be conducted in isolated environments with proper authorization.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Ingest Ransomware Leak Site Data from Public Feeds
 

@@ -66,7 +66,7 @@ Internet Traffic
   Origin Server
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Onboard Domain to Cloudflare
 

@@ -39,7 +39,7 @@ Certificate Transparency (CT) logs publicly record all SSL/TLS certificates issu
 - **HTTP Headers**: Server banners, custom headers, response patterns
 - **Favicon Hash**: Hash of HTTP favicon for server identification
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Shodan Infrastructure Discovery
 

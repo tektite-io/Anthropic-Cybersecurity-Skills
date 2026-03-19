@@ -2,14 +2,13 @@
 """ARP poisoning detection agent for network traffic analysis."""
 
 import json
-import sys
 import argparse
 import subprocess
 from datetime import datetime
 from collections import defaultdict
 
 try:
-    from scapy.all import rdpcap, ARP, Ether
+    from scapy.all import rdpcap, ARP
 except ImportError:
     rdpcap = None
 

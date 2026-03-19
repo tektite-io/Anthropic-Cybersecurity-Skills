@@ -7,13 +7,12 @@ import subprocess
 import sys
 from collections import Counter
 from datetime import datetime
-from pathlib import Path
 
 
-SURICATA_BIN = "/usr/bin/suricata"
-SURICATA_CONF = "/etc/suricata/suricata.yaml"
-EVE_LOG = "/var/log/suricata/eve.json"
-RULES_DIR = "/var/lib/suricata/rules"
+SURICATA_BIN = os.environ.get("SURICATA_BIN", "/usr/bin/suricata")
+SURICATA_CONF = os.environ.get("SURICATA_CONF", "/etc/suricata/suricata.yaml")
+EVE_LOG = os.environ.get("SURICATA_EVE_LOG", "/var/log/suricata/eve.json")
+RULES_DIR = os.environ.get("SURICATA_RULES_DIR", "/var/lib/suricata/rules")
 
 
 def check_suricata_status():
@@ -34,7 +33,7 @@ def check_suricata_status():
 
     running = False
     try:
-        r = subprocess.run(["pgrep", "-x", "suricata"], capture_output=True, text=True)
+        r = subprocess.run(["pgrep", "-x", "suricata"], capture_output=True, text=True, timeout=120)
         running = r.returncode == 0
     except FileNotFoundError:
         pass

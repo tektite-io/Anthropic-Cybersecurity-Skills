@@ -36,7 +36,7 @@ ATT&CK catalogs over 140 threat groups (e.g., APT28, APT29, Lazarus Group, FIN7)
 
 The ATT&CK Navigator is a web-based tool for creating custom ATT&CK matrix visualizations. Analysts create layers (JSON files) that annotate techniques with scores, colors, comments, and metadata to visualize threat actor coverage, detection capabilities, or risk assessments.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Query ATT&CK Data Programmatically
 

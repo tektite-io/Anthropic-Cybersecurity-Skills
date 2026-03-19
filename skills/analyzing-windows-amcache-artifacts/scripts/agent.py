@@ -7,10 +7,8 @@ file metadata, and device information using the regipy library.
 
 import argparse
 import json
-import os
 import sys
 import datetime
-import struct
 
 try:
     from regipy.registry import RegistryHive

@@ -54,7 +54,7 @@ action protocol src_ip src_port -> dst_ip dst_port (rule_options;)
 - **Suricata Traffic ID** - Application identification rules
 - **Custom Rules** - Organization-specific detections
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Install Suricata
 

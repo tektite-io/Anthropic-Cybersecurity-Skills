@@ -37,7 +37,7 @@ Business Email Compromise (BEC) is a sophisticated fraud scheme where attackers 
 - First-time communication pattern between sender and recipient
 - Request for gift cards or cryptocurrency
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure BEC-Specific Email Rules
 - Flag emails with VIP display names from external domains

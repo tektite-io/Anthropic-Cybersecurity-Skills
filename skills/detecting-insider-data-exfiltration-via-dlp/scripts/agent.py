@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """Agent for detecting insider data exfiltration via DLP analysis."""
 
-import os
 import json
 import argparse
 from datetime import datetime
 
 import pandas as pd
-import numpy as np
 
 
 def load_activity_logs(log_path):

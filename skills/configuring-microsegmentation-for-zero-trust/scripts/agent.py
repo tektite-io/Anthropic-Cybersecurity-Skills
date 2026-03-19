@@ -2,6 +2,7 @@
 """Microsegmentation audit agent for zero trust network enforcement."""
 
 import json
+import os
 import sys
 import argparse
 from datetime import datetime
@@ -51,7 +52,7 @@ def check_illumio_workloads(base_url, api_key, org_id):
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     try:
         resp = requests.get(f"{base_url}/api/v2/orgs/{org_id}/workloads",
-                            headers=headers, verify=False)
+                            headers=headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         workloads = resp.json()
         return [{

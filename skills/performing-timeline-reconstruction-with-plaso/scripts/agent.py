@@ -5,10 +5,8 @@ import subprocess
 import os
 import sys
 import csv
-import json
 from datetime import datetime
 from collections import defaultdict
-from pathlib import Path
 
 
 def verify_plaso_installed():
@@ -16,7 +14,8 @@ def verify_plaso_installed():
     tools = {}
     for tool in ["log2timeline.py", "psort.py"]:
         result = subprocess.run(
-            [tool, "--version"], capture_output=True, text=True
+            [tool, "--version"], capture_output=True, text=True,
+            timeout=120,
         )
         tools[tool] = result.stdout.strip() if result.returncode == 0 else None
     return tools

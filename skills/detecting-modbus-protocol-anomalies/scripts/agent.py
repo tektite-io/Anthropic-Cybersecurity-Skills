@@ -7,7 +7,6 @@ packets, timing deviations, register range violations, and replay attacks.
 
 import argparse
 import json
-import sys
 from collections import Counter, defaultdict
 from datetime import datetime
 

@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """Cyber Kill Chain analysis agent for mapping incidents to Lockheed Martin kill chain phases."""
 
-import json
-import os
-import sys
 import datetime
 
 

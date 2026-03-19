@@ -3,10 +3,8 @@
 
 import json
 import argparse
-import re
 from datetime import datetime
 from collections import defaultdict, Counter
-from pathlib import Path
 
 
 COMMON_PORTS = {80, 443, 53, 22, 25, 110, 143, 993, 995, 587, 8080, 8443, 3389}

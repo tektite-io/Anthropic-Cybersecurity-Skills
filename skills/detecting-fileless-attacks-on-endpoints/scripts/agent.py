@@ -8,7 +8,6 @@ WMI persistence events, and reflective DLL injection indicators from Sysmon.
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
 
 try:

@@ -23,6 +23,9 @@ GraphQL depth limit attacks exploit the recursive nature of GraphQL schemas to c
 - Burp Suite or mitmproxy for traffic analysis
 - Authorization to perform security testing on the target
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Core Attack Techniques
 
 ### 1. Recursive Depth Attack

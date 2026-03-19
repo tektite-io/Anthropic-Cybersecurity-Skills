@@ -6,7 +6,6 @@ import argparse
 import re
 from datetime import datetime
 from pathlib import Path
-from collections import Counter, defaultdict
 
 
 SENSITIVE_PATTERNS = {

@@ -20,7 +20,7 @@ Google Workspace provides advanced phishing and malware protection through the A
 - Access to Google Admin Console (admin.google.com)
 - DNS management access for SPF, DKIM, DMARC configuration
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure Advanced Phishing Protection
 - Navigate to Admin Console > Apps > Google Workspace > Gmail > Safety

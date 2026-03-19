@@ -3,10 +3,9 @@
 
 import subprocess
 import sys
-import re
 import json
 import os
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse
 
 try:
     import requests

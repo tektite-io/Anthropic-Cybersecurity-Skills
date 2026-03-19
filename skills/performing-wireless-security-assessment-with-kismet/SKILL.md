@@ -56,7 +56,7 @@ Kismet uses a client-server architecture:
 | WPA2-Enterprise (802.1X) | Recommended | Low - certificate-based |
 | WPA3-SAE | Best practice | Low - resistant to offline attacks |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Prepare Wireless Adapter
 

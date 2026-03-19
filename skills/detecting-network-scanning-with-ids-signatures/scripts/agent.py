@@ -8,8 +8,7 @@ Suricata/Snort alerts and connection logs for scanning patterns.
 import argparse
 import json
 import re
-import sys
-from collections import Counter, defaultdict
+from collections import defaultdict
 from datetime import datetime
 
 SCAN_SIGNATURES = {

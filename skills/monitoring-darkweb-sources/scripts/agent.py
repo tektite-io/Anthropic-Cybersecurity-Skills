@@ -7,7 +7,6 @@ organizational asset mentions using commercial APIs and OSINT tools.
 
 import json
 import os
-import re
 import sys
 from datetime import datetime, timezone
 

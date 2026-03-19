@@ -9,14 +9,7 @@ import logging
 from datetime import datetime
 
 try:
-    from impacket.krb5.kerberosv5 import getKerberosTGT, getKerberosTGS
-    from impacket.krb5 import constants as krb5_constants
-    from impacket.krb5.types import Principal, KerberosTime
     from impacket.smbconnection import SMBConnection
-    from impacket import version as impacket_version
-    from impacket.dcerpc.v5 import samr, transport
-    from impacket.examples.GetUserSPNs import GetUserSPNs
-    from impacket.examples.GetNPUsers import GetNPUsers
 except ImportError:
     sys.exit("impacket is required: pip install impacket")
 

@@ -8,7 +8,6 @@ detection coverage reports.
 
 import json
 import sys
-import subprocess
 from datetime import datetime
 from pathlib import Path
 

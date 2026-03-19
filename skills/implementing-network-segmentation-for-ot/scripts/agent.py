@@ -5,7 +5,6 @@ import json
 import argparse
 import logging
 import subprocess
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -25,7 +24,7 @@ PURDUE_ZONES = {
 def scan_zone_hosts(subnet):
     """Discover hosts in an OT zone via nmap ping scan."""
     cmd = ["nmap", "-sn", subnet, "-oX", "-"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     hosts = []
     import re
     for match in re.finditer(r'addr="(\d+\.\d+\.\d+\.\d+)"', result.stdout):
@@ -68,7 +67,7 @@ def check_ot_protocol_exposure(target_subnet):
                 "20000": "DNP3", "4840": "OPC-UA", "2222": "EtherNet/IP-explicit"}
     port_list = ",".join(ot_ports.keys())
     cmd = ["nmap", "-sS", "-p", port_list, target_subnet, "--open", "-oX", "-"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     exposed = []
     import re
     current_host = ""

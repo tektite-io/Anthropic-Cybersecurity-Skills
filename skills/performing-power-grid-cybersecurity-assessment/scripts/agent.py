@@ -4,8 +4,6 @@
 import json
 import argparse
 import csv
-from datetime import datetime
-from pathlib import Path
 
 
 NERC_CIP_STANDARDS = {

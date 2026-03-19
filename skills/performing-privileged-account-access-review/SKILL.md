@@ -54,7 +54,7 @@ DISCOVER                    VALIDATE                    REMEDIATE               
        level                       and activity                access                  logging
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Account Discovery and Inventory
 

@@ -22,13 +22,13 @@ class GoPhishClient:
         self.headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
     def _get(self, endpoint):
-        resp = requests.get(f"{self.base_url}/api/{endpoint}", headers=self.headers, verify=False)
+        resp = requests.get(f"{self.base_url}/api/{endpoint}", headers=self.headers, verify=False, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def _post(self, endpoint, data):
         resp = requests.post(f"{self.base_url}/api/{endpoint}", headers=self.headers,
-                             json=data, verify=False)
+                             json=data, verify=False, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

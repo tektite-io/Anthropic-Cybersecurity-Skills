@@ -2,11 +2,10 @@
 """Agent for analyzing security logs with Splunk using splunk-sdk."""
 
 import os
-import sys
 import json
 import time
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 
 import splunklib.client as client
 import splunklib.results as results

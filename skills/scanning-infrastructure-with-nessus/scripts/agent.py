@@ -7,6 +7,7 @@ vulnerability reports with severity-based prioritization.
 """
 
 import json
+import os
 import sys
 import time
 import urllib3
@@ -24,9 +25,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 class NessusScanAgent:
     """Manages Nessus vulnerability scans via REST API."""
 
-    def __init__(self, host="https://localhost:8834", username="admin",
+    def __init__(self, host=None, username="admin",
                  password="", output_dir="./nessus_scan"):
-        self.base_url = host.rstrip("/")
+        self.base_url = (host or os.environ.get("NESSUS_URL", "https://localhost:8834")).rstrip("/")
         self.username = username
         self.password = password
         self.token = None

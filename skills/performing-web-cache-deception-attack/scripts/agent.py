@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """Agent for testing web cache deception vulnerabilities.
 
 Appends static file extensions to authenticated URLs to test
 whether CDN/proxy caches serve personalized content to other users.
 """
 
-import requests
 import json
+import os
+import requests
 import sys
 from datetime import datetime
 
@@ -120,7 +124,7 @@ class WebCacheDeceptionAgent:
 
 
 def main():
-    url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080"
+    url = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("TARGET_URL", "http://localhost:8080")
     path = sys.argv[2] if len(sys.argv) > 2 else "/account"
     cookie = sys.argv[3] if len(sys.argv) > 3 else None
     agent = WebCacheDeceptionAgent(url, auth_cookie=cookie)

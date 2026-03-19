@@ -17,7 +17,7 @@ def get_graph_token(tenant_id, client_id, client_secret):
         "client_id": client_id,
         "client_secret": client_secret,
         "scope": "https://graph.microsoft.com/.default",
-    })
+    }, timeout=30)
     resp.raise_for_status()
     return resp.json()["access_token"]
 
@@ -33,7 +33,7 @@ def list_users(token, filter_query=None):
         params["$filter"] = filter_query
     users = []
     while url:
-        resp = requests.get(url, headers=headers, params=params)
+        resp = requests.get(url, headers=headers, params=params, timeout=30)
         resp.raise_for_status()
         data = resp.json()
         users.extend(data.get("value", []))
@@ -93,7 +93,7 @@ def get_access_reviews(token):
     """List active access reviews from Entra ID Governance."""
     headers = {"Authorization": f"Bearer {token}"}
     url = "https://graph.microsoft.com/v1.0/identityGovernance/accessReviews/definitions"
-    resp = requests.get(url, headers=headers)
+    resp = requests.get(url, headers=headers, timeout=30)
     resp.raise_for_status()
     reviews = []
     for r in resp.json().get("value", []):
@@ -110,7 +110,7 @@ def check_users_without_mfa(token):
     """Identify users without registered MFA methods."""
     headers = {"Authorization": f"Bearer {token}"}
     url = "https://graph.microsoft.com/v1.0/reports/authenticationMethods/userRegistrationDetails"
-    resp = requests.get(url, headers=headers, params={"$top": "999"})
+    resp = requests.get(url, headers=headers, params={"$top": "999"}, timeout=30)
     resp.raise_for_status()
     no_mfa = []
     for u in resp.json().get("value", []):

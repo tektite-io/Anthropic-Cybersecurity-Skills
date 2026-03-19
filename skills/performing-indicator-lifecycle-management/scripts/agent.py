@@ -5,8 +5,7 @@ import json
 import argparse
 import csv
 import re
-import hashlib
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 

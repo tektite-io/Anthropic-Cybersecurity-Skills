@@ -9,7 +9,6 @@ import hashlib
 import json
 import os
 import secrets
-import socket
 import sys
 import threading
 from datetime import datetime, timezone

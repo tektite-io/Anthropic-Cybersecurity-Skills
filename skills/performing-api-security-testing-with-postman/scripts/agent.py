@@ -3,7 +3,6 @@
 """Postman API security testing orchestration agent using Newman CLI."""
 
 import json
-import sys
 import argparse
 import subprocess
 import os

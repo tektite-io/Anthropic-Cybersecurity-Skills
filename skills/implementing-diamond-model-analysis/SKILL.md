@@ -1,6 +1,10 @@
 ---
 name: implementing-diamond-model-analysis
-description: The Diamond Model of Intrusion Analysis provides a structured framework for analyzing cyber intrusions by examining four core features: Adversary, Capability, Infrastructure, and Victim. This skill co
+description: >-
+  The Diamond Model of Intrusion Analysis provides a structured framework for analyzing
+  cyber intrusions by examining four core features - Adversary, Capability, Infrastructure,
+  and Victim. This skill covers implementing the Diamond Model programmatically to classify
+  and correlate intrusion events, build activity threads, and generate pivot-ready intelligence.
 domain: cybersecurity
 subdomain: threat-intelligence
 tags: [threat-intelligence, cti, ioc, mitre-attack, stix, diamond-model, intrusion-analysis]
@@ -41,7 +45,7 @@ The Diamond Model of Intrusion Analysis provides a structured framework for anal
 - **Activity Thread**: Sequence of Diamond events from a single adversary operation
 - **Activity Group**: Cluster of threads attributed to the same adversary
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Define Diamond Event Data Structure
 

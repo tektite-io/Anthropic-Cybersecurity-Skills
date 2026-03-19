@@ -2,6 +2,7 @@
 """Host-based intrusion detection agent using OSSEC/Wazuh API and osquery."""
 
 import json
+import os
 import sys
 import argparse
 import subprocess
@@ -24,14 +25,16 @@ class WazuhClient:
 
     def _authenticate(self, username, password):
         resp = requests.post(f"{self.url}/security/user/authenticate",
-                             auth=(username, password), verify=False)
+                             auth=(username, password),
+                             verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()["data"]["token"]
 
     def _get(self, endpoint, params=None):
         resp = requests.get(f"{self.url}/{endpoint}",
                             headers={"Authorization": f"Bearer {self.token}"},
-                            params=params, verify=False)
+                            params=params,
+                            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         resp.raise_for_status()
         return resp.json()
 

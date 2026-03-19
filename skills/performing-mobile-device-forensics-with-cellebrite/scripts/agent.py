@@ -9,10 +9,11 @@ iOS and Android file system extractions.
 import sqlite3
 import json
 import sys
-import csv
-import os
+import re
 from pathlib import Path
 from datetime import datetime
+
+_SAFE_TABLE_RE = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
 
 
 class MobileForensicsAgent:
@@ -147,10 +148,14 @@ class MobileForensicsAgent:
                 cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
                 tables = [row[0] for row in cursor.fetchall()]
                 for table in tables:
+                    if not _SAFE_TABLE_RE.match(table):
+                        continue
                     try:
                         cursor.execute(f"SELECT * FROM [{table}] LIMIT 1")
                         columns = [desc[0] for desc in cursor.description]
                         for col in columns:
+                            if not _SAFE_TABLE_RE.match(col):
+                                continue
                             cursor.execute(
                                 f"SELECT [{col}] FROM [{table}] WHERE [{col}] LIKE ?",
                                 [f"%{keyword}%"]

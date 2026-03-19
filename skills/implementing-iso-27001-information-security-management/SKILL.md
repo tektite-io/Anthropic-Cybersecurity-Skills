@@ -56,7 +56,7 @@ The 2022 revision restructured 93 controls into four categories:
 10. A.8.23 - Web Filtering
 11. A.8.28 - Secure Coding
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Gap Analysis and Scoping (Weeks 1-4)
 1. Define ISMS scope boundaries (locations, business units, systems)

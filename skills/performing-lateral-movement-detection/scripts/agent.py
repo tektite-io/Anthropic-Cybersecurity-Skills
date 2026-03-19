@@ -9,7 +9,6 @@ mapped to MITRE ATT&CK TA0008 techniques.
 import json
 import sys
 import csv
-import re
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path

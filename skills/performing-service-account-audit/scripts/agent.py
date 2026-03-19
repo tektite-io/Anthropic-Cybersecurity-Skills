@@ -9,7 +9,7 @@ generates a risk-classified compliance report.
 import json
 import sys
 import subprocess
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict
 
 

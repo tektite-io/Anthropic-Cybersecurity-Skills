@@ -26,6 +26,9 @@ license: Apache-2.0
 - Understanding of URL path parsing differences across technologies
 - Familiarity with common CDN platforms (Cloudflare, Akamai, Fastly, AWS CloudFront)
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1 — Identify Caching Layer and Behavior

@@ -3,9 +3,7 @@
 
 import json
 import argparse
-import re
 from datetime import datetime
-from pathlib import Path
 
 try:
     import yaml

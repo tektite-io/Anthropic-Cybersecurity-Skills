@@ -4,6 +4,7 @@
 import json
 import argparse
 import logging
+import os
 import subprocess
 from collections import defaultdict
 from datetime import datetime
@@ -11,7 +12,7 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-GC_API = "https://gc-centra.example.com/api/v3.0"
+GC_API = os.environ.get("GUARDICORE_API_URL", "https://gc-centra.example.com/api/v3.0")
 
 
 def gc_request(api_url, token, endpoint, method="GET", data=None):
@@ -21,7 +22,7 @@ def gc_request(api_url, token, endpoint, method="GET", data=None):
            f"{api_url}{endpoint}"]
     if data:
         cmd.extend(["-d", json.dumps(data)])
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 

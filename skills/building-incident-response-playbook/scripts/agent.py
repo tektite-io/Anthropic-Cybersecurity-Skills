@@ -149,7 +149,7 @@ def check_thehive_cases(thehive_url, api_key):
             {"_name": "sort", "_fields": [{"startDate": "desc"}]},
             {"_name": "page", "from": 0, "to": 50},
         ]
-    })
+    }, timeout=30)
     resp.raise_for_status()
     cases = []
     for c in resp.json():
@@ -173,7 +173,7 @@ def calculate_ir_metrics(thehive_url, api_key, days=30):
             {"_name": "filter", "_field": "status", "_value": "Resolved"},
             {"_name": "page", "from": 0, "to": 500},
         ]
-    })
+    }, timeout=30)
     resp.raise_for_status()
     cases = resp.json()
     total_resolve_ms = 0

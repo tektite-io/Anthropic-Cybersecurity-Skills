@@ -6,7 +6,6 @@ import argparse
 import logging
 import subprocess
 from datetime import datetime
-from collections import defaultdict
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -56,7 +55,7 @@ def check_esp_controls(target_ip=None):
     findings = []
     if target_ip:
         cmd = ["nmap", "-sS", "-p", "1-1024", "--open", target_ip, "-oX", "-"]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         open_ports = result.stdout.count("state=\"open\"")
         if open_ports > 10:
             findings.append({"control": "CIP-005", "issue": f"{open_ports} open ports on ESP boundary",
@@ -68,13 +67,13 @@ def check_system_hardening():
     """Check CIP-007 system hardening controls."""
     findings = []
     svc_cmd = ["systemctl", "list-units", "--type=service", "--state=running", "--no-pager"]
-    result = subprocess.run(svc_cmd, capture_output=True, text=True)
+    result = subprocess.run(svc_cmd, capture_output=True, text=True, timeout=120)
     service_count = len([l for l in result.stdout.split("\n") if ".service" in l])
     if service_count > 50:
         findings.append({"control": "CIP-007-R1", "issue": f"{service_count} running services (minimize unused)",
                         "severity": "medium"})
-    patch_cmd = ["apt", "list", "--upgradable"] if subprocess.run(["which", "apt"], capture_output=True).returncode == 0 else ["yum", "check-update"]
-    result = subprocess.run(patch_cmd, capture_output=True, text=True)
+    patch_cmd = ["apt", "list", "--upgradable"] if subprocess.run(["which", "apt"], capture_output=True, timeout=120).returncode == 0 else ["yum", "check-update"]
+    result = subprocess.run(patch_cmd, capture_output=True, text=True, timeout=120)
     pending = len([l for l in result.stdout.split("\n") if l.strip() and not l.startswith("Listing")])
     if pending > 0:
         findings.append({"control": "CIP-007-R2", "issue": f"{pending} pending security patches",

@@ -3,7 +3,6 @@
 """RESTler API fuzzing orchestration and result analysis agent."""
 
 import json
-import sys
 import argparse
 import subprocess
 import os

@@ -39,7 +39,7 @@ Building a Threat Intelligence Platform (TIP) involves deploying and integrating
 - **TheHive <-> Cortex**: Automated analysis and enrichment of case observables
 - **All <-> SIEM**: Real-time IOC push to Splunk/Elastic via API or Kafka
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deploy Platform with Docker Compose
 

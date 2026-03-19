@@ -2,11 +2,6 @@
 """DNS exfiltration detection agent using entropy analysis and query pattern detection."""
 
 import math
-import os
-import sys
-import json
-import csv
-import datetime
 from collections import Counter, defaultdict
 
 

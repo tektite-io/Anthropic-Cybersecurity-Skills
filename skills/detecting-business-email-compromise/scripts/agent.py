@@ -9,7 +9,6 @@ import argparse
 import email
 import json
 import re
-import sys
 from email import policy
 from pathlib import Path
 

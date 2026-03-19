@@ -9,7 +9,7 @@ threat cases.
 import json
 import sys
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict
 from pathlib import Path
 

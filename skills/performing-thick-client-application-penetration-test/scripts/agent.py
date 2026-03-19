@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """Agent for thick client application penetration testing.
 
 Performs static analysis (strings extraction, .NET detection),
@@ -6,7 +9,6 @@ dynamic analysis (process monitoring, DLL search order checks),
 local storage auditing, and API traffic interception assessment.
 """
 
-import subprocess
 import json
 import sys
 import os
@@ -14,6 +16,8 @@ import re
 import sqlite3
 from pathlib import Path
 from datetime import datetime
+
+_SAFE_TABLE_RE = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
 
 
 class ThickClientPentestAgent:
@@ -129,7 +133,9 @@ class ThickClientPentestAgent:
                     if any(kw in lower for kw in
                            ["user", "account", "credential", "auth",
                             "login", "password", "token", "session"]):
-                        cursor.execute(f'SELECT COUNT(*) FROM "{table}"')
+                        if not _SAFE_TABLE_RE.match(table):
+                            continue
+                        cursor.execute(f"SELECT COUNT(*) FROM [{table}]")
                         count = cursor.fetchone()[0]
                         sensitive_tables.append({"table": table, "rows": count})
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """Web cache poisoning assessment agent using requests and subprocess."""
 
 import sys
 import json
-import hashlib
 import time
 import random
 import string

@@ -14,8 +14,7 @@ import argparse
 import subprocess
 import tempfile
 import shutil
-from pathlib import Path
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 logging.basicConfig(
     level=logging.INFO,

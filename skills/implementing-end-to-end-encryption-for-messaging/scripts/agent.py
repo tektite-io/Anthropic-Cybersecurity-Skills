@@ -4,7 +4,6 @@
 import json
 import argparse
 import os
-from datetime import datetime
 
 try:
     from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey, X25519PublicKey

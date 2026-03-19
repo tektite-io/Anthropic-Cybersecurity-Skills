@@ -36,6 +36,9 @@ license: Apache-2.0
 - Trusted agent (white cell) within the target organization who manages the exercise boundaries without alerting defenders
 - MITRE ATT&CK matrix for mapping planned and executed techniques
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: Adversary Emulation Planning

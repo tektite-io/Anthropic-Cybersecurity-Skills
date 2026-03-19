@@ -6,7 +6,6 @@ and missing access controls."""
 import argparse
 import json
 import socket
-import sys
 from collections import Counter
 from datetime import datetime
 from pathlib import Path

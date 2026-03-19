@@ -5,7 +5,6 @@ import json
 import argparse
 import os
 import base64
-from datetime import datetime
 
 try:
     import boto3

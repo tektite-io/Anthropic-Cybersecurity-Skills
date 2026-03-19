@@ -5,7 +5,6 @@ import json
 import argparse
 import logging
 import subprocess
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

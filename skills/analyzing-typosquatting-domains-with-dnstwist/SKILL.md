@@ -36,7 +36,7 @@ DNSTwist uses ssdeep (locality-sensitive hash) to compare HTML content and pHash
 
 The typical workflow is: generate domain permutations -> resolve DNS records -> check for registered domains -> compare web page similarity -> flag suspicious domains -> alert security team -> request takedown. For a typical corporate domain, dnstwist generates 5,000-10,000 permutations.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Basic Domain Permutation Scan
 

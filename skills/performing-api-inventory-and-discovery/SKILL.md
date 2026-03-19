@@ -163,7 +163,7 @@ def discover_api_endpoints(base_domains):
             url = f"{scheme}://{domain}{path}"
             try:
                 resp = requests.get(url, timeout=5, allow_redirects=False,
-                                  verify=False)
+                                  verify=False)  # TLS verification disabled for discovery; enable in production
                 if resp.status_code not in (404, 502, 503):
                     return {
                         "url": url,

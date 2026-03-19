@@ -2,11 +2,10 @@
 """Agent for assessing and managing GDPR data protection compliance."""
 
 import json
-import csv
 import argparse
 import re
-from datetime import datetime, timedelta
-from collections import Counter, defaultdict
+from datetime import datetime
+from collections import Counter
 
 
 GDPR_ARTICLES = {

@@ -6,7 +6,6 @@ import argparse
 import logging
 import subprocess
 import xml.etree.ElementTree as ET
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -15,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def pan_api_request(firewall_ip, api_key, cmd_type, cmd):
     url = f"https://{firewall_ip}/api/?type={cmd_type}&cmd={cmd}&key={api_key}"
-    result = subprocess.run(["curl", "-s", "-k", url], capture_output=True, text=True)
+    result = subprocess.run(["curl", "-s", "-k", url], capture_output=True, text=True, timeout=120)
     return result.stdout
 
 

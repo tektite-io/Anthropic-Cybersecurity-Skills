@@ -4,7 +4,6 @@
 import json
 import sys
 import os
-from datetime import datetime
 
 try:
     from stix2 import MemoryStore, Filter

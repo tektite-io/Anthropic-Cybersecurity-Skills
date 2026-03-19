@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cortex XSOAR playbook audit."""
-import argparse, json, sys
+import argparse, json
 from datetime import datetime, timezone
 try:
     import requests

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Agent for auditing CyberArk Zero Standing Privilege (ZSP) configuration via REST API."""
 
+import os
 import requests
 import json
 import argparse
-import sys
 from datetime import datetime, timezone
 import urllib3
 
@@ -15,7 +15,7 @@ def authenticate(base_url, username, password, auth_method="CyberArk"):
     """Authenticate to CyberArk PVWA and obtain session token."""
     url = f"{base_url}/api/auth/{auth_method}/Logon"
     payload = {"username": username, "password": password}
-    resp = requests.post(url, json=payload, verify=False, timeout=30)
+    resp = requests.post(url, json=payload, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     token = resp.json().strip('"')
     print(f"[*] Authenticated to CyberArk PVWA as {username}")
@@ -25,7 +25,7 @@ def authenticate(base_url, username, password, auth_method="CyberArk"):
 def list_safes(base_url, headers):
     """List all safes to audit access policies."""
     url = f"{base_url}/api/Safes"
-    resp = requests.get(url, headers=headers, verify=False, timeout=30)
+    resp = requests.get(url, headers=headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     safes = resp.json().get("value", [])
     print(f"[*] Found {len(safes)} safes")
@@ -37,7 +37,7 @@ def list_safes(base_url, headers):
 def audit_safe_members(base_url, headers, safe_name):
     """Audit members and permissions of a specific safe."""
     url = f"{base_url}/api/Safes/{safe_name}/Members"
-    resp = requests.get(url, headers=headers, verify=False, timeout=30)
+    resp = requests.get(url, headers=headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     members = resp.json().get("value", [])
     findings = []
@@ -57,7 +57,7 @@ def audit_safe_members(base_url, headers, safe_name):
 def list_platforms(base_url, headers):
     """List platforms to verify JIT/ZSP configuration."""
     url = f"{base_url}/api/Platforms"
-    resp = requests.get(url, headers=headers, verify=False, timeout=30)
+    resp = requests.get(url, headers=headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     platforms = resp.json().get("Platforms", [])
     print(f"[*] Found {len(platforms)} platforms")
@@ -70,7 +70,7 @@ def list_platforms(base_url, headers):
 def check_jit_sessions(base_url, headers, days=7):
     """Check recent privileged sessions for JIT compliance."""
     url = f"{base_url}/api/LiveSessions"
-    resp = requests.get(url, headers=headers, verify=False, timeout=30)
+    resp = requests.get(url, headers=headers, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     sessions = resp.json().get("LiveSessions", [])
     print(f"[*] Active privileged sessions: {len(sessions)}")
@@ -91,7 +91,7 @@ def audit_accounts_standing_access(base_url, headers):
     """Find privileged accounts with standing (non-JIT) access enabled."""
     url = f"{base_url}/api/Accounts"
     params = {"limit": 100, "offset": 0}
-    resp = requests.get(url, headers=headers, params=params, verify=False, timeout=30)
+    resp = requests.get(url, headers=headers, params=params, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     resp.raise_for_status()
     accounts = resp.json().get("value", [])
     findings = []

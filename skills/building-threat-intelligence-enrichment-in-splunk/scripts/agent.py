@@ -5,10 +5,8 @@ Manages threat intel lookups, KV store collections, and modular inputs
 for enriching Splunk events with IOC context from MISP, OTX, and CSV feeds.
 """
 
-import sys
 import json
 import csv
-import os
 import datetime
 import io
 

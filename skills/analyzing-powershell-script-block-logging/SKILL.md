@@ -13,6 +13,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Analyzing PowerShell Script Block Logging
+
 ## Instructions
 
 1. Install dependencies: `pip install python-evtx lxml`

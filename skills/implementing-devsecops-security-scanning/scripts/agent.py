@@ -7,7 +7,6 @@ scans via subprocess, aggregates findings, and enforces severity gates.
 
 import argparse
 import json
-import os
 import subprocess
 import sys
 import datetime

@@ -62,7 +62,7 @@ User with Eligible Assignment
 2. **Azure Resource Roles**: Owner, Contributor, User Access Administrator on subscriptions/resource groups
 3. **PIM for Groups**: Manage membership in privileged security groups
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Plan Role Assignments
 

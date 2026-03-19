@@ -4,8 +4,6 @@
 import json
 import argparse
 import subprocess
-import csv
-from datetime import datetime
 from pathlib import Path
 from collections import Counter
 

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """SSL stripping assessment agent using subprocess wrappers for bettercap and curl."""
 
 import subprocess
 import re
 import json
 import sys
-import shutil
 
 
 def check_hsts_header(target_url):

@@ -4,7 +4,6 @@
 import struct
 import os
 import sys
-import hashlib
 import datetime
 import json
 import glob
@@ -164,11 +163,11 @@ def build_execution_timeline(prefetch_results):
 
 def run_pecmd(prefetch_path, output_dir=None):
     """Run Eric Zimmerman's PECmd for comprehensive prefetch parsing."""
-    cmd = f"PECmd.exe -f {prefetch_path}"
-    if output_dir:
-        cmd += f" --csv {output_dir}"
     import subprocess
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+    cmd = ["PECmd.exe", "-f", prefetch_path]
+    if output_dir:
+        cmd += ["--csv", output_dir]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
     return result.stdout, result.returncode
 
 

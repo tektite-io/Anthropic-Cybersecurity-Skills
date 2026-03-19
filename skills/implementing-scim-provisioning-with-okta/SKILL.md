@@ -58,7 +58,7 @@ Okta (IdP) ──SCIM 2.0 over HTTPS──> SCIM Server ──> Application Data
 4. **Users** (`/scim/v2/Users`): User lifecycle operations
 5. **Groups** (`/scim/v2/Groups`): Group management operations
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Build SCIM 2.0 API Server
 

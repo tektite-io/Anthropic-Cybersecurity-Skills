@@ -5,16 +5,21 @@ import argparse
 import json
 import os
 import re
+import shlex
 import subprocess
-import sys
 from datetime import datetime, timezone
 
 
 def run_cmd(cmd, timeout=10):
-    """Run a shell command and return stdout."""
+    """Run a command and return stdout."""
     try:
+        # Strip shell stderr redirects since we use subprocess.DEVNULL
+        clean_cmd = cmd.replace("2>/dev/null", "").strip()
+        # Use shell only for commands with shell operators
+        needs_shell = any(op in clean_cmd for op in ("|", ";", "&&", "||"))
         return subprocess.check_output(
-            cmd, shell=True, text=True, errors="replace",
+            clean_cmd if needs_shell else shlex.split(clean_cmd),
+            shell=needs_shell, text=True, errors="replace",
             timeout=timeout, stderr=subprocess.DEVNULL
         ).strip()
     except subprocess.SubprocessError:

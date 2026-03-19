@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """in-toto supply chain security audit."""
-import argparse, json, sys
+import argparse, json
 from datetime import datetime, timezone
 try:
     import requests

@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """
 Clickjacking Attack Test Agent — AUTHORIZED TESTING ONLY
 Tests web applications for clickjacking (UI redressing) vulnerabilities by
@@ -7,7 +10,6 @@ checking frame-busting headers and generating proof-of-concept pages.
 WARNING: Only use with explicit written authorization for the target application.
 """
 
-import json
 import sys
 from datetime import datetime, timezone
 from urllib.parse import urlparse

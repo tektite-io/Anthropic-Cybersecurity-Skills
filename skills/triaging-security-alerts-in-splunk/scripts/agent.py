@@ -6,7 +6,7 @@ import splunklib.results as splunk_results
 import json
 import sys
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 def connect_splunk(host, port, username, password):

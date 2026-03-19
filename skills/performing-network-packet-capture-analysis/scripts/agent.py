@@ -4,11 +4,10 @@
 import json
 import argparse
 import subprocess
-from datetime import datetime
 from collections import Counter
 
 try:
-    from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR, Raw
+    from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR
     HAS_SCAPY = True
 except ImportError:
     HAS_SCAPY = False

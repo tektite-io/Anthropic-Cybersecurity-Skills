@@ -4,8 +4,7 @@
 import json
 import sys
 import argparse
-from datetime import datetime, timedelta
-from collections import defaultdict
+from datetime import datetime
 
 try:
     import splunklib.client as splunk_client

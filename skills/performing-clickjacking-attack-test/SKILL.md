@@ -28,6 +28,9 @@ license: Apache-2.0
 - **HTML/CSS knowledge**: For crafting clickjacking overlay pages
 - **curl**: For checking framing headers on target pages
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: Check Frame Embedding Protections

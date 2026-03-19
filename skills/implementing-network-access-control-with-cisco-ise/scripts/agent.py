@@ -17,7 +17,7 @@ def ise_request(base_url, username, password, endpoint):
     cmd = ["curl", "-s", "-k", "-u", f"{username}:{password}",
            "-H", "Accept: application/json",
            f"{base_url}/ers/config{endpoint}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 
@@ -38,7 +38,7 @@ def get_active_sessions(base_url, user, pw):
     cmd = ["curl", "-s", "-k", "-u", f"{user}:{pw}",
            "-H", "Accept: application/json",
            f"{base_url}/admin/API/mnt/Session/ActiveList"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 

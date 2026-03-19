@@ -71,7 +71,7 @@ User requests access via CyberArk
 | Endpoint Privilege Manager | Controls local admin and app elevation |
 | Privileged Session Manager | Records and monitors privileged sessions |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Integrate Cloud Providers
 

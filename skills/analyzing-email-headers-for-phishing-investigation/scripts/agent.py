@@ -8,7 +8,6 @@ import hashlib
 import os
 import sys
 import subprocess
-import json
 from email import policy
 
 
@@ -147,9 +146,10 @@ def extract_attachments(msg, output_dir=None):
 
 def dns_lookup(domain, record_type="TXT"):
     """Perform DNS lookup for SPF/DKIM/DMARC records."""
-    cmd = f"dig {record_type} {domain} +short"
-    stdout, _, rc = subprocess.run(cmd, shell=True, capture_output=True, text=True,
-                                    timeout=10).stdout, "", 0
+    stdout, _, rc = subprocess.run(
+        ["dig", record_type, domain, "+short"],
+        capture_output=True, text=True, timeout=10
+    ).stdout, "", 0
     return stdout.strip() if stdout else ""
 
 

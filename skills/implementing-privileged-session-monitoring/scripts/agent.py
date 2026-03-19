@@ -7,7 +7,6 @@ track privileged access, detect anomalies, and generate audit reports.
 
 import argparse
 import json
-import os
 import re
 import sys
 import datetime

@@ -70,7 +70,7 @@ Attack Path 3:  Workstation -> Mimikatz -> Cached Creds
 | Software Vulnerabilities | 8% | Unpatched CVEs, outdated software |
 | Cloud Exposures | 2% | IAM misconfig, public storage, overly permissive roles |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Define Critical Assets (Business Context)
 

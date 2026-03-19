@@ -65,7 +65,7 @@ Enterprise Root CA
              (CN matches requested server)
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Generate Internal CA for SSL Inspection
 

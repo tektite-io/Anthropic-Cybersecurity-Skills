@@ -24,13 +24,13 @@ class ZPAClient:
     def _authenticate(self, client_id, client_secret):
         resp = requests.post(f"{self.base_url}/signin", json={
             "client_id": client_id, "client_secret": client_secret,
-        })
+        }, timeout=30)
         resp.raise_for_status()
         return resp.json()["token"]
 
     def _get(self, endpoint):
         resp = requests.get(f"{self.base_url}/mgmtconfig/v1/admin/customers/{self.customer_id}/{endpoint}",
-                            headers={"Authorization": f"Bearer {self.token}"})
+                            headers={"Authorization": f"Bearer {self.token}"}, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

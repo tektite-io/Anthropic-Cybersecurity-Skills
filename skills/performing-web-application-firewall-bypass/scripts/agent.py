@@ -6,8 +6,9 @@ against a target URL to identify WAF evasion weaknesses in
 XSS, SQLi, and path traversal filtering.
 """
 
-import requests
 import json
+import os
+import requests
 import sys
 import urllib.parse
 from datetime import datetime
@@ -131,7 +132,7 @@ class WAFBypassAgent:
 
 
 def main():
-    url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080/"
+    url = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("TARGET_URL", "http://localhost:8080/")
     agent = WAFBypassAgent(url)
     agent.test_encoding_bypasses()
     agent.test_sqli_bypasses()

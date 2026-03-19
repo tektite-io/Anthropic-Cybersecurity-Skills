@@ -49,7 +49,7 @@ Patch management is the systematic process of identifying, testing, deploying, a
 | Ring 3 | General Deployment | 50% | 7-14 days | Main rollout |
 | Ring 4 | Mission Critical | 30% | After Ring 3 | Final deployment |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure Patch Sources
 

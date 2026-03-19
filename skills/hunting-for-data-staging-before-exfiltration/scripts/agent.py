@@ -3,9 +3,8 @@
 
 import json
 import re
-import os
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import defaultdict
 
 ARCHIVE_TOOLS = {

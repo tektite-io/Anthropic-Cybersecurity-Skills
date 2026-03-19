@@ -36,7 +36,7 @@ A collection management framework maps intelligence requirements to collection s
 
 Strategic intelligence informs executive decision-making (threat landscape, risk trends, geopolitical context). Operational intelligence supports security operations (campaign tracking, actor TTPs, attack timing). Tactical intelligence enables immediate defense (IOCs, detection rules, blocklists).
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Define Intelligence Requirements
 

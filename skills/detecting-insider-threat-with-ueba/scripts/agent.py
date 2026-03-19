@@ -5,6 +5,7 @@ import json
 import argparse
 import logging
 import math
+import os
 from collections import defaultdict
 from datetime import datetime, timedelta
 from elasticsearch import Elasticsearch
@@ -159,7 +160,7 @@ def generate_report(anomalies, peer_findings, baselines):
 
 def main():
     parser = argparse.ArgumentParser(description="UEBA Insider Threat Detection Agent")
-    parser.add_argument("--es-hosts", default="https://localhost:9200", help="Elasticsearch hosts")
+    parser.add_argument("--es-hosts", default=os.environ.get("ES_HOSTS", "https://localhost:9200"), help="Elasticsearch hosts")
     parser.add_argument("--api-key", help="Elasticsearch API key")
     parser.add_argument("--index", default="logs-*", help="Log index pattern")
     parser.add_argument("--user-field", default="user.name", help="User identity field")

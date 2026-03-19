@@ -23,6 +23,9 @@ The JWT none algorithm attack exploits a vulnerability in JSON Web Token librari
 - Understanding of JWT structure (Header.Payload.Signature)
 - Authorization to perform security testing on the target
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## JWT Structure
 
 A JWT consists of three Base64URL-encoded parts separated by dots:

@@ -6,7 +6,6 @@ import sys
 import argparse
 import hmac
 import hashlib
-import time
 import email.utils
 import urllib.parse
 from datetime import datetime
@@ -41,7 +40,7 @@ class DuoAdminClient:
         params = params or {}
         headers = self._sign("GET", endpoint, params)
         resp = requests.get(f"https://{self.host}{endpoint}",
-                            headers=headers, params=params)
+                            headers=headers, params=params, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

@@ -62,7 +62,7 @@ int main() {
 }
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1 --- Build the Fuzzing Harness
 

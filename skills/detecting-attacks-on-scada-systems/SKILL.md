@@ -397,7 +397,7 @@ class ProcessAnomalyDetector:
                 params=params,
                 headers=headers,
                 timeout=10,
-                verify=False,  # Many OT historians use self-signed certs
+                verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             )
             resp.raise_for_status()
             return resp.json()

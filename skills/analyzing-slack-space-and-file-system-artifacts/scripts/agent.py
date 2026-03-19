@@ -2,7 +2,6 @@
 """Agent for analyzing NTFS slack space and file system artifacts."""
 
 import os
-import sys
 import json
 import struct
 import argparse
@@ -14,7 +13,7 @@ from pathlib import Path
 def parse_mft_with_analyzeMFT(mft_path, output_csv):
     """Parse MFT using analyzeMFT and return deleted/timestomped files."""
     cmd = ["analyzeMFT.py", "-f", mft_path, "-o", output_csv, "-c"]
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True, timeout=120)
     return output_csv
 
 
@@ -22,7 +21,7 @@ def extract_slack_space(image_path, offset, output_path):
     """Extract slack space from a disk image using blkls from The Sleuth Kit."""
     cmd = ["blkls", "-s", "-o", str(offset), image_path]
     with open(output_path, "wb") as out:
-        subprocess.run(cmd, stdout=out, check=True)
+        subprocess.run(cmd, stdout=out, check=True, timeout=120)
     return output_path
 
 
@@ -92,7 +91,7 @@ def parse_usn_journal(usn_path):
 def find_ads_in_image(image_path, offset):
     """List Alternate Data Streams using fls from The Sleuth Kit."""
     cmd = ["fls", "-r", "-o", str(offset), image_path]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     ads_entries = [line for line in result.stdout.splitlines() if ":" in line]
     return ads_entries
 

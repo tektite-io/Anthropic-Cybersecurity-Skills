@@ -4,11 +4,9 @@
 import json
 import sys
 import urllib.request
-import urllib.parse
 import ssl
 from collections import Counter
 from datetime import datetime
-from math import radians, sin, cos, sqrt, atan2
 
 
 class MISPClient:

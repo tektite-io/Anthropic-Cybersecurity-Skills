@@ -8,7 +8,11 @@ import hashlib
 import argparse
 from datetime import datetime
 
+import re
+
 import requests
+
+_SAFE_TABLE_RE = re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*$')
 
 
 def create_dns_canarytoken(email, memo, webhook_url=None):
@@ -79,6 +83,8 @@ def deploy_aws_credential_token(target_path, canary_key_id, canary_secret):
 
 def deploy_database_honeytoken(db_connection_string, table_name="users"):
     """Generate SQL to insert honeytoken records into a database."""
+    if not _SAFE_TABLE_RE.match(table_name):
+        raise ValueError(f"Invalid table name: {table_name!r}")
     token_id = generate_honeytoken_id()
     fake_users = [
         {
@@ -97,11 +103,13 @@ def deploy_database_honeytoken(db_connection_string, table_name="users"):
     sql_statements = []
     for user in fake_users:
         sql = (
-            f"INSERT INTO {table_name} (username, email, role, api_key) "
-            f"VALUES ('{user['username']}', '{user['email']}', "
-            f"'{user['role']}', '{user['api_key']}');"
+            f"INSERT INTO [{table_name}] (username, email, role, api_key) "
+            "VALUES (?, ?, ?, ?);"
         )
-        sql_statements.append(sql)
+        sql_statements.append({
+            "query": sql,
+            "params": [user["username"], user["email"], user["role"], user["api_key"]],
+        })
     return {"token_id": token_id, "sql_statements": sql_statements, "records": fake_users}
 
 

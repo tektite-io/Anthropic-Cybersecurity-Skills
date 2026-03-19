@@ -8,7 +8,6 @@ from datetime import datetime
 
 try:
     import boto3
-    from botocore.exceptions import ClientError
 except ImportError:
     print("Install: pip install boto3")
     sys.exit(1)

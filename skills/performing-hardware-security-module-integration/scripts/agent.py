@@ -8,7 +8,6 @@ from datetime import datetime
 try:
     import pkcs11
     from pkcs11 import KeyType, ObjectClass, Mechanism
-    from pkcs11.util.rsa import encode_rsa_public_key
 except ImportError:
     pkcs11 = None
 

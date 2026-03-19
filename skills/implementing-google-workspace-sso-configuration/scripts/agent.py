@@ -3,14 +3,11 @@
 
 import json
 import argparse
-import subprocess
-import re
 from datetime import datetime
 from pathlib import Path
 
 try:
     from cryptography import x509
-    from cryptography.hazmat.primitives import serialization
 except ImportError:
     x509 = None
 

@@ -39,7 +39,7 @@ MISP operates on an event-based model where threat intelligence is organized int
 
 PyMISP is the official Python library to access MISP platforms via their REST API. It supports fetching events, adding/updating events and attributes, uploading samples, and searching across the entire MISP dataset. Authentication uses an API key passed in the `Authorization` header.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deploy MISP with Docker
 

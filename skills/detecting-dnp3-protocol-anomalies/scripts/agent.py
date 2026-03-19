@@ -7,9 +7,6 @@ unauthorized control commands, protocol violations, and traffic anomalies.
 
 import argparse
 import json
-import re
-import subprocess
-import sys
 from collections import Counter, defaultdict
 from datetime import datetime
 

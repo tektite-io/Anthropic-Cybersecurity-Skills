@@ -57,7 +57,7 @@ The regulation requires organizations to implement measures appropriate to the r
 | Right to object | 21 | Object to processing (especially direct marketing) |
 | Automated decision-making | 22 | Not be subject to solely automated decisions |
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Data Mapping and Assessment (Weeks 1-6)
 1. Create comprehensive data inventory:

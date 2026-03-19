@@ -41,7 +41,7 @@ Nessus organizes plugins into families including:
 - **Databases**: Oracle, MySQL, PostgreSQL, MSSQL
 - **Services**: DNS, SMTP, FTP, SSH, SNMP
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Initial Configuration
 ```bash

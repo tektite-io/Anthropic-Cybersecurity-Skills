@@ -9,12 +9,11 @@ import os
 import subprocess
 import sys
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import List
 
 try:
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-    from cryptography.hazmat.primitives import hashes, serialization
-    from cryptography.hazmat.primitives.asymmetric import padding, rsa
+    from cryptography.hazmat.primitives import serialization
     from cryptography.exceptions import InvalidSignature
 except ImportError:
     sys.exit("cryptography required: pip install cryptography")

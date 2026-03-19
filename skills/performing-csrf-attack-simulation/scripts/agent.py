@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# For authorized penetration testing and educational environments only.
+# Usage against targets without prior mutual consent is illegal.
+# It is the end user's responsibility to obey all applicable local, state and federal laws.
 """
 CSRF Attack Simulation Agent — AUTHORIZED TESTING ONLY
 Tests web applications for Cross-Site Request Forgery vulnerabilities by
@@ -7,14 +10,12 @@ analyzing anti-CSRF protections and generating proof-of-concept payloads.
 WARNING: Only use with explicit written authorization for the target application.
 """
 
-import json
 import re
 import sys
 from datetime import datetime, timezone
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse
 
 import requests
-from requests.cookies import RequestsCookieJar
 
 
 def analyze_csrf_protections(url: str, session: requests.Session = None) -> dict:

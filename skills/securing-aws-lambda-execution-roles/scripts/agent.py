@@ -3,9 +3,7 @@
 
 import boto3
 import json
-import sys
 import argparse
-from datetime import datetime, timedelta, timezone
 
 
 def list_lambda_roles(region="us-east-1"):

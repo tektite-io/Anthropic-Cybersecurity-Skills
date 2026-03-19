@@ -7,7 +7,6 @@ import json
 import logging
 import sys
 from datetime import datetime
-from typing import Optional
 
 try:
     import requests
@@ -28,12 +27,12 @@ class GoPhishClient:
         self.session.verify = verify_ssl
 
     def _get(self, endpoint: str) -> dict:
-        resp = self.session.get(f"{self.base_url}/api/{endpoint}")
+        resp = self.session.get(f"{self.base_url}/api/{endpoint}", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def _post(self, endpoint: str, data: dict) -> dict:
-        resp = self.session.post(f"{self.base_url}/api/{endpoint}", json=data)
+        resp = self.session.post(f"{self.base_url}/api/{endpoint}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

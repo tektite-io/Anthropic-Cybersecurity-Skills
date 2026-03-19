@@ -38,7 +38,7 @@ Audit service accounts across enterprise infrastructure to identify orphaned, ov
 - **Rotation**: When was the credential last changed?
 - **Activity**: When was this account last used?
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Discovery - Active Directory
 1. Query AD for all service accounts (filter by description, OU, naming convention)

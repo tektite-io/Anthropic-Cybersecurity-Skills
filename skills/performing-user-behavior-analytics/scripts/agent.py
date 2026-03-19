@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """User Behavior Analytics (UEBA) agent using elasticsearch-py."""
 
-import sys
-import json
 import math
-from datetime import datetime, timedelta
+import os
+import sys
+from datetime import datetime
 
 try:
     from elasticsearch import Elasticsearch
@@ -16,7 +16,8 @@ except ImportError:
 EARTH_RADIUS_KM = 6371
 
 
-def get_es_client(host="https://localhost:9200", api_key=None):
+def get_es_client(host=None, api_key=None):
+    host = host or os.environ.get("ES_HOSTS", "https://localhost:9200")
     kwargs = {"hosts": [host], "verify_certs": False}
     if api_key:
         kwargs["api_key"] = api_key
@@ -209,7 +210,7 @@ def print_report(travel_alerts, offhours_alerts, risk_scores):
 
 
 if __name__ == "__main__":
-    host = sys.argv[1] if len(sys.argv) > 1 else "https://localhost:9200"
+    host = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("ES_HOSTS", "https://localhost:9200")
     es = get_es_client(host)
     baselines = build_user_baselines(es)
     travel = detect_impossible_travel(es)

@@ -6,7 +6,6 @@
 import json
 import subprocess
 import argparse
-import itertools
 from datetime import datetime
 
 BUCKET_PERMUTATIONS = [

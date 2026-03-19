@@ -9,7 +9,6 @@ import argparse
 import json
 import math
 import re
-import sys
 from collections import Counter
 
 URGENCY_WORDS = {"urgent", "immediately", "asap", "deadline", "critical",

@@ -6,7 +6,6 @@ import json
 import argparse
 import sys
 import os
-from datetime import datetime
 
 
 def run_baseline_scan(target_url, output_dir):

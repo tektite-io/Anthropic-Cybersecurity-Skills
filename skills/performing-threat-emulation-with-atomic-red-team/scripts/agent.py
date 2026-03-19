@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Agent for threat emulation with Atomic Red Team test execution."""
 
-import os
 import json
 import yaml
 import argparse
+import shlex
 import subprocess
 from pathlib import Path
 from datetime import datetime
@@ -92,9 +92,10 @@ def execute_atomic_manual(atomics_path, technique_id, test_number, platform):
     if not command:
         return {"status": "error", "message": "No command defined"}
     for arg_name, arg_def in test.get("input_arguments", {}).items():
-        default = arg_def.get("default", "")
-        command = command.replace(f"#{{{arg_name}}}", str(default))
+        default = str(arg_def.get("default", ""))
+        command = command.replace(f"#{{{arg_name}}}", shlex.quote(default))
     try:
+        # shell=True required: Atomic Red Team commands are shell scripts by design
         result = subprocess.run(
             command, shell=True, capture_output=True, text=True, timeout=60,
         )
@@ -123,8 +124,10 @@ def run_cleanup(atomics_path, technique_id, test_number=1):
     if not cleanup_cmd:
         return {"status": "no_cleanup_defined"}
     for arg_name, arg_def in test.get("input_arguments", {}).items():
-        cleanup_cmd = cleanup_cmd.replace(f"#{{{arg_name}}}", str(arg_def.get("default", "")))
+        default = str(arg_def.get("default", ""))
+        cleanup_cmd = cleanup_cmd.replace(f"#{{{arg_name}}}", shlex.quote(default))
     try:
+        # shell=True required: Atomic Red Team cleanup commands are shell scripts by design
         subprocess.run(cleanup_cmd, shell=True, capture_output=True, timeout=30)
         return {"status": "cleaned_up", "technique": technique_id}
     except subprocess.TimeoutExpired:

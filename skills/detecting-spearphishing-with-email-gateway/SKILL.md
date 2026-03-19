@@ -37,7 +37,7 @@ Spearphishing targets specific individuals using personalized, researched conten
 6. **Attachment sandboxing**: Behavioral analysis of attachments in isolated environments
 7. **Behavioral analytics**: Anomaly detection in communication patterns
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure Impersonation Protection
 ```

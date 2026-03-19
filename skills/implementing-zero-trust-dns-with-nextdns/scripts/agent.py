@@ -4,7 +4,6 @@
 import requests
 import json
 import argparse
-import sys
 from datetime import datetime, timezone
 
 NEXTDNS_API = "https://api.nextdns.io"

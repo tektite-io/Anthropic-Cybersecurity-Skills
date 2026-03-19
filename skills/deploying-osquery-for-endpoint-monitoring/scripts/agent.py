@@ -2,7 +2,6 @@
 """osquery endpoint monitoring agent for security auditing."""
 
 import json
-import sys
 import argparse
 import subprocess
 from datetime import datetime

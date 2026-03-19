@@ -2,7 +2,6 @@
 """Detect Living Off the Land Binaries (LOLBAS) abuse via process telemetry and Sigma rules."""
 
 import json
-import re
 import argparse
 from datetime import datetime
 from collections import defaultdict

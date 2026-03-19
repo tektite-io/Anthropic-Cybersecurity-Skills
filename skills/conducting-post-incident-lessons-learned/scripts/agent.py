@@ -2,7 +2,6 @@
 """Post-incident lessons learned analysis agent."""
 
 import json
-import sys
 import argparse
 from datetime import datetime
 

@@ -58,7 +58,7 @@ The 802.1X framework involves three components:
 | EAP-FAST | Cisco proprietary, fast reauthentication | Medium |
 | MAB | Non-802.1X devices (printers, IP phones) | Low |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure ISE for Active Directory Integration
 

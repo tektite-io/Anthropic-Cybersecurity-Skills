@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """Agent for auditing GCP IAM permissions using google-cloud libraries."""
 
-import os
 import json
 import argparse
 from datetime import datetime
 
 from google.cloud import asset_v1
 from google.cloud import resourcemanager_v3
-from google.iam.v1 import iam_policy_pb2
 
 
 def search_iam_policies(scope, query=""):

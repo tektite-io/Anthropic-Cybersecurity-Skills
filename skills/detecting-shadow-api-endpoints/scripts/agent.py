@@ -3,9 +3,7 @@
 
 import argparse
 import json
-import os
 import re
-import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 from urllib.parse import urlparse

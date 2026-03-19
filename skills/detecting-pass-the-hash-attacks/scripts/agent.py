@@ -8,7 +8,6 @@ for Type 3 NTLM logons with anomalous patterns across multiple targets.
 import argparse
 import json
 import re
-import sys
 from collections import defaultdict
 from datetime import datetime
 

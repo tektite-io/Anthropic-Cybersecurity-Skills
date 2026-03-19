@@ -48,7 +48,7 @@ Network segmentation divides a flat network into isolated security zones with fi
 | **Microsegmentation** | Layer 3-7 | Workload-level | Zero trust, container environments |
 | **SGT/TrustSec** | Layer 2-7 | Tag-based | Identity-based segmentation |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Map Traffic Flows and Define Zones
 

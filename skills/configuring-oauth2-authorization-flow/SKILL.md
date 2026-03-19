@@ -42,7 +42,7 @@ PKCE (RFC 7636) prevents authorization code interception attacks:
 - **Refresh Token**: Long-lived, single-use with rotation
 - **ID Token (OIDC)**: JWT containing user identity claims
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Authorization Code Flow with PKCE
 1. Generate cryptographically random code_verifier (min 43 chars)

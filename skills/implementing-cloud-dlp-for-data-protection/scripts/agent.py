@@ -2,7 +2,6 @@
 """Cloud DLP agent for sensitive data discovery using Google Cloud DLP and AWS Macie."""
 
 import json
-import sys
 import argparse
 from datetime import datetime
 

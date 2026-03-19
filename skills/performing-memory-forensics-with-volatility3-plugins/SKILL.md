@@ -22,7 +22,7 @@ Volatility3 (v2.26.0+, feature parity release May 2025) is the standard framewor
 - Understanding of Windows process memory architecture
 - YARA integration for in-memory pattern scanning
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Process Analysis for Malware Detection
 

@@ -5,7 +5,6 @@
 import json
 import sys
 import argparse
-import time
 from datetime import datetime
 
 try:
@@ -172,7 +171,7 @@ def test_path_bypass(url, auth_header=None):
 
 def test_encoding_bypass(url, auth_header=None):
     """Test rate limit bypass via parameter encoding variations."""
-    from urllib.parse import urlparse, parse_qs, urlencode
+    from urllib.parse import urlparse, parse_qs
     parsed = urlparse(url)
     params = parse_qs(parsed.query)
     findings = []

@@ -2,9 +2,7 @@
 """Agent for testing Cross-Site Scripting (XSS) vulnerabilities during authorized assessments."""
 
 import requests
-import re
 import json
-import sys
 import argparse
 import urllib3
 from datetime import datetime

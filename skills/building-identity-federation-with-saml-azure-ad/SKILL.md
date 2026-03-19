@@ -69,7 +69,7 @@ User → Cloud App (SP)
 | Claims Rules | Transform AD attributes into SAML claims |
 | Issuer URI | Unique identifier for the IdP (entity ID) |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Prepare AD FS Infrastructure
 

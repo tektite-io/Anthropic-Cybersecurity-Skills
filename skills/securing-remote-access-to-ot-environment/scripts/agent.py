@@ -8,9 +8,8 @@ requirements, and CIP-005 compliance auditing.
 
 import json
 import hashlib
-import sys
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 from enum import Enum
 
 

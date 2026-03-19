@@ -8,13 +8,10 @@ OIDC ID token validation weaknesses.
 
 import json
 import sys
-import re
 import secrets
-import hashlib
-import base64
 from pathlib import Path
 from datetime import datetime
-from urllib.parse import urlparse, parse_qs, urlencode
+from urllib.parse import urlencode
 
 try:
     import requests
@@ -41,7 +38,7 @@ class OAuth2TestAgent:
         kwargs.setdefault("timeout", 10)
         kwargs.setdefault("allow_redirects", False)
         try:
-            return requests.get(url, **kwargs)
+            return requests.get(url, **kwargs, timeout=30)
         except requests.RequestException:
             return None
 
@@ -50,7 +47,7 @@ class OAuth2TestAgent:
             return None
         kwargs.setdefault("timeout", 10)
         try:
-            return requests.post(url, **kwargs)
+            return requests.post(url, **kwargs, timeout=30)
         except requests.RequestException:
             return None
 

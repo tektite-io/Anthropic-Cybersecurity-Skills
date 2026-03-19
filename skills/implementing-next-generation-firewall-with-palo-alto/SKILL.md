@@ -59,7 +59,7 @@ Zones represent logical segments of the network. Security policies control traff
 | Guest | Guest wireless | Low |
 | DataCenter | Server infrastructure | High |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Initial System Configuration
 

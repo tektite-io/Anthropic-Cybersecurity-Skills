@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for extracting memory forensic artifacts using Rekall."""
 
-import os
 import json
 import argparse
 from datetime import datetime

@@ -4,7 +4,6 @@
 import boto3
 import json
 import csv
-import sys
 import argparse
 from datetime import datetime, timedelta, timezone
 from base64 import b64decode

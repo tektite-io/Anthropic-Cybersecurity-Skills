@@ -6,7 +6,6 @@ import argparse
 import subprocess
 import re
 from pathlib import Path
-from datetime import datetime
 
 
 def parse_phishlet(phishlet_path):

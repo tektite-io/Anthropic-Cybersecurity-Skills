@@ -3,9 +3,7 @@
 
 import os
 import sys
-import json
 import subprocess
-import struct
 from pathlib import Path
 
 try:

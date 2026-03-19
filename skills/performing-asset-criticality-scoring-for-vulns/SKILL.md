@@ -53,7 +53,7 @@ Asset criticality scoring assigns a business impact rating to each IT asset so t
 | 2 | Semi-public | Marketing materials, press releases (draft) |
 | 1 | Public | Published content, public APIs |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Define Scoring Criteria
 

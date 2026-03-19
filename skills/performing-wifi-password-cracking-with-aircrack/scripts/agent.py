@@ -15,7 +15,8 @@ def check_tools():
     tools = {}
     for tool in ["airmon-ng", "airodump-ng", "aireplay-ng", "aircrack-ng", "hashcat"]:
         result = subprocess.run(
-            ["which", tool], capture_output=True, text=True
+            ["which", tool], capture_output=True, text=True,
+            timeout=120,
         )
         tools[tool] = result.stdout.strip() if result.returncode == 0 else None
     return tools
@@ -24,7 +25,8 @@ def check_tools():
 def list_interfaces():
     """List wireless interfaces."""
     result = subprocess.run(
-        ["iw", "dev"], capture_output=True, text=True
+        ["iw", "dev"], capture_output=True, text=True,
+        timeout=120,
     )
     interfaces = re.findall(r"Interface\s+(\S+)", result.stdout)
     return interfaces
@@ -32,9 +34,10 @@ def list_interfaces():
 
 def enable_monitor_mode(iface="wlan0"):
     """Enable monitor mode on wireless interface."""
-    subprocess.run(["airmon-ng", "check", "kill"], capture_output=True)
+    subprocess.run(["airmon-ng", "check", "kill"], capture_output=True, timeout=120)
     result = subprocess.run(
-        ["airmon-ng", "start", iface], capture_output=True, text=True
+        ["airmon-ng", "start", iface], capture_output=True, text=True,
+        timeout=120,
     )
     mon_match = re.search(r"monitor mode .* enabled on (\S+)", result.stdout)
     mon_iface = mon_match.group(1) if mon_match else f"{iface}mon"
@@ -126,7 +129,8 @@ def try_pmkid_capture(mon_iface, bssid, channel, timeout=30):
         hash_file = "/tmp/pmkid_hash.txt"
         subprocess.run(
             ["hcxpcapngtool", "-o", hash_file, output_file],
-            capture_output=True
+            capture_output=True,
+            timeout=120,
         )
         if os.path.exists(hash_file) and os.path.getsize(hash_file) > 0:
             return {"pmkid_captured": True, "hash_file": hash_file}
@@ -171,8 +175,8 @@ def crack_with_hashcat(hash_file, wordlist="/usr/share/wordlists/rockyou.txt",
 
 def disable_monitor_mode(mon_iface="wlan0mon"):
     """Disable monitor mode and restore managed mode."""
-    subprocess.run(["airmon-ng", "stop", mon_iface], capture_output=True)
-    subprocess.run(["systemctl", "restart", "NetworkManager"], capture_output=True)
+    subprocess.run(["airmon-ng", "stop", mon_iface], capture_output=True, timeout=120)
+    subprocess.run(["systemctl", "restart", "NetworkManager"], capture_output=True, timeout=120)
     return {"restored": True}
 
 

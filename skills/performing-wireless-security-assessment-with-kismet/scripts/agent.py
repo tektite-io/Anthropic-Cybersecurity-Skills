@@ -6,25 +6,27 @@ rogue AP detection, channel analysis, and wireless threat
 monitoring during security assessments.
 """
 
-import requests
 import json
+import os
+import requests
 import sys
-from datetime import datetime
 from collections import defaultdict
+from datetime import datetime
 
 
 class KismetAssessmentAgent:
     """Uses Kismet REST API for wireless security assessment."""
 
-    def __init__(self, kismet_url="http://localhost:2501",
+    def __init__(self, kismet_url=None,
                  api_key=None, username="kismet", password="kismet"):
+        kismet_url = kismet_url or os.environ.get("KISMET_URL", "http://localhost:2501")
         self.base_url = kismet_url.rstrip("/")
         self.session = requests.Session()
         if api_key:
             self.session.cookies.set("KISMET", api_key)
         else:
             self.session.post(f"{self.base_url}/session/check_login",
-                              json={"username": username, "password": password})
+                              json={"username": username, "password": password}, timeout=30)
         self.findings = []
 
     def _get(self, endpoint, params=None):
@@ -135,7 +137,7 @@ class KismetAssessmentAgent:
 
 
 def main():
-    url = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:2501"
+    url = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("KISMET_URL", "http://localhost:2501")
     api_key = sys.argv[2] if len(sys.argv) > 2 else None
     agent = KismetAssessmentAgent(url, api_key=api_key)
     agent.generate_report()

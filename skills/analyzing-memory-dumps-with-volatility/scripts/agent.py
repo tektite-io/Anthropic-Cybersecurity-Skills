@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """Memory forensics agent using Volatility 3 for malware detection in RAM dumps."""
 
+import shlex
 import subprocess
 import os
 import sys
-import json
-import csv
-import re
-import io
 
 
 def run_vol3(memory_dump, plugin, extra_args=""):
     """Execute a Volatility 3 plugin and return output."""
-    cmd = f"vol3 -f {memory_dump} {plugin} {extra_args}"
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=300)
+    cmd = ["vol3", "-f", memory_dump, plugin]
+    if extra_args:
+        cmd.extend(shlex.split(extra_args))
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 

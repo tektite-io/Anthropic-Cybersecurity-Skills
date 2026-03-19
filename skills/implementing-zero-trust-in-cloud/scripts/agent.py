@@ -2,7 +2,6 @@
 """Zero trust cloud architecture assessment agent using AWS, Azure, and GCP SDKs."""
 
 import json
-import sys
 import argparse
 from datetime import datetime
 
@@ -13,14 +12,11 @@ except ImportError:
     boto3 = None
 
 try:
-    from azure.identity import DefaultAzureCredential
-    from azure.mgmt.authorization import AuthorizationManagementClient
     HAS_AZURE = True
 except ImportError:
     HAS_AZURE = False
 
 try:
-    from google.cloud import compute_v1
     HAS_GCP = True
 except ImportError:
     HAS_GCP = False

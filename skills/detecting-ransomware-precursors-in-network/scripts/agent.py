@@ -4,7 +4,6 @@
 import argparse
 import json
 import os
-import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -91,7 +90,8 @@ def scan_process_list():
     if sys.platform == "win32":
         try:
             out = subprocess.check_output(
-                ["tasklist", "/FO", "CSV", "/NH"], text=True, errors="replace"
+                ["tasklist", "/FO", "CSV", "/NH"], text=True, errors="replace",
+                timeout=120,
             )
             for line in out.splitlines():
                 parts = line.strip('"').split('","')
@@ -104,7 +104,7 @@ def scan_process_list():
             pass
     else:
         try:
-            out = subprocess.check_output(["ps", "-eo", "pid,comm", "--no-headers"], text=True)
+            out = subprocess.check_output(["ps", "-eo", "pid,comm", "--no-headers"], text=True, timeout=120)
             for line in out.splitlines():
                 parts = line.split(None, 1)
                 if len(parts) == 2:

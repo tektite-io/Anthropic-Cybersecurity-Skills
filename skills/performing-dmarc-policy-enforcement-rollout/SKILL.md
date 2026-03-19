@@ -48,7 +48,7 @@ v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc-agg@company.com; ruf=mailto:dma
 - **Relaxed**: Organizational domain match (sub.example.com matches example.com)
 - **Strict**: Exact domain match required
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Inventory All Sending Sources (Week 1-2)
 - Audit all systems sending email as your domain (marketing, CRM, ticketing, transactional)

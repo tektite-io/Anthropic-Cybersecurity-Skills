@@ -6,7 +6,6 @@ import argparse
 import logging
 import subprocess
 import os
-import re
 from collections import defaultdict
 from datetime import datetime
 
@@ -80,7 +79,7 @@ def deploy_opencanary(config, config_path="/etc/opencanaryd/opencanary.conf"):
         json.dump(config, f, indent=2)
     logger.info("Configuration written to %s", config_path)
     start_cmd = ["opencanaryd", "--start"]
-    result = subprocess.run(start_cmd, capture_output=True, text=True)
+    result = subprocess.run(start_cmd, capture_output=True, text=True, timeout=120)
     return {"config_path": config_path, "started": result.returncode == 0, "output": result.stdout[:200]}
 
 
@@ -159,7 +158,7 @@ def analyze_interactions(events):
 def check_honeypot_status():
     """Check if OpenCanary daemon is running."""
     cmd = ["opencanaryd", "--status"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     is_running = "running" in result.stdout.lower() or result.returncode == 0
     return {"running": is_running, "status_output": result.stdout.strip()[:200]}
 

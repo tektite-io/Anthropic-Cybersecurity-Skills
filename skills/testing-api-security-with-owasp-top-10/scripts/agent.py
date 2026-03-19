@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Agent for automated API security testing against OWASP API Security Top 10."""
 
+import os
 import requests
 import json
-import sys
 import argparse
 import urllib3
 from datetime import datetime
@@ -21,7 +21,7 @@ def test_bola(base_url, token, endpoints, id_range=(1, 20)):
         for obj_id in range(id_range[0], id_range[1]):
             url = urljoin(base_url, endpoint.replace("{id}", str(obj_id)))
             try:
-                resp = requests.get(url, headers=headers, timeout=10, verify=False)
+                resp = requests.get(url, headers=headers, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
                 if resp.status_code == 200 and len(resp.text) > 50:
                     findings.append({
                         "risk": "API1-BOLA", "url": url, "status": resp.status_code,
@@ -42,7 +42,7 @@ def test_broken_auth(base_url, login_endpoint="/api/v1/auth/login", attempts=50)
     for i in range(1, attempts + 1):
         try:
             resp = requests.post(url, json={"email": "test@test.com", "password": f"wrong{i}"},
-                                 timeout=10, verify=False)
+                                 timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code == 429:
                 print(f"  [+] Rate limited at attempt {i}")
                 rate_limited = True
@@ -68,7 +68,7 @@ def test_data_exposure(base_url, token, endpoints):
     for endpoint in endpoints:
         url = urljoin(base_url, endpoint)
         try:
-            resp = requests.get(url, headers=headers, timeout=10, verify=False)
+            resp = requests.get(url, headers=headers, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code == 200:
                 try:
                     data = resp.json()
@@ -96,7 +96,7 @@ def test_mass_assignment(base_url, token, endpoint, payload_extras):
     for field, value in payload_extras.items():
         try:
             resp = requests.patch(url, headers=headers, json={field: value},
-                                  timeout=10, verify=False)
+                                  timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code in (200, 201):
                 resp_data = resp.json() if resp.text else {}
                 if str(value) in json.dumps(resp_data):
@@ -115,7 +115,7 @@ def test_security_headers(base_url):
     print("\n[*] Testing API8: Security Misconfiguration (headers)...")
     findings = []
     try:
-        resp = requests.get(base_url, timeout=10, verify=False)
+        resp = requests.get(base_url, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         required_headers = {
             "Strict-Transport-Security": "HSTS",
             "X-Content-Type-Options": "nosniff",
@@ -145,7 +145,7 @@ def test_cors(base_url, endpoints):
         url = urljoin(base_url, endpoint)
         for origin in evil_origins:
             try:
-                resp = requests.get(url, headers={"Origin": origin}, timeout=10, verify=False)
+                resp = requests.get(url, headers={"Origin": origin}, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
                 acao = resp.headers.get("Access-Control-Allow-Origin", "")
                 acac = resp.headers.get("Access-Control-Allow-Credentials", "")
                 if acao == origin and acac.lower() == "true":
@@ -167,7 +167,7 @@ def test_api_versions(base_url, path_prefix="/api"):
     for v in versions:
         url = urljoin(base_url, f"{path_prefix}/{v}/users")
         try:
-            resp = requests.get(url, timeout=5, verify=False)
+            resp = requests.get(url, timeout=5, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code not in (404, 000):
                 findings.append({"risk": "API9-INVENTORY", "url": url, "status": resp.status_code})
                 print(f"  [+] {v}: {resp.status_code}")

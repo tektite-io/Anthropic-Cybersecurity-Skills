@@ -8,9 +8,7 @@ communication settings, malleable C2 profile details, and watermark values.
 import struct
 import os
 import sys
-import json
 import hashlib
-import re
 from collections import OrderedDict
 
 # Cobalt Strike beacon configuration field IDs (Type-Length-Value format)

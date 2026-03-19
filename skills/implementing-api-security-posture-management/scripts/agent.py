@@ -6,7 +6,6 @@ import argparse
 import re
 from datetime import datetime
 from collections import Counter, defaultdict
-from pathlib import Path
 
 
 def discover_apis_from_traffic(log_path):

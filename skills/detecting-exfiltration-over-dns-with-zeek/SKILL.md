@@ -9,6 +9,9 @@ author: mahipal
 license: Apache-2.0
 ---
 
+
+# Detecting Exfiltration over DNS with Zeek
+
 ## Overview
 
 DNS tunneling and exfiltration is a technique used by attackers to bypass firewalls and DLP controls by encoding stolen data into DNS query subdomains. Legitimate DNS queries have predictable entropy and length patterns, while exfiltration queries contain encoded data with high Shannon entropy, unusually long subdomain labels, and high volumes of unique subdomains per parent domain.

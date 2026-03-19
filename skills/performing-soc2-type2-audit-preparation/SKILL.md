@@ -58,7 +58,7 @@ Security is organized into 9 series based on COSO principles:
 | Assurance | Lower | Higher |
 | Market Value | Initial baseline | Industry standard expectation |
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Scoping and Readiness (Weeks 1-4)
 1. Determine which TSC categories to include (Security mandatory, others based on customer needs)

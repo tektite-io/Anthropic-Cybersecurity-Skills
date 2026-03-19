@@ -47,6 +47,7 @@ def enrich_ip_virustotal(ip, api_key):
     resp = requests.get(
         f"https://www.virustotal.com/api/v3/ip_addresses/{ip}",
         headers={"x-apikey": api_key},
+        timeout=30,
     )
     if resp.status_code == 200:
         attrs = resp.json()["data"]["attributes"]
@@ -66,6 +67,7 @@ def enrich_hash_virustotal(file_hash, api_key):
     resp = requests.get(
         f"https://www.virustotal.com/api/v3/files/{file_hash}",
         headers={"x-apikey": api_key},
+        timeout=30,
     )
     if resp.status_code == 200:
         attrs = resp.json()["data"]["attributes"]
@@ -85,6 +87,7 @@ def enrich_domain_virustotal(domain, api_key):
     resp = requests.get(
         f"https://www.virustotal.com/api/v3/domains/{domain}",
         headers={"x-apikey": api_key},
+        timeout=30,
     )
     if resp.status_code == 200:
         attrs = resp.json()["data"]["attributes"]
@@ -103,6 +106,7 @@ def enrich_ip_abuseipdb(ip, api_key):
         "https://api.abuseipdb.com/api/v2/check",
         headers={"Key": api_key, "Accept": "application/json"},
         params={"ipAddress": ip, "maxAgeInDays": 90},
+        timeout=30,
     )
     if resp.status_code == 200:
         data = resp.json()["data"]

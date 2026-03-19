@@ -61,7 +61,7 @@ Lightweight endpoint agent providing:
 | CIS Policy Compliance | Configuration benchmarking | Medium |
 | Web Spider | Web application discovery and assessment | Medium |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Install Security Console
 
@@ -254,7 +254,7 @@ class InsightVMClient:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         })
-        self.session.verify = False  # Self-signed cert on console
+        self.session.verify = not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true"  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
 
     def get_sites(self):
         """List all configured scan sites."""

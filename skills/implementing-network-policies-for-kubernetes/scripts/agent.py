@@ -5,7 +5,6 @@ import json
 import argparse
 import logging
 import subprocess
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -15,7 +14,7 @@ logger = logging.getLogger(__name__)
 def kubectl_json(args_list):
     """Execute kubectl command and return JSON output."""
     cmd = ["kubectl"] + args_list + ["-o", "json"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.returncode == 0 else {}
 
 

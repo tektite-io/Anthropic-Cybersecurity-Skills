@@ -32,6 +32,9 @@ license: Apache-2.0
 - Wireshark for verifying attack success and capturing evidence
 - Test accounts (not real user credentials) for demonstrating credential interception
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: Establish MITM Position

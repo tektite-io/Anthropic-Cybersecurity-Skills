@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Agent for managing Falco rules and parsing alerts for container forensics."""
 
-import os
 import json
 import argparse
-from datetime import datetime
+import os
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 
 import yaml
@@ -116,7 +116,8 @@ def summarize_alerts(alerts):
     }
 
 
-def check_falco_health(falco_url="http://localhost:8765"):
+def check_falco_health(falco_url=None):
+    falco_url = falco_url or os.environ.get("FALCO_URL", "http://localhost:8765")
     """Check Falco health via HTTP endpoint."""
     try:
         resp = requests.get(f"{falco_url}/healthz", timeout=5)
@@ -126,7 +127,8 @@ def check_falco_health(falco_url="http://localhost:8765"):
         return {"status": "unreachable", "error": str(e)}
 
 
-def get_falco_version(falco_url="http://localhost:8765"):
+def get_falco_version(falco_url=None):
+    falco_url = falco_url or os.environ.get("FALCO_URL", "http://localhost:8765")
     """Get Falco version information."""
     try:
         resp = requests.get(f"{falco_url}/version", timeout=5)
@@ -155,7 +157,7 @@ def main():
     parser = argparse.ArgumentParser(description="Falco Cloud Native Forensics Agent")
     parser.add_argument("--alert-file", help="Path to Falco JSON alert log")
     parser.add_argument("--rules-output", default="custom_falco_rules.yaml")
-    parser.add_argument("--falco-url", default="http://localhost:8765")
+    parser.add_argument("--falco-url", default=os.environ.get("FALCO_URL", "http://localhost:8765"))
     parser.add_argument("--output", default="falco_report.json")
     parser.add_argument("--action", choices=[
         "generate_rules", "parse_alerts", "health", "full_analysis"

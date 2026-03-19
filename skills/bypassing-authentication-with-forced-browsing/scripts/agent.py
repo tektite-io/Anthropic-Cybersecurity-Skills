@@ -5,6 +5,7 @@
 import json
 import logging
 import argparse
+from datetime import datetime
 from urllib.parse import urljoin
 
 import requests
@@ -137,7 +138,7 @@ def check_sensitive_files(base_url):
 def generate_report(findings, method_results, sensitive_files):
     """Generate pentest finding report for forced browsing results."""
     report = {
-        "timestamp": __import__("datetime").datetime.utcnow().isoformat(),
+        "timestamp": datetime.utcnow().isoformat(),
         "total_endpoints_found": len(findings),
         "auth_bypass_candidates": [f for f in findings if f.get("auth_bypass")],
         "accessible_without_auth": [f for f in findings if f["unauth_status"] == 200],

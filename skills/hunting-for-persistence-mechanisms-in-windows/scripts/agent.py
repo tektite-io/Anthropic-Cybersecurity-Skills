@@ -6,7 +6,6 @@ import argparse
 import subprocess
 import re
 from datetime import datetime
-from pathlib import Path
 
 REGISTRY_PERSISTENCE_KEYS = [
     r"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run",

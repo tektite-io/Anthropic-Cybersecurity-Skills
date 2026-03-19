@@ -3,11 +3,10 @@
 
 import json
 import csv
-import math
 import argparse
 import urllib.request
 from datetime import datetime
-from collections import defaultdict, Counter
+from collections import defaultdict
 from statistics import mean, stdev
 
 TOR_EXIT_LIST_URL = "https://check.torproject.org/torbulkexitlist"

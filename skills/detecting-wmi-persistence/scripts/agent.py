@@ -7,7 +7,6 @@ import logging
 import subprocess
 import re
 import xml.etree.ElementTree as ET
-from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -39,7 +38,7 @@ def query_sysmon_wmi_events(evtx_path=None, hours_back=72):
         if evtx_path:
             cmd = ["wevtutil", "qe", evtx_path, "/lf:true",
                    "/q:*[System[EventID={}]]".format(event_id), "/f:xml", "/c:500"]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         for event_xml in re.findall(r"<Event.*?</Event>", result.stdout, re.DOTALL):
             try:
                 root = ET.fromstring(event_xml)
@@ -76,7 +75,7 @@ def enumerate_wmi_subscriptions():
     }
     for category, ps_cmd in ps_commands.items():
         cmd = ["powershell", "-Command", ps_cmd]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         if result.stdout.strip():
             try:
                 data = json.loads(result.stdout)

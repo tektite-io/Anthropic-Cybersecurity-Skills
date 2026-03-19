@@ -12,6 +12,7 @@ Usage:
 import argparse
 import base64
 import json
+import os
 import sys
 import time
 from datetime import datetime
@@ -33,7 +34,7 @@ class MobileAPIAuthTester:
         self.token = token
         self.findings = []
         self.session = requests.Session()
-        self.session.verify = False
+        self.session.verify = not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true"  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         self.session.headers.update({
             "Authorization": f"Bearer {token}",
             "User-Agent": "MobileSecurityTester/1.0",
@@ -105,7 +106,7 @@ class MobileAPIAuthTester:
         for endpoint in endpoints:
             url = f"{self.base_url}{endpoint}"
             try:
-                resp = requests.get(url, verify=False, timeout=10,
+                resp = requests.get(url, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=10,  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
                                     headers={"User-Agent": "MobileSecurityTester/1.0"})
                 if resp.status_code != 401 and resp.status_code != 403:
                     result = {

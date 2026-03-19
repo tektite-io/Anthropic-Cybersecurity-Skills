@@ -47,7 +47,7 @@ Kubernetes penetration testing systematically evaluates cluster security by simu
 | Credential Access | Secret extraction, service account token theft |
 | Lateral Movement | Container escape, cluster internal services |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: External Reconnaissance
 

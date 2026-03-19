@@ -9,18 +9,17 @@ import argparse
 import json
 import sys
 import datetime
-import uuid
 
 try:
     import stix2
     from stix2 import Indicator, Malware, Campaign, Relationship, Bundle
-    from stix2 import ThreatActor, Identity, Sighting, AttackPattern
+    from stix2 import Identity
     HAS_STIX2 = True
 except ImportError:
     HAS_STIX2 = False
 
 try:
-    from taxii2client.v21 import Collection, Server
+    from taxii2client.v21 import Collection
     HAS_TAXII = True
 except ImportError:
     HAS_TAXII = False

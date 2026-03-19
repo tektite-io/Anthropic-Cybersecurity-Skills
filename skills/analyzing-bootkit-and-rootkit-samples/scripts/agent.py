@@ -112,8 +112,11 @@ def analyze_boot_code(mbr_data):
 
 def run_volatility_rootkit_scan(memory_dump, plugin):
     """Run a Volatility 3 plugin for rootkit detection via subprocess."""
-    cmd = f"vol3 -f {memory_dump} {plugin}"
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    result = subprocess.run(
+        ["vol3", "-f", memory_dump, plugin],
+        capture_output=True, text=True,
+        timeout=120,
+    )
     return result.stdout, result.stderr, result.returncode
 
 

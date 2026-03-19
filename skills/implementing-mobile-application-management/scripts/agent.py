@@ -18,7 +18,7 @@ def mdm_api_request(base_url, token, endpoint, method="GET"):
            "-H", f"Authorization: Bearer {token}",
            "-H", "Accept: application/json",
            f"{base_url}{endpoint}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 

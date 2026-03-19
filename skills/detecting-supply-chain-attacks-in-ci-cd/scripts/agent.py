@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for detecting supply chain attacks in CI/CD pipelines."""
 
-import os
 import re
 import json
 import argparse

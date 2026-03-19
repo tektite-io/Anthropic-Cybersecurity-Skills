@@ -68,7 +68,7 @@ Logical groupings of App Connectors that serve specific application segments, en
 ### Browser Access
 ZPA supports clientless browser-based access for web applications, enabling ZTNA for unmanaged devices and third-party users without requiring the Client Connector.
 
-## Procedure
+## Workflow
 
 ### Phase 1: Foundation Setup
 

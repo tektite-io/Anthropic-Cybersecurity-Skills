@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Agent for auditing Zscaler Private Access (ZPA) zero trust configuration via API."""
 
-import requests
-import json
 import argparse
+import json
+import os
+import requests
 from datetime import datetime, timezone
 
-ZPA_BASE = "https://config.private.zscaler.com"
+ZPA_BASE = os.environ.get("ZPA_BASE_URL", "https://config.private.zscaler.com")
 
 
 def authenticate(client_id, client_secret, customer_id):

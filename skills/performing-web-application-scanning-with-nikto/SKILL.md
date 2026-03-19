@@ -41,7 +41,7 @@ Nikto is an open-source web server and web application scanner that tests agains
 | Authentication | Basic | Full | Full | Template |
 | Active Community | Yes | Yes | Yes | Yes |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Basic Scanning
 ```bash

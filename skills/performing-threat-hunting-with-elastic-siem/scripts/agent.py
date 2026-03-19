@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Threat hunting agent for Elastic SIEM using elasticsearch-py."""
 
-import json
+import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     from elasticsearch import Elasticsearch
@@ -12,7 +12,8 @@ except ImportError:
     sys.exit(1)
 
 
-def get_es_client(host="https://localhost:9200", api_key=None, verify_certs=True):
+def get_es_client(host=None, api_key=None, verify_certs=True):
+    host = host or os.environ.get("ES_HOSTS", "https://localhost:9200")
     kwargs = {"hosts": [host], "verify_certs": verify_certs}
     if api_key:
         kwargs["api_key"] = api_key
@@ -175,7 +176,6 @@ def hunt_persistence(es, index="logs-endpoint.events.*", days=30):
 
 def create_detection_rule(es, kibana_url, name, query, severity="high", risk_score=73):
     """Deploy a detection rule to Elastic Security via API."""
-    import requests
     rule = {
         "name": name,
         "description": f"Detection rule created from threat hunt: {name}",
@@ -219,7 +219,7 @@ def print_hunt_report(hunts):
 
 
 if __name__ == "__main__":
-    host = sys.argv[1] if len(sys.argv) > 1 else "https://localhost:9200"
+    host = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("ES_HOSTS", "https://localhost:9200")
     es = get_es_client(host=host, verify_certs=False)
     results = run_all_hunts(es)
     print_hunt_report(results)

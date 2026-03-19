@@ -36,7 +36,7 @@ STIX defines Attack Pattern as a Structured Domain Object (SDO) that describes w
 
 Extracted attack patterns inform detection engineering by providing: specific procedure examples for Sigma rule creation, behavioral sequences for correlation rules, IOC patterns for YARA and Snort rules, and data source requirements for telemetry gaps.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Parse CTI Reports and Extract Behaviors
 

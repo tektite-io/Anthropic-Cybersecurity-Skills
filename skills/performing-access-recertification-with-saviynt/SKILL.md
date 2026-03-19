@@ -68,7 +68,7 @@ CONFIGURATION → PREVIEW → ACTIVE → IN PROGRESS → COMPLETED → REMEDIATI
        └── Campaign parameters defined
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Configure Campaign Template
 

@@ -5,8 +5,6 @@ import json
 import argparse
 import re
 import csv
-from datetime import datetime
-from pathlib import Path
 
 LOLBIN_SIGNATURES = {
     "certutil.exe": {"mitre": "T1140", "patterns": [r"-urlcache", r"-decode", r"-encode", r"-split.*http"]},

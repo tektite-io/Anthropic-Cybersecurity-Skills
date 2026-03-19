@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def nozomi_api(base_url, token, endpoint):
     cmd = ["curl", "-s", "-k", "-H", f"Authorization: Bearer {token}", f"{base_url}/api/v1{endpoint}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return json.loads(result.stdout) if result.stdout else {}
 
 

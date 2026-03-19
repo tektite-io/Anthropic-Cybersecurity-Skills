@@ -6,10 +6,10 @@ import os
 import sys
 import json
 import statistics
-from collections import defaultdict, Counter
+from collections import defaultdict
 
 try:
-    from scapy.all import rdpcap, IP, TCP, UDP, DNS, DNSQR, Raw, ARP
+    from scapy.all import rdpcap, IP, TCP, DNS
     HAS_SCAPY = True
 except ImportError:
     HAS_SCAPY = False
@@ -17,9 +17,11 @@ except ImportError:
 
 def run_tshark(pcap_path, display_filter, fields):
     """Run tshark with a display filter and extract specific fields."""
-    field_args = " ".join(f"-e {f}" for f in fields)
-    cmd = f'tshark -r {pcap_path} -Y "{display_filter}" -T fields {field_args} -E separator="|"'
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
+    cmd = ["tshark", "-r", pcap_path, "-Y", display_filter, "-T", "fields"]
+    for f in fields:
+        cmd += ["-e", f]
+    cmd += ["-E", "separator=|"]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     rows = []
     if result.returncode == 0:
         for line in result.stdout.strip().splitlines():
@@ -31,8 +33,8 @@ def run_tshark(pcap_path, display_filter, fields):
 
 def get_pcap_summary(pcap_path):
     """Get high-level PCAP statistics."""
-    cmd = f"tshark -r {pcap_path} -q -z conv,ip"
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=60)
+    cmd = ["tshark", "-r", pcap_path, "-q", "-z", "conv,ip"]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
     return result.stdout if result.returncode == 0 else ""
 
 
@@ -57,8 +59,8 @@ def detect_lateral_movement(pcap_path):
 
 def detect_data_exfiltration(pcap_path, threshold_mb=10):
     """Detect potential data exfiltration based on outbound data volume."""
-    cmd = f'tshark -r {pcap_path} -q -z conv,ip'
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=60)
+    cmd = ["tshark", "-r", pcap_path, "-q", "-z", "conv,ip"]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
     suspects = []
     if result.returncode == 0:
         for line in result.stdout.splitlines():
@@ -120,10 +122,13 @@ def extract_dns_queries(pcap_path):
 
 def detect_ids_alerts(pcap_path):
     """Run Suricata on the PCAP and extract alerts."""
-    cmd = f"suricata -r {pcap_path} -l /tmp/suricata_output -k none 2>/dev/null"
-    subprocess.run(cmd, shell=True, timeout=120)
+    import tempfile
+    suricata_output = os.environ.get("SURICATA_OUTPUT_DIR", os.path.join(tempfile.gettempdir(), "suricata_output"))
+    os.makedirs(suricata_output, exist_ok=True)
+    cmd = ["suricata", "-r", pcap_path, "-l", suricata_output, "-k", "none"]
+    subprocess.run(cmd, capture_output=True, timeout=120)
     alerts = []
-    alert_file = "/tmp/suricata_output/fast.log"
+    alert_file = os.path.join(suricata_output, "fast.log")
     if os.path.exists(alert_file):
         with open(alert_file, "r") as f:
             for line in f:
@@ -134,8 +139,8 @@ def detect_ids_alerts(pcap_path):
 def extract_http_objects(pcap_path, output_dir):
     """Extract HTTP objects (files) from the PCAP."""
     os.makedirs(output_dir, exist_ok=True)
-    cmd = f'tshark -r {pcap_path} --export-objects "http,{output_dir}"'
-    subprocess.run(cmd, shell=True, timeout=60)
+    cmd = ["tshark", "-r", pcap_path, "--export-objects", f"http,{output_dir}"]
+    subprocess.run(cmd, capture_output=True, timeout=60)
     exported = []
     if os.path.exists(output_dir):
         for f in os.listdir(output_dir):

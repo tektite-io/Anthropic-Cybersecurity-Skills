@@ -15,7 +15,6 @@ import logging
 import smtplib
 import argparse
 import platform
-import subprocess
 from pathlib import Path
 from email.mime.text import MIMEText
 from datetime import datetime, timezone
@@ -269,6 +268,7 @@ def send_syslog_alert(alert_data, syslog_server="127.0.0.1", syslog_port=514):
     )
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.settimeout(10)
         sock.sendto(message.encode("utf-8"), (syslog_server, syslog_port))
         sock.close()
         logger.info("Syslog alert sent to %s:%d", syslog_server, syslog_port)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Docker container forensics agent for investigating compromised containers."""
 
+import shlex
 import subprocess
 import json
 import os
@@ -10,8 +11,10 @@ import datetime
 
 
 def run_cmd(cmd):
-    """Execute a shell command and return output."""
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    """Execute a command and return output."""
+    if isinstance(cmd, str):
+        cmd = shlex.split(cmd)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 
@@ -134,9 +137,13 @@ def detect_suspicious_files(changes):
 
 def export_container(container_id, output_path):
     """Export container filesystem as a tarball for offline analysis."""
-    cmd = f"docker export {container_id} > {output_path}"
-    _, _, rc = run_cmd(cmd)
-    if rc == 0 and os.path.exists(output_path):
+    with open(output_path, "wb") as out_f:
+        result = subprocess.run(
+            ["docker", "export", container_id],
+            stdout=out_f, stderr=subprocess.PIPE,
+            timeout=120,
+        )
+    if result.returncode == 0 and os.path.exists(output_path):
         sha256 = hashlib.sha256()
         with open(output_path, "rb") as f:
             for chunk in iter(lambda: f.read(65536), b""):

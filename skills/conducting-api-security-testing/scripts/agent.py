@@ -5,6 +5,7 @@
 import json
 import logging
 import argparse
+from datetime import datetime
 from urllib.parse import urljoin
 
 import requests
@@ -184,7 +185,7 @@ def generate_report(findings):
     """Generate API security testing report."""
     critical = [f for f in findings if f.get("vulnerable")]
     report = {
-        "timestamp": __import__("datetime").datetime.utcnow().isoformat(),
+        "timestamp": datetime.utcnow().isoformat(),
         "total_tests": len(findings),
         "vulnerabilities_found": len(critical),
         "findings": findings,

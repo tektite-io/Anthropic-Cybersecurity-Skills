@@ -8,7 +8,6 @@ token replay from unusual IPs, and anomalous scope requests.
 import argparse
 import json
 import math
-import sys
 import datetime
 import collections
 

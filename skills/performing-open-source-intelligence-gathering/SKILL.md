@@ -10,6 +10,9 @@ license: Apache-2.0
 ---
 # Performing Open Source Intelligence Gathering
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Overview
 
 Open Source Intelligence (OSINT) gathering is the first active phase of a red team engagement, where operators collect publicly available information about the target organization to identify attack surfaces, potential targets for social engineering, technology stacks, and credential exposures. Effective OSINT directly shapes initial access strategies and reduces operational risk.
@@ -48,7 +51,7 @@ Open Source Intelligence (OSINT) gathering is the first active phase of a red te
 - **T1594** - Search Victim-Owned Websites
 - **T1596** - Search Open Technical Databases
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Domain and Network Reconnaissance
 1. Perform WHOIS lookups for target domains

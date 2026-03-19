@@ -10,12 +10,12 @@ import json
 import sys
 import ssl
 import socket
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 try:
     from cryptography import x509
-    from cryptography.x509.oid import NameOID, ExtensionOID
+    from cryptography.x509.oid import NameOID
     from cryptography.hazmat.primitives import hashes, serialization
     from cryptography.hazmat.primitives.asymmetric import ec, rsa
     HAS_CRYPTO = True

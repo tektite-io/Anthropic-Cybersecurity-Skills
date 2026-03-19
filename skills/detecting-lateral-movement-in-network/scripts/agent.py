@@ -4,11 +4,9 @@
 import json
 import os
 import re
-import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime
-from pathlib import Path
 
 try:
     import Evtx.Evtx as evtx

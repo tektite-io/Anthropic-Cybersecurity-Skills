@@ -2,6 +2,7 @@
 """SIEM Correlation Rules Agent - Builds and deploys multi-event APT detection rules via Splunk and Sigma."""
 
 import json
+import os
 import time
 import logging
 import argparse
@@ -85,7 +86,8 @@ def authenticate_splunk(base_url, username, password):
     resp = requests.post(
         f"{base_url}/services/auth/login",
         data={"username": username, "password": password},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     resp.raise_for_status()
     session_key = resp.json()["sessionKey"]
@@ -113,7 +115,8 @@ def deploy_correlation_search(base_url, headers, rule):
         f"{base_url}/services/saved/searches",
         headers=headers,
         data=search_payload,
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     if resp.status_code in (200, 201):
         logger.info("Deployed correlation search: %s", rule["name"])
@@ -147,7 +150,8 @@ def audit_existing_searches(base_url, headers):
         f"{base_url}/services/saved/searches",
         headers=headers,
         params={"output_mode": "json", "count": 0},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     if resp.status_code != 200:
         return []
@@ -171,21 +175,26 @@ def run_test_search(base_url, headers, spl, earliest="-24h"):
         f"{base_url}/services/search/jobs",
         headers=headers,
         data={"search": f"search {spl}", "earliest_time": earliest, "output_mode": "json"},
-        verify=False,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     )
     resp.raise_for_status()
     sid = resp.json()["sid"]
     for _ in range(60):
         status = requests.get(
             f"{base_url}/services/search/jobs/{sid}",
-            headers=headers, params={"output_mode": "json"}, verify=False,
+            headers=headers, params={"output_mode": "json"},
+            verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+            timeout=30,
         ).json()
         if status["entry"][0]["content"]["isDone"]:
             break
         time.sleep(2)
     results = requests.get(
         f"{base_url}/services/search/jobs/{sid}/results",
-        headers=headers, params={"output_mode": "json", "count": 50}, verify=False,
+        headers=headers, params={"output_mode": "json", "count": 50},
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        timeout=30,
     ).json()
     return results.get("results", [])
 
@@ -204,7 +213,7 @@ def generate_report(deployed, gaps, test_results):
 
 def main():
     parser = argparse.ArgumentParser(description="SIEM Correlation Rules Agent")
-    parser.add_argument("--splunk-url", default="https://localhost:8089")
+    parser.add_argument("--splunk-url", default=os.environ.get("SPLUNK_URL", "https://localhost:8089"))
     parser.add_argument("--username", default="admin")
     parser.add_argument("--password", required=True)
     parser.add_argument("--deploy", action="store_true", help="Deploy rules to Splunk")

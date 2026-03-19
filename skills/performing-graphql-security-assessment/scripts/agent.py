@@ -8,7 +8,6 @@ query depth/complexity DoS, and injection vulnerabilities.
 import requests
 import json
 import sys
-from urllib.parse import urlparse
 
 
 class GraphQLSecurityAgent:

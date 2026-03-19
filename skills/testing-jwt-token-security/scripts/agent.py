@@ -3,10 +3,10 @@
 
 import jwt
 import json
-import sys
 import hmac
 import hashlib
 import base64
+import os
 import argparse
 import requests
 import urllib3
@@ -67,7 +67,7 @@ def test_alg_none(token, target_url=None):
         if target_url:
             try:
                 resp = requests.get(target_url, headers={"Authorization": f"Bearer {forged}"},
-                                    timeout=10, verify=False)
+                                    timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
                 if resp.status_code == 200:
                     findings.append({
                         "type": "ALG_NONE", "alg_value": alg,
@@ -134,7 +134,7 @@ def test_expired_token(token, target_url):
     if "exp" in payload and payload["exp"] < datetime.now(timezone.utc).timestamp():
         try:
             resp = requests.get(target_url, headers={"Authorization": f"Bearer {token}"},
-                                timeout=10, verify=False)
+                                timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code == 200:
                 print(f"  [!] VULNERABLE: Expired token accepted (status {resp.status_code})")
                 return [{"type": "EXPIRED_TOKEN_ACCEPTED", "severity": "HIGH"}]
@@ -152,12 +152,12 @@ def test_token_after_logout(token, target_url, logout_url):
     print(f"\n[*] Testing token validity after logout...")
     headers = {"Authorization": f"Bearer {token}"}
     try:
-        pre = requests.get(target_url, headers=headers, timeout=10, verify=False)
+        pre = requests.get(target_url, headers=headers, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         if pre.status_code != 200:
             print("  [-] Token not valid pre-logout, skipping")
             return []
-        requests.post(logout_url, headers=headers, timeout=10, verify=False)
-        post = requests.get(target_url, headers=headers, timeout=10, verify=False)
+        requests.post(logout_url, headers=headers, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
+        post = requests.get(target_url, headers=headers, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         if post.status_code == 200:
             print(f"  [!] VULNERABLE: Token still valid after logout")
             return [{"type": "NO_TOKEN_REVOCATION", "severity": "HIGH"}]
@@ -178,7 +178,7 @@ def check_jwks_endpoint(base_url):
     for ep in endpoints:
         url = urljoin(base_url, ep)
         try:
-            resp = requests.get(url, timeout=10, verify=False)
+            resp = requests.get(url, timeout=10, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true")  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             if resp.status_code == 200:
                 print(f"  [+] Found: {ep}")
                 data = resp.json()

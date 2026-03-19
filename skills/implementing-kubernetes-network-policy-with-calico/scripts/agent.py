@@ -4,9 +4,7 @@
 import json
 import argparse
 import subprocess
-import yaml
 from datetime import datetime
-from collections import Counter
 
 
 def kubectl_get(resource, namespace=None, label_selector=None):

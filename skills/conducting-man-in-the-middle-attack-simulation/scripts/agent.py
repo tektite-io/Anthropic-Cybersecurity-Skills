@@ -5,10 +5,10 @@
 import json
 import logging
 import argparse
-import subprocess
+import time
 from datetime import datetime
 
-from scapy.all import ARP, Ether, srp, send, sniff, IP, TCP, get_if_hwaddr, conf
+from scapy.all import ARP, Ether, srp, send, sniff, IP, TCP
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -127,7 +127,7 @@ def run_mitm_simulation(target_ip, gateway_ip, interface, duration=30):
         for _ in range(duration):
             arp_spoof(target_ip, gateway_ip, target_mac)
             arp_spoof(gateway_ip, target_ip, gateway_mac)
-            __import__("time").sleep(1)
+            time.sleep(1)
     except KeyboardInterrupt:
         pass
     finally:

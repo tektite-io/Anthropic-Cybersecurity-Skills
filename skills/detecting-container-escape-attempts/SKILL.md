@@ -44,7 +44,7 @@ Container escape is a critical attack technique where an adversary breaks out of
 4. **Network monitoring** - Detect container-to-host connections
 5. **Audit logging** - Linux auditd for capability and mount operations
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy Falco for Runtime Detection
 

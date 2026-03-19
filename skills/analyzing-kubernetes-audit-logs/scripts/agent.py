@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for analyzing Kubernetes audit logs for security threats."""
 
-import os
 import json
 import argparse
 from collections import defaultdict

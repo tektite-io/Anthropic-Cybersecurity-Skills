@@ -4,7 +4,6 @@
 import boto3
 import subprocess
 import json
-import sys
 import os
 import argparse
 from datetime import datetime

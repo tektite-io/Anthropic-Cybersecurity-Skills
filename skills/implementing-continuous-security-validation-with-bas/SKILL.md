@@ -68,7 +68,7 @@ Example:
   Gap Rate:         50/500 = 10%
 ```
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy BAS Platform Components
 

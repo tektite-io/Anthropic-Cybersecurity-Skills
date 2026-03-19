@@ -8,7 +8,6 @@ accounts requesting directory replication (DCSync technique T1003.006).
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
 
 try:

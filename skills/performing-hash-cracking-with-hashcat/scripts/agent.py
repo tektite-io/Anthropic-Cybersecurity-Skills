@@ -6,8 +6,8 @@ import argparse
 import subprocess
 import hashlib
 import re
+from collections import Counter
 from pathlib import Path
-from datetime import datetime
 
 
 HASH_PATTERNS = {
@@ -121,7 +121,7 @@ def parse_hashcat_status(potfile):
         "total_cracked": len(cracked),
         "length_distribution": length_dist,
         "charset_analysis": charset,
-        "top_passwords": [p for p, _ in __import__("collections").Counter(passwords).most_common(10)],
+        "top_passwords": [p for p, _ in Counter(passwords).most_common(10)],
     }
 
 

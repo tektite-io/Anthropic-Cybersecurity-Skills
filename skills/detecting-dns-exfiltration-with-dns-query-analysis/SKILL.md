@@ -67,7 +67,7 @@ NULL records carry arbitrary binary data
 | DNSExfiltrator | Custom | Base64 | Low |
 | Cobalt Strike DNS | C2 over DNS | Custom encoding | High |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Capture DNS Traffic
 

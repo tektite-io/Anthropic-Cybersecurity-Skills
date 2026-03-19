@@ -2,9 +2,7 @@
 """OpenVAS/GVM authenticated vulnerability scan orchestration agent."""
 
 import json
-import sys
 import argparse
-import subprocess
 import xml.etree.ElementTree as ET
 from datetime import datetime
 

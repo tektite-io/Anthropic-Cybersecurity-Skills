@@ -7,8 +7,6 @@ import hashlib
 import json
 import os
 import re
-import struct
-import sys
 from datetime import datetime, timezone
 
 

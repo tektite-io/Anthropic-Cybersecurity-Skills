@@ -4,12 +4,10 @@
 import argparse
 import json
 import os
-import subprocess
-import sys
 from datetime import datetime, timezone
 
 
-DAEMON_JSON_PATH = "/etc/docker/daemon.json"
+DAEMON_JSON_PATH = os.environ.get("DOCKER_DAEMON_JSON", "/etc/docker/daemon.json")
 
 RECOMMENDED_SETTINGS = {
     "icc": False,
@@ -100,6 +98,7 @@ def check_docker_files():
 
 
 def main():
+    global DAEMON_JSON_PATH
     parser = argparse.ArgumentParser(
         description="Audit Docker daemon configuration against CIS benchmarks"
     )
@@ -108,7 +107,6 @@ def main():
     args = parser.parse_args()
 
     print("[*] Docker Daemon Configuration Audit Agent")
-    global DAEMON_JSON_PATH
     DAEMON_JSON_PATH = args.config
 
     config = read_daemon_config()

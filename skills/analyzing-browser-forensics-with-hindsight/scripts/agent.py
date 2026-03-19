@@ -10,8 +10,6 @@ import sys
 import json
 import sqlite3
 import datetime
-import hashlib
-from collections import defaultdict
 
 
 def chrome_time_to_datetime(chrome_time):

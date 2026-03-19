@@ -8,7 +8,6 @@ network traffic analysis, and service scanning for security testing.
 import subprocess
 import json
 import sys
-import re
 import hashlib
 from pathlib import Path
 
@@ -53,6 +52,7 @@ class IoTSecurityAgent:
                  "-u", f"{username}:{password}",
                  f"http://{self.target_ip}/", "--max-time", "5"],
                 capture_output=True, text=True,
+                timeout=120,
             )
             status = result.stdout.strip()
             if status in ("200", "301", "302"):
@@ -72,12 +72,14 @@ class IoTSecurityAgent:
 
         sha256 = hashlib.sha256(fw_path.read_bytes()).hexdigest()
         scan_result = subprocess.run(
-            ["binwalk", str(fw_path)], capture_output=True, text=True
+            ["binwalk", str(fw_path)], capture_output=True, text=True,
+            timeout=120,
         )
         extract_dir = self.output_dir / "firmware_extracted"
         subprocess.run(
             ["binwalk", "-eM", "-C", str(extract_dir), str(fw_path)],
             capture_output=True, text=True,
+            timeout=120,
         )
 
         creds_found = []
@@ -89,6 +91,7 @@ class IoTSecurityAgent:
                 ["grep", "-rn", "-i", "password\\|passwd\\|secret",
                  str(extract_dir)],
                 capture_output=True, text=True,
+                timeout=120,
             )
             for line in grep_result.stdout.splitlines()[:20]:
                 creds_found.append(line.strip())
@@ -111,7 +114,8 @@ class IoTSecurityAgent:
         )
         if pcap_path.exists():
             stats = subprocess.run(
-                ["capinfos", str(pcap_path)], capture_output=True, text=True
+                ["capinfos", str(pcap_path)], capture_output=True, text=True,
+                timeout=120,
             )
             return {"pcap": str(pcap_path), "stats": stats.stdout}
         return {"error": "Capture failed"}

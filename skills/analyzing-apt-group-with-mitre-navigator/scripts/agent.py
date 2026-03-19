@@ -8,7 +8,6 @@ performs detection gap analysis, and generates threat-informed reports.
 import json
 import os
 import sys
-import hashlib
 from collections import Counter
 
 try:

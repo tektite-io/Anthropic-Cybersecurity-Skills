@@ -7,7 +7,7 @@ import logging
 import os
 import sys
 from datetime import datetime
-from typing import Dict, List
+from typing import List
 
 try:
     import requests

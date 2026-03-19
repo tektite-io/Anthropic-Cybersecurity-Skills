@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """LaZagne credential access detection agent."""
-import argparse, json, sys
+import argparse, json
 from datetime import datetime, timezone
 try:
     import requests

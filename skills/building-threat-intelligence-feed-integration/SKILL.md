@@ -221,7 +221,8 @@ for indicator in unique_indicators:
 
     requests.post(
         f"{splunk_url}/services/data/threat_intel/item/ip_intel",
-        headers=headers, data=data, verify=False
+        headers=headers, data=data,
+        verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
     )
 ```
 

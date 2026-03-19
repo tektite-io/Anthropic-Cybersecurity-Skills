@@ -7,7 +7,6 @@
 import json
 import logging
 import argparse
-import subprocess
 from datetime import datetime
 
 import requests

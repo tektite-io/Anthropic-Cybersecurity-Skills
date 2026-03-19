@@ -10,7 +10,6 @@ from datetime import datetime
 
 try:
     from cryptography import x509
-    from cryptography.hazmat.primitives import hashes
 except ImportError:
     print("Install: pip install cryptography")
     sys.exit(1)

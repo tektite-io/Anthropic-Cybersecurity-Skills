@@ -44,7 +44,7 @@ Proofpoint Email Protection is a cloud-native secure email gateway (SEG) that ac
 | Attachment | Static + dynamic sandboxing | Malware, ransomware |
 | Post-delivery | TRAP (auto-retraction) | Weaponized after delivery |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Plan Mail Flow Architecture
 - Document current MX records and mail flow path

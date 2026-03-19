@@ -7,11 +7,8 @@ mass file downloads, unusual data access patterns, and privilege abuse.
 
 import argparse
 import json
-import math
-import re
-import sys
-from collections import Counter, defaultdict
-from datetime import datetime, timedelta
+from collections import defaultdict
+from datetime import datetime
 
 RISK_INDICATORS = {
     "off_hours_access": {"weight": 15, "desc": "Activity outside business hours"},

@@ -3,12 +3,10 @@
 
 import json
 import sys
-from datetime import datetime, timedelta
 
 try:
     from taxii2client.v21 import Server, Collection, as_pages
-    from stix2 import parse as stix_parse, Bundle, Indicator, Malware, ThreatActor
-    from stix2 import AttackPattern, Relationship, Identity, Campaign
+    from stix2 import parse as stix_parse, Malware
     from stix2.exceptions import InvalidValueError
 except ImportError:
     print("Install: pip install taxii2-client stix2")

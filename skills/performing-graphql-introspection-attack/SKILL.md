@@ -36,6 +36,9 @@ license: Apache-2.0
 - Clairvoyance tool for schema reconstruction when introspection is disabled
 - Wordlists for GraphQL field and type name brute-forcing
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Workflow
 
 ### Step 1: GraphQL Endpoint Discovery

@@ -36,7 +36,7 @@ GoPhish is an open-source phishing simulation framework used by security teams t
 4. **User Group**: Target recipients for the campaign
 5. **Campaign**: Combines all components with scheduling
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy GoPhish
 ```bash

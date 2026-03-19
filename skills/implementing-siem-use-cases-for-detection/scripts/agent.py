@@ -14,8 +14,6 @@ except ImportError:
     sys.exit(1)
 
 try:
-    import splunklib.client as splunk_client
-    import splunklib.results as splunk_results
     HAS_SPLUNK = True
 except ImportError:
     HAS_SPLUNK = False

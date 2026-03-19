@@ -8,7 +8,6 @@ a common APT persistence and defense evasion technique (T1574.002).
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
 from pathlib import Path
 

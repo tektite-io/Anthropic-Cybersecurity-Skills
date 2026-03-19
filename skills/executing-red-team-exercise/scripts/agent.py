@@ -7,7 +7,7 @@ import json
 import logging
 from datetime import datetime
 from dataclasses import dataclass, field, asdict
-from typing import List, Optional
+from typing import List
 
 try:
     import requests

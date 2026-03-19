@@ -36,7 +36,7 @@ ATT&CK catalogs over 140 threat groups with documented technique usage. Each gro
 
 The Navigator supports loading multiple layers simultaneously, allowing analysts to overlay threat actor TTPs against detection coverage to identify gaps, compare multiple APT groups to find common techniques worth prioritizing, and track technique coverage changes over time.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Query ATT&CK Data for APT Group
 

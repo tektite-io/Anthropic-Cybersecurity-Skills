@@ -4,7 +4,7 @@
 import json
 import sys
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     from attackcti import attack_client

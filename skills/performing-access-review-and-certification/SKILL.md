@@ -44,7 +44,7 @@ Conduct systematic access reviews and certifications to ensure users have approp
 6. **Reporting**: Generate compliance evidence and metrics
 7. **Closure**: Archive campaign, feed findings into next cycle
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Define Review Scope and Schedule
 - Identify in-scope applications and systems

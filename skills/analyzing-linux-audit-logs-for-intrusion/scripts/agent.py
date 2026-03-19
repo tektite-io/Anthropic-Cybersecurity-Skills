@@ -7,7 +7,6 @@ unauthorized file access, suspicious syscalls, and process execution anomalies.
 
 import argparse
 import json
-import os
 import re
 import sys
 import datetime

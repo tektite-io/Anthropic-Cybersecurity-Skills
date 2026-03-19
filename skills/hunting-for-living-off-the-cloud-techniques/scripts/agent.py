@@ -4,7 +4,7 @@
 import json
 import argparse
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     from elasticsearch import Elasticsearch

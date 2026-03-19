@@ -18,6 +18,7 @@ Usage:
 
 import argparse
 import json
+import os
 import sys
 import time
 import urllib3
@@ -35,7 +36,7 @@ class InsightVMAPI:
     def __init__(self, console_url, username=None, password=None, api_key=None):
         self.base_url = f"{console_url.rstrip('/')}/api/3"
         self.session = requests.Session()
-        self.session.verify = False
+        self.session.verify = not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true"  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
 
         if api_key:
             self.session.headers.update({

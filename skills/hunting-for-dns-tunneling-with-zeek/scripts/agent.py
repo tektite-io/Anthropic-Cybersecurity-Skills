@@ -2,7 +2,6 @@
 """Agent for detecting DNS tunneling using Zeek log analysis."""
 
 import argparse
-import csv
 import json
 import math
 import sys

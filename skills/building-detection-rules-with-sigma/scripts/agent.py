@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for building and converting Sigma detection rules."""
 
-import os
 import json
 import argparse
 from datetime import datetime
@@ -10,7 +9,6 @@ from pathlib import Path
 from sigma.rule import SigmaRule
 from sigma.backends.splunk import SplunkBackend
 from sigma.pipelines.splunk import splunk_windows_pipeline
-from sigma.collection import SigmaCollection
 
 
 def load_sigma_rule(rule_path):

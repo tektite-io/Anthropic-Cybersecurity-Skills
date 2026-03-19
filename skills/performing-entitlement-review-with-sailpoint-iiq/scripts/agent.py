@@ -8,8 +8,7 @@ and entitlement review reporting via the SailPoint IdentityIQ REST API.
 import requests
 import json
 import sys
-from datetime import datetime, timedelta
-from collections import defaultdict
+from datetime import datetime
 
 
 class SailPointIIQAgent:
@@ -28,14 +27,14 @@ class SailPointIIQAgent:
         """Retrieve certification campaigns filtered by phase."""
         url = f"{self.base_url}/identityiq/scim/v2/Certifications"
         params = {"filter": f'phase eq "{phase}"'}
-        resp = self.session.get(url, params=params)
+        resp = self.session.get(url, params=params, timeout=30)
         resp.raise_for_status()
         return resp.json().get("Resources", [])
 
     def get_certification_items(self, cert_id):
         """Get individual certification items for a campaign."""
         url = f"{self.base_url}/identityiq/scim/v2/Certifications/{cert_id}/items"
-        resp = self.session.get(url)
+        resp = self.session.get(url, timeout=30)
         resp.raise_for_status()
         return resp.json().get("Resources", [])
 
@@ -45,7 +44,7 @@ class SailPointIIQAgent:
         params = {}
         if query:
             params["filter"] = query
-        resp = self.session.get(url, params=params)
+        resp = self.session.get(url, params=params, timeout=30)
         resp.raise_for_status()
         return resp.json().get("Resources", [])
 
@@ -53,21 +52,21 @@ class SailPointIIQAgent:
         """Get entitlements for a specific identity."""
         url = f"{self.base_url}/identityiq/scim/v2/Users/{identity_id}"
         params = {"attributes": "entitlements,roles,accounts"}
-        resp = self.session.get(url, params=params)
+        resp = self.session.get(url, params=params, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def check_sod_violations(self, identity_id):
         """Check for separation of duties violations on an identity."""
         url = f"{self.base_url}/identityiq/rest/identities/{identity_id}/policyViolations"
-        resp = self.session.get(url)
+        resp = self.session.get(url, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_campaign_statistics(self, cert_id):
         """Retrieve completion statistics for a certification campaign."""
         url = f"{self.base_url}/identityiq/rest/certifications/{cert_id}/statistics"
-        resp = self.session.get(url)
+        resp = self.session.get(url, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
@@ -79,7 +78,7 @@ class SailPointIIQAgent:
             "comments": comments,
             "decisionDate": datetime.utcnow().isoformat() + "Z",
         }
-        resp = self.session.post(url, json=payload)
+        resp = self.session.post(url, json=payload, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

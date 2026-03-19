@@ -48,7 +48,7 @@ OWASP Threat Dragon is an open-source threat modeling tool that enables security
 | U | Unawareness | User unaware of data collection |
 | N | Non-compliance | Violating privacy regulations |
 
-## Implementation Steps
+## Workflow
 
 ### Step 1 --- Install Threat Dragon
 

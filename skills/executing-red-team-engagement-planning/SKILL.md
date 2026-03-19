@@ -23,6 +23,8 @@ Red team engagement planning is the foundational phase that defines scope, objec
 - Develop deconfliction procedures with the organization's SOC/blue team
 - Produce a comprehensive engagement brief for stakeholder approval
 
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Core Concepts
 
 ### Engagement Types
@@ -54,7 +56,7 @@ Map organizational threats using MITRE ATT&CK Navigator to select relevant adver
 - **Lazarus Group**: Financial institutions, cryptocurrency exchanges, destructive malware
 - **Conti/Royal**: Ransomware operators, double extortion, RaaS model
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: Pre-Engagement
 

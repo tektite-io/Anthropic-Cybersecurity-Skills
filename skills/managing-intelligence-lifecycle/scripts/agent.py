@@ -8,7 +8,7 @@ tracking PIRs, collection sources, and intelligence product metrics.
 import json
 import os
 import sys
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 
 
 def load_intelligence_requirements(filepath: str) -> list[dict]:

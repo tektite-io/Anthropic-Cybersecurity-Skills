@@ -36,7 +36,7 @@ MISP supports three feed formats: MISP format (native JSON events), CSV (comma-s
 
 MISP instances can synchronize with other MISP instances via push/pull mechanisms. Sharing groups control distribution (organization only, this community, connected communities, all communities). The TAXII server module enables integration with STIX/TAXII consumers.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Deploy MISP with Docker
 
@@ -265,7 +265,8 @@ class MISPSIEMExporter:
             }
             resp = requests.post(
                 f"{splunk_url}/services/collector/event",
-                headers=headers, json=event, verify=False,
+                headers=headers, json=event,
+                verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true",  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
             )
             if resp.status_code == 200:
                 exported += 1

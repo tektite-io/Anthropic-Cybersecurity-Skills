@@ -8,7 +8,6 @@ unquoted service paths by analyzing process creation and security logs.
 import argparse
 import json
 import re
-import sys
 from datetime import datetime
 
 try:

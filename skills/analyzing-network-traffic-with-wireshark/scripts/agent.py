@@ -2,26 +2,24 @@
 """Wireshark/tshark packet analysis agent for network security investigations."""
 
 import subprocess
+import shlex
 import os
 import sys
-import json
-import re
-from collections import defaultdict
 
 
 def run_tshark(pcap_path, args):
     """Execute tshark with custom arguments."""
-    cmd = f"tshark -r {pcap_path} {args}"
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=120)
+    cmd = ["tshark", "-r", pcap_path] + shlex.split(args)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 
 def capture_live(interface, output_path, duration=60, capture_filter=None):
     """Start a live packet capture using tshark."""
-    cmd = f"tshark -i {interface} -w {output_path} -a duration:{duration}"
+    cmd = ["tshark", "-i", interface, "-w", output_path, "-a", f"duration:{duration}"]
     if capture_filter:
-        cmd += f' -f "{capture_filter}"'
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=duration + 10)
+        cmd += ["-f", capture_filter]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=duration + 10)
     return result.returncode == 0
 
 

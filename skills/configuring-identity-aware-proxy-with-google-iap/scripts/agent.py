@@ -8,8 +8,6 @@ from datetime import datetime
 
 try:
     from google.cloud import iap_v1
-    from google.cloud import resourcemanager_v3
-    from google.iam.v1 import iam_policy_pb2
 except ImportError:
     print("Install: pip install google-cloud-iap google-cloud-resource-manager")
     sys.exit(1)

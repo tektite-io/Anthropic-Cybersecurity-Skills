@@ -36,7 +36,7 @@ Pivoting identifies related infrastructure by following connections: IP pivot (f
 
 Threat actors exhibit patterns: preferred registrars (Namecheap, REG.RU, Tucows), preferred hosting (bulletproof hosting providers, cloud services), domain generation algorithms (DGA), consistent naming patterns, and certificate reuse across campaigns.
 
-## Practical Steps
+## Workflow
 
 ### Step 1: Passive DNS Infrastructure Discovery
 

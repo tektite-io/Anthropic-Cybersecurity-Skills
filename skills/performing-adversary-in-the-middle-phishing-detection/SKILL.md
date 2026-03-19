@@ -47,7 +47,7 @@ Adversary-in-the-Middle (AiTM) phishing attacks use reverse-proxy infrastructure
 - CDN requests to legitimate auth providers from phishing domains
 - Impossible travel between authentication and session usage
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy Phishing-Resistant MFA
 - Implement FIDO2 security keys or Windows Hello for Business for high-value accounts

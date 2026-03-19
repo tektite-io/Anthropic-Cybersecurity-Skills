@@ -4,16 +4,16 @@
 import json
 import argparse
 import logging
+import os
 import subprocess
-import re
 from collections import defaultdict
 from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-EVE_LOG = "/var/log/suricata/eve.json"
-RULES_DIR = "/etc/suricata/rules"
+EVE_LOG = os.environ.get("SURICATA_EVE_LOG", "/var/log/suricata/eve.json")
+RULES_DIR = os.environ.get("SURICATA_RULES_DIR", "/etc/suricata/rules")
 
 
 def parse_eve_alerts(log_path, limit=10000):
@@ -104,9 +104,9 @@ def detect_attack_patterns(alerts):
 
 def check_suricata_status():
     """Check Suricata service status and configuration."""
-    status_cmd = subprocess.run(["systemctl", "is-active", "suricata"], capture_output=True, text=True)
-    rule_count_cmd = subprocess.run(["suricata", "--build-info"], capture_output=True, text=True)
-    stats_cmd = subprocess.run(["suricatasc", "-c", "dump-counters"], capture_output=True, text=True)
+    status_cmd = subprocess.run(["systemctl", "is-active", "suricata"], capture_output=True, text=True, timeout=120)
+    rule_count_cmd = subprocess.run(["suricata", "--build-info"], capture_output=True, text=True, timeout=120)
+    stats_cmd = subprocess.run(["suricatasc", "-c", "dump-counters"], capture_output=True, text=True, timeout=120)
     return {
         "service_active": status_cmd.stdout.strip() == "active",
         "build_info": rule_count_cmd.stdout[:200] if rule_count_cmd.returncode == 0 else "unavailable",

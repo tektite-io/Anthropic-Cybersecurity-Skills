@@ -4,7 +4,6 @@
 import json
 import argparse
 import socket
-import struct
 import time
 from datetime import datetime
 

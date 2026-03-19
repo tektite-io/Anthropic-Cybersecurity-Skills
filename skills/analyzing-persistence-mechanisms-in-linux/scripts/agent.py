@@ -44,7 +44,8 @@ def scan_crontabs():
                     findings.extend(_scan_cron_file(full_path))
     user_crontabs = subprocess.run(
         ["bash", "-c", "for u in $(cut -d: -f1 /etc/passwd); do crontab -l -u $u 2>/dev/null && echo \"__USER:$u\"; done"],
-        capture_output=True, text=True
+        capture_output=True, text=True,
+        timeout=120,
     )
     if user_crontabs.returncode == 0:
         current_user = None
@@ -112,7 +113,8 @@ def scan_systemd_units():
                         if re.search(pattern, ex, re.IGNORECASE):
                             risk = "critical"
                 dpkg_check = subprocess.run(
-                    ["dpkg", "-S", unit_file], capture_output=True, text=True
+                    ["dpkg", "-S", unit_file], capture_output=True, text=True,
+                    timeout=120,
                 )
                 package_managed = dpkg_check.returncode == 0
                 if not package_managed:
@@ -141,7 +143,7 @@ def scan_ld_preload():
                 "libraries": content.splitlines(), "risk": "critical",
                 "mitre": "T1574.006",
             })
-    env_check = subprocess.run(["env"], capture_output=True, text=True)
+    env_check = subprocess.run(["env"], capture_output=True, text=True, timeout=120)
     for line in env_check.stdout.splitlines():
         if line.startswith("LD_PRELOAD="):
             findings.append({
@@ -174,7 +176,7 @@ def scan_shell_profiles():
                 continue
     etc_profiles = glob.glob("/etc/profile.d/*.sh")
     for filepath in etc_profiles:
-        dpkg = subprocess.run(["dpkg", "-S", filepath], capture_output=True, text=True)
+        dpkg = subprocess.run(["dpkg", "-S", filepath], capture_output=True, text=True, timeout=120)
         if dpkg.returncode != 0:
             findings.append({
                 "type": "etc_profile_d", "path": filepath,

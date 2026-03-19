@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Forensic disk image analysis agent using The Sleuth Kit (TSK) command-line tools."""
 
+import shlex
 import subprocess
 import os
 import sys
@@ -10,8 +11,10 @@ import datetime
 
 
 def run_cmd(cmd):
-    """Execute a shell command and return output."""
-    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    """Execute a command and return output."""
+    if isinstance(cmd, str):
+        cmd = shlex.split(cmd)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return result.stdout.strip(), result.stderr.strip(), result.returncode
 
 
@@ -93,9 +96,15 @@ def list_deleted_files(image_path, offset):
 
 def recover_file(image_path, offset, inode, output_path):
     """Recover a file by inode using icat."""
-    cmd = f"icat -o {offset} {image_path} {inode} > {output_path}"
-    _, _, rc = run_cmd(cmd)
-    return rc == 0
+    result = subprocess.run(
+        ["icat", "-o", str(offset), image_path, str(inode)],
+        capture_output=True,
+        timeout=120,
+    )
+    if result.returncode == 0:
+        with open(output_path, "wb") as f:
+            f.write(result.stdout)
+    return result.returncode == 0
 
 
 def get_file_metadata(image_path, offset, inode):
@@ -106,26 +115,40 @@ def get_file_metadata(image_path, offset, inode):
 
 def create_bodyfile(image_path, offset, output_path):
     """Generate a TSK bodyfile for timeline creation."""
-    cmd = f'fls -r -m "/" -o {offset} {image_path} > {output_path}'
-    _, _, rc = run_cmd(cmd)
-    return rc == 0
+    result = subprocess.run(
+        ["fls", "-r", "-m", "/", "-o", str(offset), image_path],
+        capture_output=True, text=True,
+        timeout=120,
+    )
+    if result.returncode == 0:
+        with open(output_path, "w") as f:
+            f.write(result.stdout)
+    return result.returncode == 0
 
 
 def generate_timeline(bodyfile_path, output_csv, start_date=None, end_date=None):
     """Generate a timeline from a bodyfile using mactime."""
-    cmd = f"mactime -b {bodyfile_path} -d"
+    cmd = ["mactime", "-b", bodyfile_path, "-d"]
     if start_date and end_date:
-        cmd += f" {start_date}..{end_date}"
-    cmd += f" > {output_csv}"
-    _, _, rc = run_cmd(cmd)
-    return rc == 0
+        cmd.append(f"{start_date}..{end_date}")
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    if result.returncode == 0:
+        with open(output_csv, "w") as f:
+            f.write(result.stdout)
+    return result.returncode == 0
 
 
 def search_keywords(image_path, offset, keyword):
     """Search for keyword strings in the disk image."""
-    cmd = f'srch_strings -a -o {offset} {image_path} | grep -i "{keyword}"'
-    stdout, _, rc = run_cmd(cmd)
-    return stdout.splitlines() if rc == 0 else []
+    result = subprocess.run(
+        ["srch_strings", "-a", "-o", str(offset), image_path],
+        capture_output=True, text=True,
+        timeout=120,
+    )
+    if result.returncode != 0 or not result.stdout:
+        return []
+    keyword_lower = keyword.lower()
+    return [line for line in result.stdout.splitlines() if keyword_lower in line.lower()]
 
 
 def find_file_signature(image_path, offset, hex_signature):
@@ -179,7 +202,8 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1:
         image = sys.argv[1]
-        case = sys.argv[2] if len(sys.argv) > 2 else "/tmp/autopsy_case"
+        import tempfile
+        case = sys.argv[2] if len(sys.argv) > 2 else os.environ.get("AUTOPSY_CASE_DIR", os.path.join(tempfile.gettempdir(), "autopsy_case"))
         if os.path.exists(image):
             analyze_image(image, case)
         else:

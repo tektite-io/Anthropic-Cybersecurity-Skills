@@ -10,9 +10,9 @@ import time
 from datetime import datetime
 
 try:
-    from cryptography.hazmat.primitives.asymmetric import rsa, ec, ed25519
-    from cryptography.hazmat.primitives import hashes, serialization
-    from cryptography.hazmat.primitives.asymmetric import padding, utils
+    from cryptography.hazmat.primitives.asymmetric import rsa
+    from cryptography.hazmat.primitives import serialization
+    from cryptography.hazmat.primitives.asymmetric import padding
     HAS_CRYPTO = True
 except ImportError:
     HAS_CRYPTO = False

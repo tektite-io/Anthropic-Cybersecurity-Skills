@@ -10,8 +10,6 @@ import sys
 import json
 import hashlib
 import re
-from datetime import datetime
-from collections import defaultdict
 
 try:
     import pypff

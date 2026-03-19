@@ -5,7 +5,6 @@ import json
 import argparse
 import csv
 from datetime import datetime
-from pathlib import Path
 
 
 IEC62443_SECURITY_LEVELS = {

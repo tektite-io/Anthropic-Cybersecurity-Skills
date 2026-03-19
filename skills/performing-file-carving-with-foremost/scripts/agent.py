@@ -6,7 +6,6 @@ validates carved files, and generates evidence catalogs with hashes.
 """
 
 import subprocess
-import os
 import sys
 import hashlib
 import json
@@ -25,14 +24,14 @@ class FileCarvingAgent:
         """Execute foremost against a disk image."""
         carved_dir = self.output_dir / "foremost_output"
         if carved_dir.exists():
-            subprocess.run(["rm", "-rf", str(carved_dir)], check=False)
+            subprocess.run(["rm", "-rf", str(carved_dir)], check=False, timeout=120)
 
         cmd = ["foremost"]
         if config_path:
             cmd.extend(["-c", config_path])
         cmd.extend(["-t", file_types, "-i", image_path, "-o", str(carved_dir)])
 
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         if result.returncode != 0:
             print(f"Foremost error: {result.stderr}")
         return carved_dir
@@ -41,7 +40,7 @@ class FileCarvingAgent:
         """Execute scalpel for high-performance carving."""
         carved_dir = self.output_dir / "scalpel_output"
         cmd = ["scalpel", "-c", config_path, "-o", str(carved_dir), image_path]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         if result.returncode != 0:
             print(f"Scalpel error: {result.stderr}")
         return carved_dir
@@ -68,7 +67,8 @@ class FileCarvingAgent:
 
                 result = subprocess.run(
                     ["file", "--brief", str(filepath)],
-                    capture_output=True, text=True
+                    capture_output=True, text=True,
+                    timeout=120,
                 )
                 file_type = result.stdout.strip().lower()
                 if "data" in file_type or "empty" in file_type:

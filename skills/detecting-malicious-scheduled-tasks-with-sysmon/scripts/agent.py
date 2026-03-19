@@ -2,13 +2,11 @@
 """Sysmon scheduled task detection agent for hunting malicious persistence."""
 
 import json
-import sys
 import argparse
 import re
 import base64
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from collections import defaultdict
 
 
 SUSPICIOUS_PATHS = [

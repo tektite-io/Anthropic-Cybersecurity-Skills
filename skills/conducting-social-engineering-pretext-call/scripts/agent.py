@@ -2,7 +2,6 @@
 """Social engineering pretext call planning and tracking agent."""
 
 import json
-import sys
 import argparse
 from datetime import datetime
 

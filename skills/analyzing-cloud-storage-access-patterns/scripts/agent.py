@@ -21,7 +21,7 @@ def query_cloudtrail_s3_events(bucket_name, hours_back=24):
         "--start-time", start_time,
         "--output", "json",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode != 0:
         logger.error("CloudTrail query failed: %s", result.stderr[:200])
         return []

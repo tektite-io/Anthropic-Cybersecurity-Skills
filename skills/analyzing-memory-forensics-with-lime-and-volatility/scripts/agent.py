@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Agent for Linux memory forensics using LiME acquisition and Volatility 3."""
 
-import os
 import json
 import subprocess
 import argparse
@@ -12,13 +11,13 @@ from pathlib import Path
 def acquire_memory_lime(output_path, lime_format="lime"):
     """Acquire memory using LiME kernel module."""
     kernel_version = subprocess.run(
-        ["uname", "-r"], capture_output=True, text=True
+        ["uname", "-r"], capture_output=True, text=True, timeout=120
     ).stdout.strip()
     lime_module = f"lime-{kernel_version}.ko"
     if not Path(lime_module).exists():
         lime_module = "lime.ko"
     cmd = ["insmod", lime_module, f"path={output_path}", f"format={lime_format}"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     return {
         "status": "success" if result.returncode == 0 else "failed",
         "output_path": output_path,

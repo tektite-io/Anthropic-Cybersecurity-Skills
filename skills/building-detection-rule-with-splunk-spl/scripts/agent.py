@@ -3,6 +3,7 @@
 
 import json
 import logging
+import os
 import argparse
 from datetime import datetime
 
@@ -92,7 +93,7 @@ def deploy_saved_search(splunk_url, token, rule_name, spl, severity="high"):
         "actions": "email",
     }
     try:
-        resp = requests.post(f"{splunk_url}/servicesNS/admin/search/saved/searches", headers=headers, data=data, verify=False, timeout=30)
+        resp = requests.post(f"{splunk_url}/servicesNS/admin/search/saved/searches", headers=headers, data=data, verify=not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true", timeout=30)  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
         return {"status": resp.status_code, "deployed": resp.status_code in (200, 201)}
     except requests.RequestException as e:
         return {"error": str(e)}

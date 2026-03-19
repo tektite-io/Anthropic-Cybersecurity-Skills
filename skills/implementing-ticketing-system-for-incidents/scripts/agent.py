@@ -4,7 +4,7 @@
 import json
 import sys
 import argparse
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     import requests
@@ -29,7 +29,7 @@ class ServiceNowClient:
                 "urgency": urgency, "impact": impact, "category": category,
                 "assignment_group": "Security Operations",
                 "contact_type": "Automated"}
-        resp = self.session.post(f"{self.base_url}/table/incident", json=data)
+        resp = self.session.post(f"{self.base_url}/table/incident", json=data, timeout=30)
         resp.raise_for_status()
         result = resp.json().get("result", {})
         return {"number": result.get("number"), "sys_id": result.get("sys_id"),
@@ -37,14 +37,14 @@ class ServiceNowClient:
 
     def update_incident(self, sys_id, update_data):
         """Update an existing incident."""
-        resp = self.session.patch(f"{self.base_url}/table/incident/{sys_id}", json=update_data)
+        resp = self.session.patch(f"{self.base_url}/table/incident/{sys_id}", json=update_data, timeout=30)
         resp.raise_for_status()
         return resp.json().get("result", {})
 
     def get_incident(self, number):
         """Get incident details by number."""
         resp = self.session.get(f"{self.base_url}/table/incident",
-                                params={"sysparm_query": f"number={number}"})
+                                params={"sysparm_query": f"number={number}"}, timeout=30)
         resp.raise_for_status()
         results = resp.json().get("result", [])
         return results[0] if results else None
@@ -55,7 +55,7 @@ class ServiceNowClient:
         resp = self.session.get(f"{self.base_url}/table/incident",
                                 params={"sysparm_query": query, "sysparm_limit": limit,
                                         "sysparm_fields": "number,short_description,priority,state,"
-                                                         "opened_at,assigned_to,urgency"})
+                                                         "opened_at,assigned_to,urgency"}, timeout=30)
         resp.raise_for_status()
         return resp.json().get("result", [])
 
@@ -85,7 +85,7 @@ class TheHiveClient:
                 "severity": severity, "tlp": tlp,
                 "tags": tags or ["security-incident"],
                 "flag": False, "status": "Open"}
-        resp = self.session.post(f"{self.base_url}/api/case", json=data)
+        resp = self.session.post(f"{self.base_url}/api/case", json=data, timeout=30)
         resp.raise_for_status()
         result = resp.json()
         return {"id": result.get("_id"), "caseId": result.get("caseId"),
@@ -95,7 +95,7 @@ class TheHiveClient:
         """Create a task within a case."""
         data = {"title": title, "description": description, "group": group,
                 "status": "Waiting"}
-        resp = self.session.post(f"{self.base_url}/api/case/{case_id}/task", json=data)
+        resp = self.session.post(f"{self.base_url}/api/case/{case_id}/task", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
@@ -103,7 +103,7 @@ class TheHiveClient:
         """Add an observable (IOC) to a case."""
         obs_data = {"dataType": data_type, "data": data_value, "tlp": tlp,
                     "message": message, "ioc": True}
-        resp = self.session.post(f"{self.base_url}/api/case/{case_id}/artifact", json=obs_data)
+        resp = self.session.post(f"{self.base_url}/api/case/{case_id}/artifact", json=obs_data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
@@ -111,13 +111,13 @@ class TheHiveClient:
         """List cases with optional status filter."""
         query = {"query": {"_field": "status", "_value": status}}
         resp = self.session.post(f"{self.base_url}/api/case/_search",
-                                  json=query, params={"range": f"0-{limit}"})
+                                  json=query, params={"range": f"0-{limit}"}, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def get_case(self, case_id):
         """Get case details."""
-        resp = self.session.get(f"{self.base_url}/api/case/{case_id}")
+        resp = self.session.get(f"{self.base_url}/api/case/{case_id}", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
@@ -125,7 +125,7 @@ class TheHiveClient:
         """Close a case with summary."""
         data = {"status": "Resolved", "summary": summary,
                 "impactStatus": impact_status, "resolutionStatus": "TruePositive"}
-        resp = self.session.patch(f"{self.base_url}/api/case/{case_id}", json=data)
+        resp = self.session.patch(f"{self.base_url}/api/case/{case_id}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

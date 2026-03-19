@@ -3,6 +3,7 @@
 
 import json
 import logging
+import os
 import argparse
 from datetime import datetime
 
@@ -22,25 +23,25 @@ class PfSenseAPI:
             "Authorization": f"{api_key} {api_secret}",
             "Content-Type": "application/json",
         })
-        self.session.verify = False
+        self.session.verify = not os.environ.get("SKIP_TLS_VERIFY", "").lower() == "true"  # Set SKIP_TLS_VERIFY=true for self-signed certs in lab environments
 
     def get(self, endpoint):
-        resp = self.session.get(f"{self.base_url}/api/v1/{endpoint}")
+        resp = self.session.get(f"{self.base_url}/api/v1/{endpoint}", timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def post(self, endpoint, data):
-        resp = self.session.post(f"{self.base_url}/api/v1/{endpoint}", json=data)
+        resp = self.session.post(f"{self.base_url}/api/v1/{endpoint}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def put(self, endpoint, data):
-        resp = self.session.put(f"{self.base_url}/api/v1/{endpoint}", json=data)
+        resp = self.session.put(f"{self.base_url}/api/v1/{endpoint}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 
     def delete(self, endpoint, data=None):
-        resp = self.session.delete(f"{self.base_url}/api/v1/{endpoint}", json=data)
+        resp = self.session.delete(f"{self.base_url}/api/v1/{endpoint}", json=data, timeout=30)
         resp.raise_for_status()
         return resp.json()
 

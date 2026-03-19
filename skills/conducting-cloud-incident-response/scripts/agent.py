@@ -7,7 +7,6 @@ import argparse
 import subprocess
 from datetime import datetime, timedelta
 
-import requests
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
@@ -21,7 +20,7 @@ def aws_disable_access_key(username, access_key_id):
         "--access-key-id", access_key_id,
         "--status", "Inactive",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         logger.info("Disabled access key %s for user %s", access_key_id, username)
     else:
@@ -36,7 +35,7 @@ def aws_attach_deny_all(username):
         "--user-name", username,
         "--policy-arn", "arn:aws:iam::aws:policy/AWSDenyAll",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         logger.info("Attached AWSDenyAll to user %s", username)
     return result.returncode == 0
@@ -49,7 +48,7 @@ def aws_isolate_ec2(instance_id, forensic_sg):
         "--instance-id", instance_id,
         "--groups", forensic_sg,
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         logger.info("Isolated EC2 %s with security group %s", instance_id, forensic_sg)
     return result.returncode == 0
@@ -63,7 +62,7 @@ def aws_snapshot_ebs(instance_id):
         "--query", "Volumes[*].VolumeId",
         "--output", "text",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     volume_ids = result.stdout.strip().split()
     snapshots = []
     for vol_id in volume_ids:
@@ -72,7 +71,7 @@ def aws_snapshot_ebs(instance_id):
             "--volume-id", vol_id,
             "--description", f"IR evidence - {instance_id} - {datetime.utcnow().isoformat()}",
         ]
-        snap_result = subprocess.run(snap_cmd, capture_output=True, text=True)
+        snap_result = subprocess.run(snap_cmd, capture_output=True, text=True, timeout=120)
         if snap_result.returncode == 0:
             snap_data = json.loads(snap_result.stdout)
             snapshots.append(snap_data.get("SnapshotId"))
@@ -89,7 +88,7 @@ def aws_query_cloudtrail(username, hours_back=24):
         "--start-time", start_time,
         "--output", "json",
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if result.returncode == 0:
         events = json.loads(result.stdout).get("Events", [])
         logger.info("CloudTrail: %d events for user %s in last %d hours", len(events), username, hours_back)
@@ -120,7 +119,7 @@ def aws_list_attacker_resources(username, events):
 def aws_check_all_regions_instances():
     """Check all AWS regions for unauthorized EC2 instances."""
     cmd = ["aws", "ec2", "describe-regions", "--query", "Regions[*].RegionName", "--output", "text"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     regions = result.stdout.strip().split()
     all_instances = {}
     for region in regions:
@@ -130,7 +129,7 @@ def aws_check_all_regions_instances():
             "--query", "Reservations[*].Instances[*].[InstanceId,InstanceType,State.Name]",
             "--output", "json",
         ]
-        r = subprocess.run(cmd, capture_output=True, text=True)
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
         if r.returncode == 0:
             instances = json.loads(r.stdout)
             running = [i for reservation in instances for i in reservation if i[2] == "running"]

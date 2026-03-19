@@ -6,8 +6,7 @@ import argparse
 import hashlib
 import secrets
 import re
-from datetime import datetime, timedelta
-from pathlib import Path
+from datetime import datetime
 
 
 def generate_api_key(prefix="sk", length=32):

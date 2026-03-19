@@ -21,6 +21,9 @@ Software supply chain attacks exploit trust in package registries through typosq
 - Access to PyPI JSON API (https://pypi.org/pypi/{package}/json)
 - Network access for package metadata retrieval
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Key Detection Areas
 
 1. **Typosquatting** — compare package names against top PyPI packages using edit distance thresholds

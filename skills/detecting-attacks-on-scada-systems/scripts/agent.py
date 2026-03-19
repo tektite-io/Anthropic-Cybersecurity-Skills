@@ -5,7 +5,6 @@ import json
 import sys
 import argparse
 import socket
-import struct
 from datetime import datetime
 
 try:

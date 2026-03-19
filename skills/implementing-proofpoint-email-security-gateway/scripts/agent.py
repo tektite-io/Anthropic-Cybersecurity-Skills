@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Proofpoint email security gateway audit."""
-import argparse, json, sys
+import argparse, json
 from datetime import datetime, timezone
 try:
     import requests

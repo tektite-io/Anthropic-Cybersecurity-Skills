@@ -1,6 +1,6 @@
 ---
 name: deploying-software-defined-perimeter
-description: Deploying Software Defined Perimeter
+description: Deploy a Software-Defined Perimeter using the CSA v2.0 specification with Single Packet Authorization, mutual TLS, and SDP controller/gateway configuration to enforce zero trust network access.
 domain: cybersecurity
 subdomain: security-operations
 tags: [cybersecurity]
@@ -77,7 +77,7 @@ After SPA validation, both the client and server authenticate each other using X
 ### Dynamic Provisioning
 SDP connections are provisioned on-demand based on real-time policy evaluation. No persistent network tunnels exist; each session is individually authorized and encrypted.
 
-## Procedure
+## Workflow
 
 ### Phase 1: SDP Controller Deployment
 

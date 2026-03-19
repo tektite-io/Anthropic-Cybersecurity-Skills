@@ -5,8 +5,6 @@ import json
 import argparse
 import subprocess
 import re
-from datetime import datetime
-from pathlib import Path
 
 
 def detect_wmiexec_artifacts_evtx(evtx_file):

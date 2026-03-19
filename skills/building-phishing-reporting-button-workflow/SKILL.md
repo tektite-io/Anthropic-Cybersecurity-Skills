@@ -20,7 +20,7 @@ A phishing reporting button empowers users to flag suspicious emails directly fr
 - Email security gateway with message retraction capability
 - Security awareness training platform for feedback loop
 
-## Implementation Steps
+## Workflow
 
 ### Step 1: Deploy Phishing Report Button
 - Enable Microsoft built-in Report button via Security & Compliance Center

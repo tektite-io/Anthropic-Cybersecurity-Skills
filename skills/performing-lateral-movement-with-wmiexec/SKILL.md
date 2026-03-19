@@ -10,6 +10,9 @@ license: Apache-2.0
 ---
 # Performing Lateral Movement with WMIExec
 
+
+> **Legal Notice:** This skill is for authorized security testing and educational purposes only. Unauthorized use against systems you do not own or have written permission to test is illegal and may violate computer fraud laws.
+
 ## Overview
 
 WMI (Windows Management Instrumentation) is a legitimate Windows administration framework that red teams abuse for lateral movement because it provides remote command execution without deploying additional services or leaving obvious artifacts like PsExec. Impacket's wmiexec.py creates a semi-interactive shell over WMI by executing commands through Win32_Process.Create and reading output via temporary files on ADMIN$ share. Unlike PsExec, WMIExec does not install a service on the target, making it stealthier and less likely to trigger security alerts. WMI-based lateral movement maps to MITRE ATT&CK T1047 (Windows Management Instrumentation) and is used by threat actors including APT29, APT32, and Lazarus Group.
@@ -31,7 +34,7 @@ WMI (Windows Management Instrumentation) is a legitimate Windows administration 
 - **T1059.001** - Command and Scripting Interpreter: PowerShell
 - **T1570** - Lateral Tool Transfer
 
-## Implementation Steps
+## Workflow
 
 ### Phase 1: WMIExec with Impacket
 1. Execute a semi-interactive shell with credentials:
