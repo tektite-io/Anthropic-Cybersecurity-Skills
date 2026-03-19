@@ -25,6 +25,13 @@ Use this skill when:
 
 **Do not use** for Sysmon configuration (separate skill) or Linux audit logging.
 
+## Prerequisites
+
+- Windows Server or Windows 10/11 systems with Group Policy management access
+- Active Directory environment with Group Policy Object (GPO) creation privileges
+- SIEM platform configured to receive Windows Event Log forwarding
+- Understanding of Windows security event IDs and audit categories
+
 ## Workflow
 
 ### Step 1: Configure Advanced Audit Policy via GPO

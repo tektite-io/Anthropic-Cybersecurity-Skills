@@ -19,6 +19,13 @@ license: Apache-2.0
 
 Use this skill when hardening endpoints against memory-based exploits by configuring DEP, ASLR, CFG, and Windows Exploit Protection system-wide and per-application mitigations.
 
+## Prerequisites
+
+- Windows 10/11 or Windows Server 2016+ with administrative privileges
+- Group Policy management access for enterprise-wide deployment
+- Understanding of memory corruption attack techniques (buffer overflow, ROP chains)
+- Test environment for validating application compatibility with exploit mitigations
+
 ## Workflow
 
 ### Step 1: Configure System-Level Mitigations
