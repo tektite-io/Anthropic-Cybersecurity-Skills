@@ -505,17 +505,9 @@ Write YARA rule targeting unique strings or byte patterns.
 Thanks to these wonderful people for building the largest open-source cybersecurity skills collection:
 
 <!-- ALL-CONTRIBUTORS-LIST:START -->
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/mukul975">
-        <img src="https://avatars.githubusercontent.com/u/42860185?v=4" width="100px;" alt="mukul975" /><br />
-        <sub><b>mukul975</b></sub>
-      </a><br />
-      💻 📖 🚧 🎨
-    </td>
-  </tr>
-</table>
+<a href="https://github.com/mukul975/Anthropic-Cybersecurity-Skills/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mukul975/Anthropic-Cybersecurity-Skills" />
+</a>
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Want to see your name here? Check out the [contributing guide](#-contributing-to-cybersecurity-ai-skills) below.
